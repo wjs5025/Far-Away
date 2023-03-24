@@ -3,13 +3,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+	<meta charset="UTF-8">
+	<%@ include file="../include/import_styles.jsp" %>
 <title>Insert title here</title>
 </head>
 <body>
 	<%@ include file="/include/nav.jsp"%>
-	<section id="services" class="services section-bg">
-		<div class="container">
+	<main id="main">
+		<section id="route" class="route background" class="d-flex align-items-center">
+			<div class="container align-items-center" >
 			<div class="row">
 				<div class="col-lg-4">
 					<div class="section-title" data-aos="fade-right">
@@ -77,5 +79,6 @@
 			</div>
 		</div>
 	</section>
+	</main>
 </body>
 </html>

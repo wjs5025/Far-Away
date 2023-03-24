@@ -6,18 +6,21 @@
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-lg-3 col-md-6 footer-contact">
-              <h3>TRAVEL MAKER</h3>
-              <p>
-                SSAFY <br />
-                관통프로젝트 / Front-end<br />
+              <h3>Far Away</h3>
+              <h5>당신에게 꼭 맞는 국내 여행지 추천</h5>
+              <p><br />
+                <strong>Back-End 관통 프로젝트 5팀</strong><br />Class 5, GwangJu, SSAFY 9th
                 <br />
               </p>
             </div>
             <div class="col-lg-3 col-md-6 footer-contact">
-              <p>팀 구성</p>
+              <h3>&nbsp;</h3>
+              <h5>&nbsp;</h5>
+              <p><br />
+              <strong>팀 구성</strong>
               <br />
-              <strong>[팀원] 전인혁</strong><br />
-              <strong>[팀원] 이규민</strong><br />
+              [팀원] 전인혁 / [팀원] 최영환
+              </p>
             </div>
           </div>
         </div>
@@ -29,12 +32,8 @@
             &copy; Copyright <strong><span>SSAFY</span></strong
             >. All Rights Reserved
           </div>
-          <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/bethany-free-onepage-bootstrap-theme/ -->
-          </div>
         </div>
       </div>
     </footer>
+<!-- ======= 자바스크립트 import ======= -->
+<%@ include file="/include/import_scripts.jsp"%>
