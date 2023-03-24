@@ -8,6 +8,7 @@
 
     <title>Far Away : 지역별 여행지</title>
     <%@ include file="/include/import_styles.jsp" %>
+    <%@ include file="/include/import_apis.jsp" %>
 </head>
 <body>
 <%@ include file="/include/nav.jsp" %>
@@ -20,7 +21,7 @@
         <main class="main" id="board">
         <div class="card container align-items-center rounded-0 mt-5"  >
             <!-- 중앙 center content end -->
-            <h1 class="col-md-12 text-center section-header">지역별 여행지</h1>
+            <h2 class="col-md-12 text-center section-header">지역별 여행지</h2>
             <div class="col-md-12 d-flex flex-row">
                 <div id="map" class="col-md-6" style="height: 600px"></div>
                 <div class="col-md-6 ps-5">
@@ -51,9 +52,9 @@
                                 type="button" onclick="Search()">SEARCH
                         </button>
                     </form>
-                    <div class="row">
-                        <table class="table table-striped" id="trip-list">
-                            <tbody>
+                    <div class="row" style="max-height: 50vh; overflow-y: scroll">
+                        <table class="table table-striped" id="trip-list"   >
+                            <tbody class=" ">
                             <td style="text-align: center">검색 조건을 설정 후 검색하세요</td>
                             </tbody>
                         </table>

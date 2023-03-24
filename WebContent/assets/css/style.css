@@ -1,11 +1,3 @@
-/**
-* Template Name: Bethany
-* Updated: Mar 10 2023 with Bootstrap v5.2.3
-* Template URL: https://bootstrapmade.com/bethany-free-onepage-bootstrap-theme/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
@@ -68,7 +60,7 @@ h6 {
 .section-header::after {
   content: "";
   display: block;
-  width: 280px;
+  width: 230px;
   margin: auto;
   height: 4px;
   margin: auto;

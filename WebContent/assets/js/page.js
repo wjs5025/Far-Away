@@ -14,12 +14,21 @@ const setSeason = () => {
   } else {
     season = "가을";
   }
-  console.log(mainTitle);
   mainTitle.innerText = `이번 ${season}, 어디로 떠나실건가요?`;
 };
 
 // window onload 시
 window.onload = () => {
-  getRegionData();
-  setSeason();
+  let pathname = location.pathname  ;
+
+  switch (pathname) {
+    case "/index.jsp" :
+      setSeason();
+      break;
+    case "/Attraction/attraction_index.jsp":
+      getRegionData();
+      break;
+    default:
+      break;
+  }
 };

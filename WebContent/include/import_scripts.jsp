@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<script src="../assets/js/register.js"></script>
+<%--<script src="../assets/js/register.js"></script>--%>
 
 <!-- Vendor JS Files -->
 <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -16,7 +16,7 @@
 <script src="../assets/js/main.js"></script>
 
 <!-- 카카오맵 -->
-<script src="../assets/js/kakaoMap.js"></script>
+<%--<script src="../assets/js/kakaoMap.js"></script>--%>
 
 <!-- tour.js -->
 <script src="../assets/js/tour.js"></script>

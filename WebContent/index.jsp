@@ -11,11 +11,8 @@
     <%@ include file="/include/import_styles.jsp" %>
 
     <!-- api keys -->
+    <%@ include file="/include/import_apis.jsp" %>
 
-    <script src="./assets/js/api_config.js"></script>
-    <!-- kakao map api -->
-    <script type="text/javascript"
-            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8510df0d52f1a6b3d7e4cefe66c42714"></script>
 </head>
 
 <body>
@@ -24,6 +21,7 @@
 
 <!-- 본문 -->
 <main id="main">
+
     <section id="intro" class="background d-flex align-items-center">
         <div class="container text-center position-relative"
              data-aos="fade-in" data-aos-delay="200">
@@ -32,6 +30,7 @@
             <a href="/Attraction/attraction_index.jsp" class="btn-get-started scrollto">SEARCH
                 !</a>
         </div>
+
     </section>
 </main>
 
