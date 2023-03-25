@@ -23,13 +23,13 @@
                 <form>
                     <!-- 아이디 입력 -->
                     <div class="form-outline mb-4">
-                        <label class="form-label" for="form2Example1">아이디</label>
+                        <label class="form-label d-flex"  for="form2Example1">아이디</label>
                         <input type="email" id="form2Example1" class="form-control"/>
                     </div>
 
                     <!-- 비밀번호 입력 -->
                     <div class="form-outline mb-4">
-                        <label class="form-label" for="form2Example2">비밀번호</label>
+                        <label class="form-label d-flex" for="form2Example2">비밀번호</label>
                         <input type="password" id="form2Example2" class="form-control"/>
                     </div>
 
@@ -53,7 +53,7 @@
 
                     <div class="row mb-4 justify-content-center">
                         <!-- Submit button -->
-                        <button type="button" class=" btn btn-primary btn-block mb-4" style="width: 180px">Sign in
+                        <button type="button" class=" btn btn-primary btn-block mb-4">로그인
                         </button>
                     </div>
 
