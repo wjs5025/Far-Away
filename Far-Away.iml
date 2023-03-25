@@ -61,5 +61,6 @@
       </library>
     </orderEntry>
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="javax.servlet.api" level="project" />
   </component>
 </module>
