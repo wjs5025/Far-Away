@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
   <component name="EclipseModuleManager">
-    <libelement value="file://C:/SSAFY/workspaces/Far-Away/WebContent/WEB-INF/jstl-1.2.jar" />
-    <libelement value="file://C:/SSAFY/workspaces/Far-Away/WebContent/WEB-INF/mysql-connector-j-8.0.32.jar" />
-    <libelement value="file://C:/SSAFY/workspaces/Far-Away/WebContent/WEB-INF/servlet-api.jar" />
     <conelement value="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0" />
     <conelement value="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER" />
     <src_description expected_position="6">
@@ -36,7 +33,7 @@
     <orderEntry type="module-library">
       <library name="jstl-1.2.jar">
         <CLASSES>
-          <root url="file://C:/SSAFY/workspaces/Far-Away/WebContent/WEB-INF/jstl-1.2.jar" />
+          <root url="file://$MODULE_DIR$/WedContent/WEB-INF/jstl-1.2.jar" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -45,7 +42,7 @@
     <orderEntry type="module-library">
       <library name="mysql-connector-j-8.0.32.jar">
         <CLASSES>
-          <root url="file://C:/SSAFY/workspaces/Far-Away/WebContent/WEB-INF/mysql-connector-j-8.0.32.jar" />
+          <root url="file://$MODULE_DIR$/WedContent/WEB-INF/mysql-connector-j-8.0.32.jar" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -54,7 +51,7 @@
     <orderEntry type="module-library">
       <library name="servlet-api.jar">
         <CLASSES>
-          <root url="file://C:/SSAFY/workspaces/Far-Away/WebContent/WEB-INF/servlet-api.jar" />
+          <root url="file://$MODULE_DIR$/WedContent/WEB-INF/servlet-api.jar" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -62,5 +59,8 @@
     </orderEntry>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="javax.servlet.api" level="project" />
+    <orderEntry type="library" name="Maven: com.mysql:mysql-connector-j:8.0.32" level="project" />
+    <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.21.9" level="project" />
+    <orderEntry type="library" name="Maven: javax.servlet:jstl:1.2" level="project" />
   </component>
 </module>
