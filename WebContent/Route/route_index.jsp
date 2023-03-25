@@ -12,7 +12,7 @@
 </head>
 <body>
 <%@ include file="/include/nav.jsp" %>
-<%@ include file="../assets/js/route_kakaomap.js"%>
+
 <section id="hero" class="background d-flex align-items-center">
 	<div
 			class="container text-center position-relative"
@@ -24,7 +24,6 @@
 				<!-- 중앙 center content end -->
 				<h2 class="col-md-12 text-center section-header">나의 여행계획</h2>
 				<p>최적의 경로로, 최고의 여행을 만들어보세요 !</p>
-
 				<p>최초 좌클릭하여 선그리기를 시작하고, 좌클릭으로 경유지를 추가하세요 !</p>
 				<p>모든 경로가 추가되었다면, 우클릭으로 선그리기를 종료하세요.</p>
 				<div class="col-md-12 d-flex flex-row">
@@ -34,7 +33,7 @@
 		</main>
 	</div>
 </section>
-<%@ include file="../include/footer.jsp"%>
 
+<%@ include file="../include/footer.jsp"%>
 </body>
 </html>
