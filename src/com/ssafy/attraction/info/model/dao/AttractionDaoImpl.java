@@ -37,11 +37,10 @@ public class AttractionDaoImpl implements AttractionDao {
             String sidoCode = (String) param.get("sido-code");
             String gugunCode = (String) param.get("gugun-code");
             String contentTypeId = (String) param.get("content-type-id");
-            if (!sidoCode.isEmpty() && !gugunCode.isEmpty() && !contentTypeId.isEmpty()) {
-                sql.append("where sido_code = ? and gugun_code = ? and content_type_id = ? \n");
+            if (!sidoCode.isEmpty() | !gugunCode.isEmpty() | !contentTypeId.isEmpty()) {
+                sql.append("where sido_code = ? or gugun_code = ? or content_type_id = ? \n");
             }
             preparedStatement = connection.prepareStatement(sql.toString());
-
         } finally {
             dbUtil.close();
         }
