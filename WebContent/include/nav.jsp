@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
+
 <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container">
         <div
@@ -31,17 +34,26 @@
                             <li><a class="nav-link scrollto" href="../Board/share_list.jsp">공유게시판</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a href="#"><span
-                            id="account">계정</span> <i class="bi bi-chevron-down"></i></a>
+                    <li class="dropdown">
+                        <a href="#">
+                            <c:if test="${empty user}">
+                                <span id="account">계정</span>
+                            </c:if>
+                            <c:if test="${not empty user}">
+                                <span id="account">${user.userId} 님</span>
+                            </c:if>
+                            <i class="bi bi-chevron-down"></i>
+                        </a>
                         <ul>
-                            <li><a class="nav-link scrollto" href="/user?action=mv-login"> 로그인 </a></li>
-                            <li><a class="nav-link scrollto" href="/user?action=mv-regist"> 회원가입 </a></li>
-                            <li><a id="logout" class="nav-link scrollto" href="../User/user_regist.jsp"> 로그아웃 </a></li>
-
-                            <li><a data-bs-toggle="modal" data-bs-target="#Modal3"
-                                   id="btn-modal3"> 회원정보조회 </a></li>
-                            <li><a data-bs-toggle="modal" data-bs-target="#Modal4"
-                                   id="btn-modal4"> 회원정보변경 </a></li>
+                            <c:if test="${empty user}">
+                                <li><a class="nav-link scrollto" href="/user?action=mv-login"> 로그인 </a></li>
+                                <li><a class="nav-link scrollto" href="/user?action=mv-regist"> 회원가입 </a></li>
+                            </c:if>
+                            <c:if test="${not empty user}">
+                                <li><a class="nav-link scrollto" href="../user?action=logout"> 로그아웃 </a></li>
+                                <li><a class="nav-link scrollto" href="../User/user_regist.jsp"> 회원정보조회 </a></li>
+                                <li><a class="nav-link scrollto" href="../User/user_regist.jsp"> 회원정보변경 </a></li>
+                            </c:if>
                         </ul>
                     </li>
                     <li>

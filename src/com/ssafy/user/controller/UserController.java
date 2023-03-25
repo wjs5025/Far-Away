@@ -36,7 +36,11 @@ public class UserController extends HttpServlet {
                 resp.sendRedirect(req.getContextPath() + "/User/user_login.jsp");
                 break;
             case "login":
-                login(req,resp);
+                login(req, resp);
+                break;
+            case "logout":
+                logout(req, resp);
+                resp.sendRedirect("/index.jsp");
                 break;
             case "mv-find":
                 resp.sendRedirect(req.getContextPath() + "/regist.jsp");
@@ -85,7 +89,7 @@ public class UserController extends HttpServlet {
         UserDto userDto = null;
         try {
             userDto = userService.login(userId, userPassword);
-            if(userDto == null){
+            if (userDto == null) {
                 System.out.println("로그인 실패");
                 resp.sendRedirect(req.getContextPath() + "/User/user_login.jsp");
             } else {
@@ -95,17 +99,17 @@ public class UserController extends HttpServlet {
 
                 // cookie 설정
                 String idSave = req.getParameter("save_id");
-                System.out.println("아이디세이브"+idSave);
-                if(idSave != null){
+                System.out.println("아이디세이브" + idSave);
+                if (idSave != null) {
                     Cookie cookie = new Cookie("user_id", userId);
                     cookie.setPath(req.getContextPath());
-                    cookie.setMaxAge(60*60*24*7);
+                    cookie.setMaxAge(60 * 60 * 24 * 7);
                     resp.addCookie(cookie);
                 } else {
                     Cookie[] cookies = req.getCookies();
-                    if (cookies != null){
-                        for (Cookie cookie : cookies){
-                            if (cookie.getName().equals("user_id")){
+                    if (cookies != null) {
+                        for (Cookie cookie : cookies) {
+                            if (cookie.getName().equals("user_id")) {
                                 cookie.setMaxAge(0);
                                 resp.addCookie(cookie);
                                 break;
@@ -120,6 +124,11 @@ public class UserController extends HttpServlet {
         }
 
         System.out.println(userDto);
+    }
 
+    private void logout(HttpServletRequest req, HttpServletResponse resp) {
+        HttpSession session = req.getSession();
+        session.removeAttribute("user");
+        session.invalidate();
     }
 }
