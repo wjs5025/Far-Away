@@ -2,28 +2,28 @@ package com.ssafy.board.model.dto;
 
 
 public class BoardDto {
-    private int board_id;
-    private String user_id;
+    private int boardId;
+    private String userId;
     private String title;
     private String content;
     private String category;
     private int hit;
     private String registerTime;
 
-    public int getBoard_id() {
-        return board_id;
+    public int getBoardId() {
+        return boardId;
     }
 
-    public void setBoard_id(int board_id) {
-        this.board_id = board_id;
+    public void setBoardId(int boardId) {
+        this.boardId = boardId;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {
