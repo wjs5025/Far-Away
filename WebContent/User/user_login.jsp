@@ -20,17 +20,17 @@
             <div class="card container align-items-center rounded-0 mt-5 justify-content-center "
                  style="min-height: 70vh;">
                 <h1 class="col-md-12 text-center section-header text-black">로그인</h1>
-                <form>
+                <form method="POST" id="login-form">
                     <!-- 아이디 입력 -->
                     <div class="form-outline mb-4">
-                        <label class="form-label d-flex"  for="form2Example1">아이디</label>
-                        <input type="email" id="form2Example1" class="form-control"/>
+                        <label class="form-label d-flex" for="user_id">아이디</label>
+                        <input type="email" id="user_id" name="user_id" class="form-control"/>
                     </div>
 
                     <!-- 비밀번호 입력 -->
                     <div class="form-outline mb-4">
-                        <label class="form-label d-flex" for="form2Example2">비밀번호</label>
-                        <input type="password" id="form2Example2" class="form-control"/>
+                        <label class="form-label d-flex" for="user_password">비밀번호</label>
+                        <input type="password" id="user_password" name="user_password" class="form-control"/>
                     </div>
 
                     <!-- 2 column grid layout for inline styling -->
@@ -38,9 +38,8 @@
                         <div class="col d-flex justify-content-center">
                             <!-- Checkbox -->
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="form2Example31"
-                                       checked/>
-                                <label class="form-check-label" for="form2Example31"> 로그인 정보 기억 </label>
+                                <input class="form-check-input" type="checkbox" value="save" id="save_id" name="save_id"/>
+                                <label class="form-check-label" for="save_id"> 로그인 정보 기억 </label>
                             </div>
                         </div>
                         <div class="row mb-4">
@@ -51,7 +50,7 @@
                     </div>
                     <div class="row mb-4 justify-content-center">
                         <!-- Submit button -->
-                        <button type="button" class=" btn btn-success btn-block mb-4">로그인
+                        <button type="button" id="login-submit-btn" class=" btn btn-success btn-block mb-4">로그인
                         </button>
                     </div>
 
@@ -66,6 +65,14 @@
         </main>
     </div>
 </section>
-<%@ include file="../include/footer.jsp"%>
+<%@ include file="../include/footer.jsp" %>
+<script>
+    let submitBtn = document.getElementById("login-submit-btn");
+    submitBtn.addEventListener("click", () => {
+        let form = document.getElementById("login-form");
+        form.setAttribute("action", "/user?action=login");
+        form.submit();
+    });
+</script>
 </body>
 </html>
