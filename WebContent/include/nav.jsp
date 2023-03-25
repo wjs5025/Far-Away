@@ -34,9 +34,9 @@
                     <li class="dropdown"><a href="#"><span
                             id="account">계정</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
-                            <li><a class="nav-link scrollto" href="../User/user_login.jsp"> 로그인 </a></li>
-                            <li><a class="nav-link scrollto" href="../User/user_regist.jsp"> 회원가입 </a></li>
-                            <li><a id="logout"> 로그아웃 </a></li>
+                            <li><a class="nav-link scrollto" href="/user?action=mv-login"> 로그인 </a></li>
+                            <li><a class="nav-link scrollto" href="/user?action=mv-regist"> 회원가입 </a></li>
+                            <li><a id="logout" class="nav-link scrollto" href="../User/user_regist.jsp"> 로그아웃 </a></li>
 
                             <li><a data-bs-toggle="modal" data-bs-target="#Modal3"
                                    id="btn-modal3"> 회원정보조회 </a></li>
@@ -52,5 +52,4 @@
             </nav>
         </div>
     </div>
-
 </header>

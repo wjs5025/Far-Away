@@ -11,9 +11,13 @@ public class UserServiceImpl implements UserService {
         userDao = UserDaoImpl.getInstance();
     }
 
+    public static UserServiceImpl getUserService(){
+        return instance;
+    }
+
     @Override
-    public int join(UserDto userDto) throws Exception {
-        return userDao.join(userDto);
+    public int regist(UserDto userDto) throws Exception {
+        return userDao.regist(userDto);
     }
 
     @Override

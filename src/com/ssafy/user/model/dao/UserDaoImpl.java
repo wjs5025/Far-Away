@@ -21,7 +21,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public int join(UserDto userDto) throws SQLException {
+    public int regist(UserDto userDto) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         int result = 0;

@@ -55,4 +55,16 @@ public class UserDto {
     public void setJoinDate(String joinDate) {
         this.joinDate = joinDate;
     }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "userId='" + userId + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userPwd='" + userPwd + '\'' +
+                ", emailId='" + emailId + '\'' +
+                ", emailDomain='" + emailDomain + '\'' +
+                ", joinDate='" + joinDate + '\'' +
+                '}';
+    }
 }

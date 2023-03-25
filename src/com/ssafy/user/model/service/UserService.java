@@ -4,7 +4,7 @@ import com.ssafy.user.model.dto.UserDto;
 
 
 public interface UserService {
-    int join(UserDto userDto) throws Exception;
+    int regist(UserDto userDto) throws Exception;
     UserDto login(String userId, String userPwd) throws Exception;
     UserDto getUser(String userId) throws Exception;
     void modifyUser(UserDto userDto) throws Exception;
