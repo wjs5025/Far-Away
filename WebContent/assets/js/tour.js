@@ -14,7 +14,6 @@ const getRegionData = () => {
     .then((res) => res.text())
     .then((data) => {
       const xmlDoc = parseXML.parseFromString(data, "text/xml");
-      console.log(xmlDoc);
       makeRegionList(xmlDoc.querySelectorAll("item"));
     });
 };

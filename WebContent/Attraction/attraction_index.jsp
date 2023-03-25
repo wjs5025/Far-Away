@@ -19,11 +19,11 @@
             data-aos-delay="100"
     >
         <main class="main" id="board">
-        <div class="card container align-items-center rounded-0 mt-5"  >
+        <div class="card container align-items-center rounded-0 mt-5 p-3"  >
             <!-- 중앙 center content end -->
             <h2 class="col-md-12 text-center section-header">지역별 여행지</h2>
             <div class="col-md-12 d-flex flex-row">
-                <div id="map" class="col-md-6" style="height: 600px"></div>
+                <div id="map" class="col-md-6" style="height: 60vh"></div>
                 <div class="col-md-6 ps-5">
                     <!-- 관광지 검색 start -->
                     <form class="d-flex m-3" role="search"
@@ -66,6 +66,12 @@
 </main>
     </div>
 </section>
+
+<%-- Footer --%>
 <%@ include file="../include/footer.jsp"%>
+
+<%-- 카카오맵 API --%>
+<script src="../assets/js/kakaoMap.js"></script>
+
 </body>
 </html>

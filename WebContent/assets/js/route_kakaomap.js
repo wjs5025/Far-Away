@@ -4,7 +4,7 @@ mapContainer = document.getElementById("route_map"), // 지도를 표시할 div
         level: 3, // 지도의 확대 레벨
     };
 
-map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+let map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
 let drawingFlag = false; // 선이 그려지고 있는 상태를 가지고 있을 변수입니다
 let moveLine; // 선이 그려지고 있을때 마우스 움직임에 따라 그려질 선 객체 입니다

@@ -15,15 +15,11 @@
 <!-- Template Main JS File -->
 <script src="../assets/js/main.js"></script>
 
-<!-- 카카오맵 -->
-
-<script src="../assets/js/kakaoMap.js"></script>
-
 <!-- tour.js -->
 <script src="../assets/js/tour.js"></script>
 
 <!-- page js -->
 <script src="../assets/js/page.js"></script>
 
-<script src="../assets/js/route_kakaomap.js"></script>
+
 

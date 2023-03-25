@@ -18,9 +18,8 @@ function displayMarker() {
     // 마커 이미지의 이미지 크기 입니다
     let imageSize = new kakao.maps.Size(24, 35);
 
-    imageSrc = `./assets/img/marker/marker${positions[i].contenttypeid}.png`;
-    console.log(imageSrc);
-    // 마커 이미지를 생성합니다
+    imageSrc = `/assets/img/marker/marker${positions[i].contenttypeid}.png`;
+      // 마커 이미지를 생성합니다
     let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
     // 마커를 생성합니다

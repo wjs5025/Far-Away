@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-
 <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container">
         <div
                 class="header-container d-flex align-items-center justify-content-between">
             <div class="logo">
                 <h1 class="text-light">
+
                     <a href="../index.jsp"><span>FAR AWAY</span></a>
                 </h1>
             </div>
@@ -15,7 +15,7 @@
                 <ul>
                     <li><a class="nav-link scrollto active" href="../index.jsp#hero">INTRO</a>
                     </li>
-                    <li><a class="nav-link scrollto active"
+                    <li><a class="nav-link scrollto"
                            href="../Attraction/attraction_index.jsp">지역별 여행지</a></li>
                     <li><a class="nav-link scrollto" href="../Route/route_index.jsp">나의
                         여행계획</a></li>
@@ -46,7 +46,9 @@
                                    id="btn-modal4"> 회원정보변경 </a></li>
                         </ul>
                     </li>
-                    <li><div style="width: 20px"></div></li>
+                    <li>
+                        <div style="width: 20px"></div>
+                    </li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>
