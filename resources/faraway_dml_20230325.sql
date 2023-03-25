@@ -86,3 +86,8 @@ attraction_info schema
 | mlevel          | varchar(2)     | YES  |     | NULL    |       |
 +-----------------+----------------+------+-----+---------+-------+
 */
+select * from attraction_info limit 10;
+
+select *
+from attraction_info
+where content_type_id = null;
