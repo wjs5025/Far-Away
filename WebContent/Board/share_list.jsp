@@ -23,7 +23,7 @@
             data-aos-delay="100"
     >
         <main class="main" id="board">
-            <div class="card container align-items-center rounded-0 mt-5 " style="min-height: 70vh;" >
+            <div class="card container align-items-center rounded-0 mt-5 " style="height: 80vh;" >
                 <h1 class="col-md-12 text-center section-header">공유 게시판</h1>
                 <div class="col-md-12 card rounded-0">
                     <div class="card-header">
