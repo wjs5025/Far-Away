@@ -22,10 +22,10 @@
             data-aos="fade-in"
             data-aos-delay="100"
     >
-        <main class="mt-5 pt-5" id="board">
-            <div class="container-fluid p-0 col-md-12 min-vh-100 br-0  ">
-                <h2 class="mt-4">공지사항</h2>
-                <div class="card mb-4 h-75 rounded-0">
+        <main class="main" id="board">
+            <div class="card container align-items-center rounded-0 mt-5 " style="min-height: 70vh;" >
+                <h1 class="col-md-12 text-center section-header">공지사항</h1>
+                <div class="col-md-12 card rounded-0">
                     <div class="card-header">
                         <a class="btn float-end text-white rounded-5"
                            style="background-color: #009970"
@@ -60,7 +60,6 @@
                 </div>
             </div>
         </main>
-        <!-- End #main -->
     </div>
 </section>
 

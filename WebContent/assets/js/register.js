@@ -1,7 +1,6 @@
 // 사용자 정보 배열
 // 회원가입 시 아이디 검사하여 추가
 // 로그인 시 확인
-
 let btn = document.getElementById("register");
 let member = "";
 

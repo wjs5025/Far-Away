@@ -4,9 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+	<%@ include file="/include/import_styles.jsp" %>
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file="/include/nav.jsp" %>
+<main id="main">
+
+	<section id="intro" class="background d-flex align-items-center">
 <!-- 로그인 모달 -->
 	<div class="modal" id="Modal2" tabindex="-1">
 		<div class="modal-dialog modal-lg">
@@ -40,5 +45,7 @@
 			</div>
 		</div>
 	</div>
+</section>
+</main>
 </body>
 </html>

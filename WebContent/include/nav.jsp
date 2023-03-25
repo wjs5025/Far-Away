@@ -19,11 +19,11 @@
                            href="../Attraction/attraction_index.jsp">지역별 여행지</a></li>
                     <li><a class="nav-link scrollto" href="../Route/route_index.jsp">나의
                         여행계획</a></li>
-                    <li><a class="nav-link scrollto" href="../Attraction/hotplace_index.jsp">핫플자랑하기</a>
+                    <li><a class="nav-link scrollto" href="../Attraction/hotplace_index.jsp">핫플 자랑하기</a>
                     </li>
                     <li class="dropdown">
                         <a href="#">
-                            <span>여행정보공유</span>
+                            <span>여행정보 공유</span>
                             <i class="bi bi-chevron-down"></i>
                         </a>
                         <ul>
@@ -34,10 +34,8 @@
                     <li class="dropdown"><a href="#"><span
                             id="account">계정</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
-                            <li><a data-bs-toggle="modal" data-bs-target="#Modal2"
-                                   id="btn-modal2"> 로그인 </a></li>
-                            <li><a data-bs-toggle="modal" data-bs-target="#Modal1"
-                                   id="btn-modal1"> 회원가입 </a></li>
+                            <li><a class="nav-link scrollto" href="../User/user_login.jsp"> 로그인 </a></li>
+                            <li><a class="nav-link scrollto" href="../User/user_regist.jsp"> 회원가입 </a></li>
                             <li><a id="logout"> 로그아웃 </a></li>
 
                             <li><a data-bs-toggle="modal" data-bs-target="#Modal3"

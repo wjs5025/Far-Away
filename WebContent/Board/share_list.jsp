@@ -23,8 +23,8 @@
             data-aos-delay="100"
     >
         <main class="main" id="board">
-            <div class="card container align-items-center rounded-0 mt-5"  >
-                <h1 class="col-md-12 text-center section-header">공지사항</h1>
+            <div class="card container align-items-center rounded-0 mt-5 " style="min-height: 70vh;" >
+                <h1 class="col-md-12 text-center section-header">공유 게시판</h1>
                 <div class="col-md-12 card rounded-0">
                     <div class="card-header">
                         <a class="btn float-end text-white rounded-5"
