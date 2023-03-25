@@ -42,22 +42,26 @@ public class UserController extends HttpServlet {
                 logout(req, resp);
                 resp.sendRedirect("/index.jsp");
                 break;
+            case "mv-modify":
+                resp.sendRedirect(req.getContextPath() + "/User/user_modify.jsp");
+                break;
+            case "modify":
+                modify(req, resp);
+                break;
             case "mv-find":
                 resp.sendRedirect(req.getContextPath() + "/regist.jsp");
                 break;
             case "find":
                 break;
             case "mv-info":
-                resp.sendRedirect(req.getContextPath() + "/regist.jsp");
-                break;
-            case "modify-info":
-                resp.sendRedirect(req.getContextPath() + "/regist.jsp");
+                resp.sendRedirect(req.getContextPath() + "/User/user_info.jsp");
                 break;
             default:
                 break;
         }
 
     }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -99,7 +103,7 @@ public class UserController extends HttpServlet {
 
                 // cookie 설정
                 String idSave = req.getParameter("save_id");
-                System.out.println("아이디세이브" + idSave);
+
                 if (idSave != null) {
                     Cookie cookie = new Cookie("user_id", userId);
                     cookie.setPath(req.getContextPath());
@@ -117,7 +121,8 @@ public class UserController extends HttpServlet {
                         }
                     }
                 }
-                resp.sendRedirect("/index.jsp");
+
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -130,5 +135,37 @@ public class UserController extends HttpServlet {
         HttpSession session = req.getSession();
         session.removeAttribute("user");
         session.invalidate();
+    }
+
+    private void modify(HttpServletRequest req, HttpServletResponse resp) {
+        HttpSession session = req.getSession();
+        String userPwd = ((UserDto)session.getAttribute("user")).getUserPwd();
+
+        // 비밀번호가 일치하면 변경 가능.
+        if (req.getParameter("user_password").equals(userPwd)) {
+            UserDto modifiedUserDto = new UserDto();
+
+            modifiedUserDto.setUserId(req.getParameter("user_id"));
+            modifiedUserDto.setUserPwd(req.getParameter("user_password"));
+            modifiedUserDto.setUserName(req.getParameter("user_name"));
+            modifiedUserDto.setEmailId(req.getParameter("email_id"));
+            modifiedUserDto.setEmailDomain(req.getParameter("email_domain"));
+
+            try {
+                userService.modifyUser(modifiedUserDto);
+                session.setAttribute("user", modifiedUserDto);
+                resp.sendRedirect("/index.jsp");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("수정 실패 (비밀번호 오류)");
+            try {
+                resp.sendRedirect(req.getContextPath() + "/User/user_modify.jsp");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 }

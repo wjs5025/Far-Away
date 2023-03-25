@@ -30,7 +30,6 @@
             <a href="/Attraction/attraction_index.jsp" class="btn-get-started scrollto">SEARCH
                 !</a>
         </div>
-
     </section>
 </main>
 

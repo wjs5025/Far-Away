@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <%@ include file="/include/import_styles.jsp" %>
-    <title>Far Away : 회원 정보 조회</title>
+    <title>Far Away : 회원 정보 수정</title>
 </head>
 <body>
 <%@ include file="/include/nav.jsp" %>
@@ -22,9 +22,9 @@
     >
         <div class="card container align-items-center rounded-0 mt-5  justify-content-center overflow-y-scroll"
              style="height: 80vh">
-            <h1 class="col-md-12 text-center section-header text-black">회원 정보 조회</h1>
+            <h1 class="col-md-12 text-center section-header text-black">회원 정보 수정</h1>
             <div class="container col-4 ">
-
+                <form method="POST" id="user-modify-form">
                     <div class="form-group">
                         <label for="user_id" class="form-label d-flex">아이디</label>
                         <input type="text" class="form-control" id="user_id" name="user_id" readonly
@@ -33,25 +33,28 @@
                     </div>
                     <div class="form-group">
                         <label for="user_name" class="form-label  d-flex mt-4">이름</label>
-                        <input type="text" class="form-control" id="user_name" name="user_name" readonly
+                        <input type="text" class="form-control" id="user_name" name="user_name"
                                value="${user.userName}">
                     </div>
                     <div class="form-group">
                         <label for="email_id" class="form-label  d-flex mt-4">이메일 아이디</label>
-                        <input type="email" class="form-control" id="email_id" name="email_id" readonly
+                        <input type="email" class="form-control" id="email_id" name="email_id"
                                value="${user.emailId}">
                     </div>
                     <div class="form-group">
                         <label for="email_domain" class="form-label  d-flex mt-4">이메일 도메인</label>
-                        <input type="email" class="form-control" id="email_domain" name="email_domain" readonly
+                        <input type="email" class="form-control" id="email_domain" name="email_domain"
                                value="${user.emailDomain}">
                     </div>
-                    <div class="d-grid gap-2 mt-5">
-                        <button class="btn btn-success btn-lg">
-                            <a href="/User/user_modify.jsp" class="text-white">회원 정보 수정하기</a>
-                        </button>
+                    <div class="form-group has-success">
+                        <label class="form-label  d-flex mt-4" for="user_password">비밀번호</label>
+                        <input type="password" class="form-control is-valid" id="user_password" name="user_password" placeholder="회원정보를 변경하려면 비밀번호를 입력하세요.">
+                        <div class="valid-feedback"></div>
                     </div>
-
+                    <div class="d-grid gap-2 mt-5">
+                        <button class="btn btn-success btn-lg" id="user-modify-submit-btn">수정완료</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -59,6 +62,13 @@
 </section>
 
 <%@ include file="../include/footer.jsp" %>
-
+<script>
+    let submitBtn = document.getElementById("user-modify-submit-btn");
+    submitBtn.addEventListener("click", () => {
+        let form = document.getElementById("user-modify-form");
+        form.setAttribute("action", "/user?action=modify");
+        form.submit();
+    });
+</script>
 </body>
 </html>

@@ -40,7 +40,7 @@
                                 <span id="account">계정</span>
                             </c:if>
                             <c:if test="${not empty user}">
-                                <span id="account">${user.userId} 님</span>
+                                <span id="account">${user.userName} 님</span>
                             </c:if>
                             <i class="bi bi-chevron-down"></i>
                         </a>
@@ -51,8 +51,8 @@
                             </c:if>
                             <c:if test="${not empty user}">
                                 <li><a class="nav-link scrollto" href="../user?action=logout"> 로그아웃 </a></li>
-                                <li><a class="nav-link scrollto" href="../User/user_regist.jsp"> 회원정보조회 </a></li>
-                                <li><a class="nav-link scrollto" href="../User/user_regist.jsp"> 회원정보변경 </a></li>
+                                <li><a class="nav-link scrollto" href="/user?action=mv-info"> 회원정보조회 </a></li>
+                                <li><a class="nav-link scrollto" href="/User/user_modify.jsp"> 회원정보변경 </a></li>
                             </c:if>
                         </ul>
                     </li>
