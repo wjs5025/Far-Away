@@ -45,22 +45,20 @@
                         </div>
                         <div class="row mb-4">
                             <div class="col text-center ">
-                                <a href="#!">비밀번호를 분실했나요?</a>
+                                <a href="./user_find.jsp">비밀번호를 분실했나요?</a>
                             </div>
                         </div>
                     </div>
-
-
                     <div class="row mb-4 justify-content-center">
                         <!-- Submit button -->
-                        <button type="button" class=" btn btn-primary btn-block mb-4">로그인
+                        <button type="button" class=" btn btn-success btn-block mb-4">로그인
                         </button>
                     </div>
 
                     <!-- Register buttons -->
                     <div class="text-center">
                         <div class="col">
-                            회원이 아니신가요? <br/><a href="#!">회원가입</a>
+                            회원이 아니신가요? <br/><a href="./user_regist.jsp">회원가입</a>
                         </div>
                     </div>
                 </form>
