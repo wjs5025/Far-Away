@@ -29,16 +29,30 @@ public class RegionController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         sidoCode = ParameterCheck.nullToBlank(request.getParameter("sidoCode"));
+        String resultJson ="";
+        // sidoCode가 없을 때
         if (sidoCode.isEmpty()) {
             try {
                 sidoList = regionService.getSidoList();
                 ObjectMapper objectMapper = new ObjectMapper();
-                String sidoListJson = objectMapper.writeValueAsString(sidoList);
+                resultJson = objectMapper.writeValueAsString(sidoList);
                 response.setContentType("application/x-json; charset=utf-8");
-                response.getWriter().println(sidoListJson);
+                response.getWriter().println(resultJson);
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else {
+            // sidoCode가 있을 때, 구군 조회
+            try {
+                gugunList = regionService.getGugunList(sidoCode);
+                ObjectMapper objectMapper = new ObjectMapper();
+                resultJson = objectMapper.writeValueAsString(gugunList);
+                response.setContentType("application/x-json; charset=utf-8");
+                response.getWriter().println(resultJson);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
         }
     }
 }

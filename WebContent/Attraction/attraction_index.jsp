@@ -15,94 +15,96 @@
             data-aos-delay="100"
     >
         <main class="main" id="board">
-        <div class="card container align-items-center rounded-0 mt-5 p-3"  >
-            <!-- 중앙 center content end -->
-            <h2 class="col-md-12 text-center section-header">지역별 여행지</h2>
-            <div class="col-md-12 d-flex flex-row">
-                <div id="map" class="col-md-6" style="height: 60vh"></div>
-                <div class="col-md-6 ps-5">
-                    <!-- 관광지 검색 start -->
-                    <form class="d-flex m-3" id="search-form" name="search-form" method="get" action="">
-                        <input type="hidden" id="action" name="action" value="list">
-                        <input type="hidden" id="page_no" name="page_no" value="1">
-                        <select id="sido_code" name="sido_code" class="form-select mx-2"
-                                aria-label="Default select example" onchange="getSigunguData()">
-                            <option value="" selected>시/도</option>
-                        </select> <select id="gugun_code" name="gugun_code" class="form-select mx-2"
+            <div class="card container align-items-center rounded-0 mt-5 p-3">
+                <!-- 중앙 center content end -->
+                <h2 class="col-md-12 text-center section-header">지역별 여행지</h2>
+                <div class="col-md-12 d-flex flex-row">
+                    <div id="map" class="col-md-6" style="height: 60vh"></div>
+                    <div class="col-md-6 ps-5">
+                        <!-- 관광지 검색 start -->
+                        <form class="d-flex m-3" id="search-form" name="search-form" method="get" action="">
+                            <input type="hidden" id="action" name="action" value="list">
+                            <input type="hidden" id="page_no" name="page_no" value="1">
+                            <select id="sido_code" name="sido_code" class="form-select mx-2"
+                                    aria-label="Default select example" onchange="getGunguData()">
+                                <option value="" selected>시/도</option>
+                            </select> <select id="gugun_code" name="gugun_code" class="form-select mx-2"
+                                              aria-label="Default select example">
+                            <option value="" selected>구/군</option>
+                        </select> <select id="content_type_id" name="content_type_id" class="form-select mx-2"
                                           aria-label="Default select example">
-                        <option value="" selected>구/군</option>
-                    </select> <select id="content_type_id" name="content_type_id" class="form-select mx-2"
-                                      aria-label="Default select example">
-                        <option value="" selected>관광지 유형</option>
-                        <option value="12">관광지</option>
-                        <option value="14">문화시설</option>
-                        <option value="15">축제공연행사</option>
-                        <option value="25">여행코스</option>
-                        <option value="28">레포츠</option>
-                        <option value="32">숙박</option>
-                        <option value="38">쇼핑</option>
-                        <option value="39">음식점</option>
-                    </select>
+                            <option value="" selected>관광지 유형</option>
+                            <option value="12">관광지</option>
+                            <option value="14">문화시설</option>
+                            <option value="15">축제공연행사</option>
+                            <option value="25">여행코스</option>
+                            <option value="28">레포츠</option>
+                            <option value="32">숙박</option>
+                            <option value="38">쇼핑</option>
+                            <option value="39">음식점</option>
+                        </select>
 
-                        <!-- type="submit | button " -->
-                        <button id="btn-search" name="btn-search" class="btn btn-outline-success"
-                                type="button">SEARCH
-                        </button>
-                    </form>
-                    <div class="row" style="max-height: 50vh; overflow-y: scroll">
-                        <div style="text-align: center; background-color: #babbbc">검색 조건을 설정 후 검색하세요</div>
-                        <table class="table table-striped" id="attraction_info_list" name="attraction_info_list"  >
-                            <thead>
+                            <!-- type="submit | button " -->
+                            <button id="btn-search" name="btn-search" class="btn btn-outline-success"
+                                    type="button">SEARCH
+                            </button>
+                        </form>
+                        <div class="row" style="max-height: 50vh; overflow-y: scroll">
+                            <div style="text-align: center; background-color: #babbbc">검색 조건을 설정 후 검색하세요</div>
+                            <table class="table table-striped" id="attraction_info_list" name="attraction_info_list">
+                                <thead>
                                 <tr class="text-center">
-                                    <th >대표이미지</th>
+                                    <th>대표이미지</th>
                                     <th>관광지명</th>
                                     <th>주소</th>
                                 </tr>
-                            </thead>
-                            <c:if test="${empty attractionInfoList}">
-                                <tr>
-                                    <td>검색 결과가 없습니다.</td>
-                                </tr>
-                            </c:if>
-                            <c:if test="${not empty attractionInfoList}">
-                                <tbody>
+                                </thead>
+                                <c:if test="${empty attractionInfoList}">
+                                    <tr>
+                                        <td>검색 결과가 없습니다.</td>
+                                    </tr>
+                                </c:if>
+                                <c:if test="${not empty attractionInfoList}">
+                                    <tbody>
                                     <c:forEach var="attractionInfo" items="${attractionInfoList}">
                                         <tr class="text-center">
                                             <c:if test="${empty attractionInfo.firstImage}">
-                                                <td><img src="${root}/assets/img/attraction/no-img.png" width="100px" /></td>
+                                                <td><img src="${root}/assets/img/attraction/no-img.png" width="100px"/>
+                                                </td>
                                             </c:if>
                                             <c:if test="${not empty attractionInfo.firstImage}">
-                                                <td><img src="${attractionInfo.firstImage}" width="100px" /></td>
+                                                <td><img src="${attractionInfo.firstImage}" width="100px"/></td>
                                             </c:if>
                                             <td>${attractionInfo.title}</td>
                                             <td>${attractionInfo.addr1}</td>
                                         </tr>
                                     </c:forEach>
-                                </tbody>
-                            </c:if>
-                        </table>
-                    </div>
-                    <div class="row">
-                        ${page_navigation.navigator}
+                                    </tbody>
+                                </c:if>
+                            </table>
+                        </div>
+                        <div class="row">
+                            ${page_navigation.navigator}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <form id="form-param" method="get" action="">
-                <input type="hidden" id="p-action" name="action" value="">
-                <input type="hidden" id="p-page_no" name="page_no" value="">
-                <input type="hidden" id="p-sido_code" name="sido_code" value="">
-                <input type="hidden" id="p-gugun_code" name="gugun_code" value="">
-                <input type="hidden" id="p-content_type_id" name="content_type_id" value="">
-            </form>
+                <form id="form-param" method="get" action="">
+                    <input type="hidden" id="p-action" name="action" value="">
+                    <input type="hidden" id="p-page_no" name="page_no" value="">
+                    <input type="hidden" id="p-sido_code" name="sido_code" value="">
+                    <input type="hidden" id="p-gugun_code" name="gugun_code" value="">
+                    <input type="hidden" id="p-content_type_id" name="content_type_id" value="">
+                </form>
                 <!-- 관광지 검색 end -->
             </div>
-        </div>
-</main>
+        </main>
+    </div>
+
     </div>
 </section>
 
 <%-- Footer --%>
-<%@ include file="../include/footer.jsp"%>
+<%@ include file="../include/footer.jsp" %>
 
 <%-- 카카오맵 API --%>
 <script src="../assets/js/kakaoMap.js"></script>
@@ -126,6 +128,10 @@
             document.querySelector("#form-param").submit();
         });
     });
+
+    window.onload = () => {
+        getRegionData();
+    }
 </script>
 
 </body>
