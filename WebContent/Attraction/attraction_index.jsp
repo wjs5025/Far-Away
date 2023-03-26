@@ -22,15 +22,15 @@
                 <div id="map" class="col-md-6" style="height: 60vh"></div>
                 <div class="col-md-6 ps-5">
                     <!-- 관광지 검색 start -->
-                    <form class="d-flex m-3" role="search"
-                          onsubmit="event.preventDefault(); Search();">
-                        <select id="search-area" class="form-select mx-2"
+                    <form class="d-flex m-3" id="search-form" name="search-form" method="post" action="">
+                        <input type="hidden" id="action" name="action" value="list">
+                        <select id="sido_code" name="sido_code" class="form-select mx-2"
                                 aria-label="Default select example" onchange="getSigunguData()">
-                            <option value="0" selected>전체 지역</option>
-                        </select> <select id="search-sigunguCode" class="form-select mx-2"
+                            <option value="0" selected>시/도</option>
+                        </select> <select id="gugun_code" name="gugun_code" class="form-select mx-2"
                                           aria-label="Default select example">
-                        <option value="0" selected>시/군/구</option>
-                    </select> <select id="search-content-id" class="form-select mx-2"
+                        <option value="0" selected>구/군</option>
+                    </select> <select id="content_type_id" name="content_type_id" class="form-select mx-2"
                                       aria-label="Default select example">
                         <option value="0" selected>관광지 유형</option>
                         <option value="12">관광지</option>
@@ -44,15 +44,41 @@
                     </select>
 
                         <!-- type="submit | button " -->
-                        <button id="btn-search" class="btn btn-outline-success"
-                                type="button" onclick="Search()">SEARCH
+                        <button id="btn-search" name="btn-search" class="btn btn-outline-success"
+                                type="button">SEARCH
                         </button>
                     </form>
                     <div class="row" style="max-height: 50vh; overflow-y: scroll">
-                        <table class="table table-striped" id="trip-list"   >
-                            <tbody class=" ">
-                            <td style="text-align: center">검색 조건을 설정 후 검색하세요</td>
-                            </tbody>
+                        <div style="text-align: center; background-color: #babbbc">검색 조건을 설정 후 검색하세요</div>
+                        <table class="table table-striped" id="attraction_info_list" name="attraction_info_list"  >
+                            <thead>
+                                <tr class="text-center">
+                                    <th >대표이미지</th>
+                                    <th>관광지명</th>
+                                    <th>주소</th>
+                                </tr>
+                            </thead>
+                            <c:if test="${empty attractionInfoList}">
+                                <tr>
+                                    <td>검색 결과가 없습니다.</td>
+                                </tr>
+                            </c:if>
+                            <c:if test="${not empty attractionInfoList}">
+                                <tbody>
+                                    <c:forEach var="attractionInfo" items="${attractionInfoList}">
+                                        <tr class="text-center">
+                                            <c:if test="${empty attractionInfo.firstImage}">
+                                                <td><img src="${root}/assets/img/attraction/no-img.png" width="100px" /></td>
+                                            </c:if>
+                                            <c:if test="${not empty attractionInfo.firstImage}">
+                                                <td><img src="${attractionInfo.firstImage}" width="100px" /></td>
+                                            </c:if>
+                                            <td>${attractionInfo.title}</td>
+                                            <td>${attractionInfo.addr1}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </c:if>
                         </table>
                     </div>
                 </div>
@@ -68,6 +94,14 @@
 
 <%-- 카카오맵 API --%>
 <script src="../assets/js/kakaoMap.js"></script>
+<script>
+    document.getElementById("btn-search").addEventListener("click", function () {
+        let form = document.getElementById("search-form");
+        form.setAttribute("action", "${root}/attraction");
+        console.log("${root}/attraction");
+        form.submit();
+    });
+</script>
 
 </body>
 </html>
