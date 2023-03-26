@@ -153,7 +153,7 @@ public class UserDaoImpl implements UserDao {
             StringBuilder sql = new StringBuilder();
             sql.append("select user_password \n");
             sql.append("from users \n");
-            sql.append("where user_id = ?, user_name = ? and email_id = ? and email_domain = ? \n");
+            sql.append("where user_id = ? and user_name = ? and email_id = ? and email_domain = ? \n");
             preparedStatement = connection.prepareStatement(sql.toString());
             preparedStatement.setString(1, userDto.getUserId());
             preparedStatement.setString(2, userDto.getUserName());

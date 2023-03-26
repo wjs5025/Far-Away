@@ -42,11 +42,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String findUserPwd(UserDto userDto) throws Exception {
-        return null;
+        return userDao.findUserPwd(userDto);
     }
 
     @Override
     public String findUserId(UserDto userDto) throws Exception {
-        return null;
+        return userDao.findUserId(userDto);
     }
 }
