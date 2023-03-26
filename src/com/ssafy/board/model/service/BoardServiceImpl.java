@@ -40,9 +40,6 @@ public class BoardServiceImpl implements BoardService {
         param.put("listSize", SizeConstant.LIST_SIZE);
         param.put("category", map.get("category"));
 
-        System.out.println("맵"+map);
-
-
         return boardDao.getBoardList(param);
     }
 
