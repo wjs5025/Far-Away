@@ -18,7 +18,9 @@ public class AttractionInfoDaoImpl implements AttractionInfoDao {
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
+    private StringBuilder sql = null;
     private List<AttractionInfoDto> attractionInfoList = null;
+
 
     private AttractionInfoDaoImpl() {
         dbUtil = DBUtil.getInstance();
@@ -29,34 +31,33 @@ public class AttractionInfoDaoImpl implements AttractionInfoDao {
     }
 
     @Override
-    public List<AttractionInfoDto> getAttractionInfoList(Map<String, String> param) throws SQLException {
+    public List<AttractionInfoDto> getAttractionInfoList(Map<String, Object> param) throws SQLException {
         List<AttractionInfoDto> attractionInfoList = new ArrayList<>();
         try {
             connection = dbUtil.getConnection();
-            StringBuilder sql = new StringBuilder();
+            sql = new StringBuilder();
             sql.append("select content_id, first_image,  title, addr1 \n");
             sql.append("from attraction_info \n");
-            String sidoCode = param.get("sido_code");
-            String gugunCode = param.get("gugun_code");
-            String contentTypeId = param.get("content_type_id");
-            System.out.println("======검색 키워드 확인======");
-            System.out.println(contentTypeId);
-            System.out.println(sidoCode);
-            System.out.println(gugunCode);
-            System.out.println("======확인 완료======");
+            String sidoCode = (String) param.get("sido_code");
+            String gugunCode = (String) param.get("gugun_code");
+            String contentTypeId = (String) param.get("content_type_id");
+
             boolean empty = (sidoCode.isEmpty() && gugunCode.isEmpty() && contentTypeId.isEmpty());
             if (!empty) {
                 sql.append("where sido_code = ? or gugun_code = ? or content_type_id = ? \n");
             }
-            sql.append("limit 10 \n");
+            sql.append("limit ?, ? \n");
             preparedStatement = connection.prepareStatement(sql.toString());
-            if(!empty) {
-                preparedStatement.setString(1, sidoCode);
-                preparedStatement.setString(2, gugunCode);
-                preparedStatement.setString(3, contentTypeId);
+            int idx = 0;
+            if (!empty) {
+                preparedStatement.setString(++idx, sidoCode);
+                preparedStatement.setString(++idx, gugunCode);
+                preparedStatement.setString(++idx, contentTypeId);
             }
+            preparedStatement.setInt(++idx, (Integer) param.get("start"));
+            preparedStatement.setInt(++idx, (Integer) param.get("list_size"));
             resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 AttractionInfoDto attractionInfoDto = new AttractionInfoDto();
                 attractionInfoDto.setContentId(resultSet.getString("content_id"));
                 attractionInfoDto.setFirstImage(resultSet.getString("first_image"));
@@ -65,9 +66,41 @@ public class AttractionInfoDaoImpl implements AttractionInfoDao {
                 attractionInfoList.add(attractionInfoDto);
             }
         } finally {
-            dbUtil.close();
+            dbUtil.close(preparedStatement, resultSet, connection);
         }
-        System.out.println("데이터 총 길이: " + attractionInfoList.size());
         return attractionInfoList;
+    }
+
+    @Override
+    public int getTotalAttractionInfoCount(Map<String, Object> param) throws SQLException {
+        int cnt = 0;
+        try {
+            connection = dbUtil.getConnection();
+            sql = new StringBuilder();
+            sql.append("select count(content_id) \n");
+            sql.append("from attraction_info \n");
+            String sidoCode = (String) param.get("sido_code");
+            String gugunCode = (String) param.get("gugun_code");
+            String contentTypeId = (String) param.get("content_type_id");
+
+            boolean empty = (sidoCode.isEmpty() && gugunCode.isEmpty() && contentTypeId.isEmpty());
+            if (!empty) {
+                sql.append("where sido_code = ? or gugun_code = ? or content_type_id = ? \n");
+            }
+            preparedStatement = connection.prepareStatement(sql.toString());
+            int idx = 0;
+            if (!empty) {
+                preparedStatement.setString(++idx, sidoCode);
+                preparedStatement.setString(++idx, gugunCode);
+                preparedStatement.setString(++idx, contentTypeId);
+            }
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                cnt = resultSet.getInt(1);
+            }
+        } finally {
+            dbUtil.close(resultSet, preparedStatement, connection);
+        }
+        return cnt;
     }
 }

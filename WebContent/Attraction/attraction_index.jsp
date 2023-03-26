@@ -22,8 +22,9 @@
                 <div id="map" class="col-md-6" style="height: 60vh"></div>
                 <div class="col-md-6 ps-5">
                     <!-- 관광지 검색 start -->
-                    <form class="d-flex m-3" id="search-form" name="search-form" method="post" action="">
+                    <form class="d-flex m-3" id="search-form" name="search-form" method="get" action="">
                         <input type="hidden" id="action" name="action" value="list">
+                        <input type="hidden" id="page_no" name="page_no" value="1">
                         <select id="sido_code" name="sido_code" class="form-select mx-2"
                                 aria-label="Default select example" onchange="getSigunguData()">
                             <option value="0" selected>시/도</option>
@@ -81,7 +82,18 @@
                             </c:if>
                         </table>
                     </div>
+                    <div class="row">
+                        ${page_navigation.navigator}
+                    </div>
                 </div>
+            </div>
+            <form id="form-param" method="get" action="">
+                <input type="hidden" id="p-action" name="action" value="">
+                <input type="hidden" id="p-page_no" name="page_no" value="">
+                <input type="hidden" id="p-sido_code" name="sido_code" value="">
+                <input type="hidden" id="p-gugun_code" name="gugun_code" value="">
+                <input type="hidden" id="p-content_type_id" name="content_type_id" value="">
+            </form>
                 <!-- 관광지 검색 end -->
             </div>
         </div>
@@ -100,6 +112,19 @@
         form.setAttribute("action", "${root}/attraction");
         console.log("${root}/attraction");
         form.submit();
+    });
+
+    let pages = document.querySelectorAll(".page-link");
+    pages.forEach(function (page) {
+        page.addEventListener("click", function () {
+            console.log(this.parentNode.getAttribute("data-pg"));
+            document.querySelector("#p-action").value = "list";
+            document.querySelector("#p-page_no").value = this.parentNode.getAttribute("data-pg");
+            document.querySelector("#p-sido_code").value = "${param.sido_code}";
+            document.querySelector("#p-gugun_code").value = "${param.gugun_code}";
+            document.querySelector("#p-content_type_id").value = "${param.content_type_id}";
+            document.querySelector("#form-param").submit();
+        });
     });
 </script>
 

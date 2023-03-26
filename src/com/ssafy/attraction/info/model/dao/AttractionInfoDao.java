@@ -7,5 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface AttractionInfoDao {
-    public List<AttractionInfoDto> getAttractionInfoList(Map<String, String> param) throws SQLException;
+    List<AttractionInfoDto> getAttractionInfoList(Map<String, Object> param) throws SQLException;
+    int getTotalAttractionInfoCount(Map<String, Object> param) throws SQLException;
 }
