@@ -5,6 +5,7 @@ import com.ssafy.user.model.dto.UserDto;
 import com.ssafy.user.model.service.UserService;
 import com.ssafy.user.model.service.UserServiceImpl;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -26,35 +27,39 @@ public class UserController extends HttpServlet {
 
         switch (action) {
             case "mv-regist":
-                resp.sendRedirect(req.getContextPath() + "/User/user_regist.jsp");
+                redirect(req, resp, "/User/user_regist.jsp");
                 break;
             case "regist":
                 regist(req, resp);
-                resp.sendRedirect(req.getContextPath() + "/User/user_login.jsp");
+                redirect(req, resp, "/User/user_login.jsp");
                 break;
             case "mv-login":
-                resp.sendRedirect(req.getContextPath() + "/User/user_login.jsp");
+                redirect(req, resp, "/User/user_login.jsp");
                 break;
             case "login":
                 login(req, resp);
                 break;
             case "logout":
                 logout(req, resp);
-                resp.sendRedirect("/index.jsp");
+                redirect(req, resp, "/index.jsp");
                 break;
             case "mv-modify":
-                resp.sendRedirect(req.getContextPath() + "/User/user_modify.jsp");
+                redirect(req, resp, "/User/user_modify.jsp");
                 break;
             case "modify":
                 modify(req, resp);
                 break;
+            case "delete" :
+                delete(req,resp);
+                redirect(req,resp,"/index.jsp");
+                break;
             case "mv-find":
-                resp.sendRedirect(req.getContextPath() + "/regist.jsp");
+                redirect(req, resp, "/regist.jsp");
                 break;
             case "find":
                 break;
             case "mv-info":
-                resp.sendRedirect(req.getContextPath() + "/User/user_info.jsp");
+                redirect(req, resp, "/User/user_info.jsp");
                 break;
             default:
                 break;
@@ -62,6 +67,15 @@ public class UserController extends HttpServlet {
 
     }
 
+    private void redirect(HttpServletRequest req, HttpServletResponse resp, String path) throws IOException {
+        resp.sendRedirect(req.getContextPath() + path);
+    }
+
+    private void forward(HttpServletRequest request, HttpServletResponse response, String path)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+        dispatcher.forward(request, response);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -95,7 +109,7 @@ public class UserController extends HttpServlet {
             userDto = userService.login(userId, userPassword);
             if (userDto == null) {
                 System.out.println("로그인 실패");
-                resp.sendRedirect(req.getContextPath() + "/User/user_login.jsp");
+                redirect(req, resp, "/User/user_login.jsp");
             } else {
                 // session 설정
                 HttpSession session = req.getSession();
@@ -121,14 +135,13 @@ public class UserController extends HttpServlet {
                         }
                     }
                 }
-
-
+                System.out.println("로그인 성공!");
+                redirect(req, resp, "/index.jsp");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        System.out.println(userDto);
     }
 
     private void logout(HttpServletRequest req, HttpServletResponse resp) {
@@ -139,7 +152,7 @@ public class UserController extends HttpServlet {
 
     private void modify(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
-        String userPwd = ((UserDto)session.getAttribute("user")).getUserPwd();
+        String userPwd = ((UserDto) session.getAttribute("user")).getUserPwd();
 
         // 비밀번호가 일치하면 변경 가능.
         if (req.getParameter("user_password").equals(userPwd)) {
@@ -154,18 +167,28 @@ public class UserController extends HttpServlet {
             try {
                 userService.modifyUser(modifiedUserDto);
                 session.setAttribute("user", modifiedUserDto);
-                resp.sendRedirect("/index.jsp");
+                redirect(req, resp, "/index.jsp");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         } else {
             System.out.println("수정 실패 (비밀번호 오류)");
             try {
-                resp.sendRedirect(req.getContextPath() + "/User/user_modify.jsp");
+                redirect(req, resp, "/User/user_modify.jsp");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
 
+    private void delete(HttpServletRequest req, HttpServletResponse resp) {
+        HttpSession session = req.getSession();
+
+        try {
+            userService.deleteUser(((UserDto) session.getAttribute("user")).getUserId());
+            session.removeAttribute("user");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

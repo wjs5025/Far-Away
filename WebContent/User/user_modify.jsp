@@ -36,19 +36,37 @@
                         <input type="text" class="form-control" id="user_name" name="user_name"
                                value="${user.userName}">
                     </div>
-                    <div class="form-group">
-                        <label for="email_id" class="form-label  d-flex mt-4">이메일 아이디</label>
-                        <input type="email" class="form-control" id="email_id" name="email_id"
-                               value="${user.emailId}">
-                    </div>
-                    <div class="form-group">
-                        <label for="email_domain" class="form-label  d-flex mt-4">이메일 도메인</label>
-                        <input type="email" class="form-control" id="email_domain" name="email_domain"
-                               value="${user.emailDomain}">
+                    <div class="form-group d-flex">
+                        <div class="col-5">
+                            <label for="email_id" class="form-label  d-flex mt-4">이메일</label>
+                            <input type="email" class="form-control" id="email_id" name="email_id" value="${user.emailId}"
+                                   aria-describedby="emailHelp" placeholder="이메일 아이디">
+                        </div>
+                        <div class="col-1 d-flex fs-3" style="align-items: flex-end;justify-content: center; ">@</div>
+                        <div class="col-6">
+                            <label for="email_domain" class="form-label  d-flex mt-4">&nbsp;</label>
+                            <select
+                                    class="form-select"
+                                    id="email_domain"
+                                    name="email_domain"
+                                    aria-label="이메일 도메인 선택"
+                            >
+                                <option selected>선택</option>
+                                <option value="ssafy.com"}>ssafy.com
+                                </option>
+                                <option value="google.com">google.com
+                                </option>
+                                <option value="naver.com">naver.com
+                                </option>
+                                <option value="kakao.com">kakao.com
+                                </option>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group has-success">
                         <label class="form-label  d-flex mt-4" for="user_password">비밀번호</label>
-                        <input type="password" class="form-control is-valid" id="user_password" name="user_password" placeholder="회원정보를 변경하려면 비밀번호를 입력하세요.">
+                        <input type="password" class="form-control is-valid" id="user_password" name="user_password"
+                               placeholder="회원정보를 변경하려면 비밀번호를 입력하세요.">
                         <div class="valid-feedback"></div>
                     </div>
                     <div class="d-grid gap-2 mt-5">
