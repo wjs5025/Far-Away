@@ -50,7 +50,6 @@ public class BoardDaoImpl implements BoardDao {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            System.out.println("파람"+param);
             connection = dbUtil.getConnection();
             StringBuilder sql = new StringBuilder();
             sql.append("select board_id, user_id, title, content, category, hit, register_time \n")
@@ -68,7 +67,6 @@ public class BoardDaoImpl implements BoardDao {
             }
             sql.append("category = ? \n")
                     .append("order by board_id desc ").append("limit ?, ? \n");
-            System.out.println("sql"+sql);
             preparedStatement = connection.prepareStatement(sql.toString());
 
             int idx = 0;
@@ -143,7 +141,7 @@ public class BoardDaoImpl implements BoardDao {
         try {
             connection = dbUtil.getConnection();
             StringBuilder sql = new StringBuilder();
-            sql.append("select article_no, user_id, subject, content, category, hit, register_time \n");
+            sql.append("select board_id, user_id, title, content, category, hit, register_time \n");
             sql.append("from board \n");
             sql.append("where board_id = ?");
             preparedStatement = connection.prepareStatement(sql.toString());

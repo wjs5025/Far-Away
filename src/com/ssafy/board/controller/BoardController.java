@@ -42,7 +42,7 @@ public class BoardController extends HttpServlet {
 
         switch (action) {
             case "mv-add":
-                if (isLogined(req,resp)){
+                if (isLogined(req, resp)) {
                     redirect(req, resp, "/Board/board_write.jsp");
                 } else {
                     redirect(req, resp, "/User/user_login.jsp");
@@ -58,7 +58,7 @@ public class BoardController extends HttpServlet {
                 getList(req, resp);
                 break;
             case "mv-modify":
-                forward(req, resp, "/Board/board_write.jsp");
+                mvModify(req,resp);
                 break;
             case "modify":
                 modify(req, resp);
@@ -74,10 +74,27 @@ public class BoardController extends HttpServlet {
 
     }
 
+    private void mvModify(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int boardId = Integer.parseInt(req.getParameter("boardId"));
+
+        try {
+            BoardDto boardDto = boardService.getBoard(boardId);
+
+            if (boardDto == null){
+                throw new Exception();
+            }
+            req.setAttribute("boardDto", boardDto);
+            forward(req, resp, "/Board/board_modify.jsp");
+        } catch (Exception e) {
+            e.printStackTrace();
+            req.setAttribute("msg", "게시글 조회에 실패했습니다. 잘못된 게시글 번호입니다.");
+            forward(req, resp, "/error/error.jsp");
+        }
+    }
+
     private boolean isLogined(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
-        System.out.println(session.getAttribute("user"));
-        if (session.getAttribute("user") ==null){
+        if (session.getAttribute("user") == null) {
             return false;
         }
         return true;
@@ -92,7 +109,7 @@ public class BoardController extends HttpServlet {
 
     private void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-       String userId=  ((UserDto) session.getAttribute("user")).getUserId();
+        String userId = ((UserDto) session.getAttribute("user")).getUserId();
         String title = req.getParameter("title");
         String content = req.getParameter("content");
         String category = req.getParameter("category");
@@ -105,10 +122,9 @@ public class BoardController extends HttpServlet {
         boardDto.setContent(content);
         boardDto.setCategory(category);
 
-        System.out.println(boardDto);
         try {
             boardService.addBoard(boardDto);
-            redirect(req,resp,"/board?action=get-list&category="+category+"&pageNo=1");
+            redirect(req, resp, "/board?action=get-list&category=" + category + "&pageNo=1");
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("msg", "게시글 작성에 실패했습니다. 잠시 후 다시 시도하세요.");
@@ -116,36 +132,82 @@ public class BoardController extends HttpServlet {
         }
     }
 
-    private void get(HttpServletRequest req, HttpServletResponse resp) {
+    private void get(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int boardId = Integer.parseInt(req.getParameter("boardId"));
+        try {
+            BoardDto boardDto = boardService.getBoard(boardId);
 
+            if (boardDto == null){
+                throw new Exception();
+            }
+            req.setAttribute("boardDto", boardDto);
+            forward(req, resp, "/Board/board_detail.jsp");
+        } catch (Exception e) {
+            e.printStackTrace();
+            req.setAttribute("msg", "게시글 조회에 실패했습니다. 잘못된 게시글 번호입니다.");
+            forward(req, resp, "/error/error.jsp");
+        }
     }
 
     private void getList(HttpServletRequest req, HttpServletResponse resp) {
-        Map<String,String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         String category = req.getParameter("category");
         String pageNo = req.getParameter("pageNo");
         String key = req.getParameter("key");
         String word = req.getParameter("word");
 
-        map.put("category",category==null?"":category);
-        map.put("pageNo",pageNo==null?"":pageNo);
-        map.put("key",key==null?"":key);
-        map.put("word",word==null?"":word);
+        map.put("category", category == null ? "" : category);
+        map.put("pageNo", pageNo == null ? "" : pageNo);
+        map.put("key", key == null ? "" : key);
+        map.put("word", word == null ? "" : word);
 
         try {
             List<BoardDto> boardList = boardService.getBoardList(map);
-            req.setAttribute("list",boardList);
-            System.out.println(boardList);
-            forward(req,resp,"/Board/"+category+"_list.jsp");
+            req.setAttribute("list", boardList);
+            forward(req, resp, "/Board/" + category + "_list.jsp");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void modify(HttpServletRequest req, HttpServletResponse resp) {
+    private void modify(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        int boardId = Integer.parseInt(req.getParameter("boardId"));
+        String userId = ((UserDto) session.getAttribute("user")).getUserId();
+        String title = req.getParameter("title");
+        String content = req.getParameter("content");
+        String category = req.getParameter("category");
+
+        BoardDto boardDto = new BoardDto();
+
+        boardDto.setBoardId(boardId);
+        boardDto.setUserId(userId);
+        boardDto.setTitle(title);
+        boardDto.setContent(content);
+        boardDto.setCategory(category);
+
+        try {
+            boardService.modifyBoard(boardDto);
+            redirect(req, resp, "/board?action=get-list&category=" + category + "&pageNo=1");
+        } catch (Exception e) {
+            e.printStackTrace();
+            req.setAttribute("msg", "게시글 수정에 실패했습니다. 잠시 후 다시 시도하세요.");
+            forward(req, resp, "/error/error.jsp");
+        }
     }
 
-    private void delete(HttpServletRequest req, HttpServletResponse resp) {
+    private void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int boardId = Integer.parseInt(req.getParameter("boardId"));
+        String category = req.getParameter("category");
+
+        try {
+            boardService.deleteBoard(boardId);
+            redirect(req, resp, "/board?action=get-list&category=" + category + "&pageNo=1");
+        } catch (Exception e) {
+            e.printStackTrace();
+            req.setAttribute("msg", "게시글 삭제에 실패했습니다.");
+            forward(req, resp, "/error/error.jsp");
+        }
     }
 
 
