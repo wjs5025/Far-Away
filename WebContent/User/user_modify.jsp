@@ -51,7 +51,7 @@
                                     name="email_domain"
                                     aria-label="이메일 도메인 선택"
                             >
-                                <option selected>선택</option>
+                                <option value="none" selected>선택</option>
                                 <option value="ssafy.com" }>ssafy.com
                                 </option>
                                 <option value="google.com">google.com
@@ -89,7 +89,7 @@
         }else if (!document.getElementById("email_id").value) {
             alert("이메일을 입력하세요.");
             return;
-        }else if (!document.getElementById("email_domain").value) {
+        }else if (document.getElementById("email_domain").value === "none") {
             alert("이메일을 입력하세요.");
             return;
         } else if (!document.getElementById("user_password").value) {

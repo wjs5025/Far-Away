@@ -50,9 +50,9 @@ public class UserController extends HttpServlet {
             case "modify":
                 modify(req, resp);
                 break;
-            case "delete" :
-                delete(req,resp);
-                redirect(req,resp,"/");
+            case "delete":
+                delete(req, resp);
+                redirect(req, resp, "/");
                 break;
             case "mv-find":
                 redirect(req, resp, "/regist.jsp");
@@ -94,15 +94,14 @@ public class UserController extends HttpServlet {
         userDto.setEmailDomain(req.getParameter("email_domain"));
 
         try {
-            if(userService.regist(userDto) == 1) {
+            if (userService.regist(userDto) == 1) {
                 redirect(req, resp, "/User/user_login.jsp");
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("msg", "회원가입에 실패했습니다. 이미 사용 중인 아이디입니다.");
             System.out.println(req.getAttribute("msg"));
-            forward(req,resp,"/error/error.jsp");
+            forward(req, resp, "/error/error.jsp");
         }
     }
 
@@ -158,7 +157,7 @@ public class UserController extends HttpServlet {
         session.invalidate();
     }
 
-    private void modify(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    private void modify(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         HttpSession session = req.getSession();
         String userPwd = ((UserDto) session.getAttribute("user")).getUserPwd();
 
@@ -180,14 +179,8 @@ public class UserController extends HttpServlet {
                 throw new RuntimeException(e);
             }
         } else {
-            System.out.println("수정 실패 (비밀번호 오류)");
-            try {
-                redirect(req, resp, "/User/user_modify.jsp");
-            } catch (IOException e) {
-                e.printStackTrace();
-                req.setAttribute("msg", "회원 수정에 실패했습니다. 비밀번호를 확인해주세요.");
-                redirect(req,resp,"/error/error.jsp");
-            }
+            req.setAttribute("msg", "회원 수정에 실패했습니다. 비밀번호를 확인해주세요.");
+            forward(req, resp, "/error/error.jsp");
         }
     }
 
@@ -200,7 +193,7 @@ public class UserController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("msg", "회원 탈퇴에 실패했습니다.");
-            redirect(req,resp,"/error/error.jsp");
+            redirect(req, resp, "/error/error.jsp");
         }
     }
 }
