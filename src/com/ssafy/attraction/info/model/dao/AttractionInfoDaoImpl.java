@@ -10,8 +10,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-public class AttractionDaoImpl implements AttractionDao {
-    private static AttractionDaoImpl instance = new AttractionDaoImpl();
+public class AttractionInfoDaoImpl implements AttractionInfoDao {
+    private static AttractionInfoDaoImpl instance = new AttractionInfoDaoImpl();
     private DBUtil dbUtil;
 
     private Connection connection = null;
@@ -19,26 +19,29 @@ public class AttractionDaoImpl implements AttractionDao {
     private ResultSet resultSet = null;
     private List<AttractionInfoDto> attractionInfoList = null;
 
-    private AttractionDaoImpl() {
+    private AttractionInfoDaoImpl() {
         dbUtil = DBUtil.getInstance();
     }
 
-    public static AttractionDaoImpl getInstance() {
+    public static AttractionInfoDaoImpl getInstance() {
         return instance;
     }
 
     @Override
-    public List<AttractionInfoDto> getAttractionInfoList(Map<String, Object> param) throws SQLException {
+    public List<AttractionInfoDto> getAttractionInfoList(Map<String, String> param) throws SQLException {
         try {
             connection = dbUtil.getConnection();
             StringBuilder sql = new StringBuilder();
             sql.append("select * \n");
             sql.append("from attraction_info \n");
-            String sidoCode = (String) param.get("sido-code");
-            String gugunCode = (String) param.get("gugun-code");
-            String contentTypeId = (String) param.get("content-type-id");
+            String sidoCode = param.get("sido-code");
+            String gugunCode = param.get("gugun-code");
+            String contentTypeId = param.get("content-type-id");
             if (!sidoCode.isEmpty() | !gugunCode.isEmpty() | !contentTypeId.isEmpty()) {
                 sql.append("where sido_code = ? or gugun_code = ? or content_type_id = ? \n");
+                preparedStatement.setString(1, sidoCode);
+                preparedStatement.setString(2, gugunCode);
+                preparedStatement.setString(3, contentTypeId);
             }
             preparedStatement = connection.prepareStatement(sql.toString());
         } finally {
