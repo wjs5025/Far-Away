@@ -38,7 +38,8 @@
                     <div class="form-group d-flex">
                         <div class="col-5">
                             <label for="email_id" class="form-label  d-flex mt-4">이메일</label>
-                            <input type="email" class="form-control" id="email_id" name="email_id" value="${user.emailId}"
+                            <input type="email" class="form-control" id="email_id" name="email_id"
+                                   value="${user.emailId}"
                                    aria-describedby="emailHelp" placeholder="이메일 아이디">
                         </div>
                         <div class="col-1 d-flex fs-3" style="align-items: flex-end;justify-content: center; ">@</div>
@@ -51,7 +52,7 @@
                                     aria-label="이메일 도메인 선택"
                             >
                                 <option selected>선택</option>
-                                <option value="ssafy.com"}>ssafy.com
+                                <option value="ssafy.com" }>ssafy.com
                                 </option>
                                 <option value="google.com">google.com
                                 </option>
@@ -82,9 +83,23 @@
 <script>
     let submitBtn = document.getElementById("user-modify-submit-btn");
     submitBtn.addEventListener("click", () => {
-        let form = document.getElementById("user-modify-form");
-        form.setAttribute("action", "/user?action=modify");
-        form.submit();
+        if (!document.getElementById("user_name").value) {
+            alert("이름을 입력하세요.");
+            return;
+        }else if (!document.getElementById("email_id").value) {
+            alert("이메일을 입력하세요.");
+            return;
+        }else if (!document.getElementById("email_domain").value) {
+            alert("이메일을 입력하세요.");
+            return;
+        } else if (!document.getElementById("user_password").value) {
+            alert("비밀번호를 입력하세요.");
+            return;
+        } else{
+            let form = document.getElementById("user-modify-form");
+            form.setAttribute("action", "/user?action=modify");
+            form.submit();
+        }
     });
 </script>
 </body>
