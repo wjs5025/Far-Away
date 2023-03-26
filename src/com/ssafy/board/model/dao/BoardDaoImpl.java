@@ -30,7 +30,7 @@ public class BoardDaoImpl implements BoardDao {
         try {
             connection = dbUtil.getConnection();
             StringBuilder sql = new StringBuilder();
-            sql.append("insert into board (user_id, title, content, category \n")
+            sql.append("insert into board (user_id, title, content, category) \n")
                     .append("values (?, ?, ?, ?) \n");
             preparedStatement = connection.prepareStatement(sql.toString());
             preparedStatement.setString(1, boardDto.getUserId());
@@ -50,6 +50,7 @@ public class BoardDaoImpl implements BoardDao {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
+            System.out.println("파람"+param);
             connection = dbUtil.getConnection();
             StringBuilder sql = new StringBuilder();
             sql.append("select board_id, user_id, title, content, category, hit, register_time \n")
@@ -58,13 +59,16 @@ public class BoardDaoImpl implements BoardDao {
             String word = (String) param.get("word");
             if (!key.isEmpty() && !word.isEmpty()) {
                 if ("title".equals(key)) {
-                    sql.append("where title like concat('%', ?, '%') \n");
+                    sql.append("where title like concat('%', ?, '%') and\n");
                 } else {
                     sql.append("where ").append(key).append(" = ? \n");
                 }
+            } else {
+                sql.append("where ");
             }
-            sql.append("and category = ? \n")
-                    .append("order by board_id desc").append("limit ?, ? \n");
+            sql.append("category = ? \n")
+                    .append("order by board_id desc ").append("limit ?, ? \n");
+            System.out.println("sql"+sql);
             preparedStatement = connection.prepareStatement(sql.toString());
 
             int idx = 0;

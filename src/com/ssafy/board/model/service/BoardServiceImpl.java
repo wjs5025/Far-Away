@@ -38,6 +38,11 @@ public class BoardServiceImpl implements BoardService {
         int start = pgno * SizeConstant.LIST_SIZE - SizeConstant.LIST_SIZE;
         param.put("start", start);
         param.put("listSize", SizeConstant.LIST_SIZE);
+        param.put("category", map.get("category"));
+
+        System.out.println("맵"+map);
+
+
         return boardDao.getBoardList(param);
     }
 
