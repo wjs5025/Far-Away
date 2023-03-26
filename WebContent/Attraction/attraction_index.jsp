@@ -27,13 +27,13 @@
                         <input type="hidden" id="page_no" name="page_no" value="1">
                         <select id="sido_code" name="sido_code" class="form-select mx-2"
                                 aria-label="Default select example" onchange="getSigunguData()">
-                            <option value="0" selected>시/도</option>
+                            <option value="" selected>시/도</option>
                         </select> <select id="gugun_code" name="gugun_code" class="form-select mx-2"
                                           aria-label="Default select example">
-                        <option value="0" selected>구/군</option>
+                        <option value="" selected>구/군</option>
                     </select> <select id="content_type_id" name="content_type_id" class="form-select mx-2"
                                       aria-label="Default select example">
-                        <option value="0" selected>관광지 유형</option>
+                        <option value="" selected>관광지 유형</option>
                         <option value="12">관광지</option>
                         <option value="14">문화시설</option>
                         <option value="15">축제공연행사</option>

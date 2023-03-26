@@ -42,14 +42,32 @@ public class AttractionInfoDaoImpl implements AttractionInfoDao {
             String gugunCode = (String) param.get("gugun_code");
             String contentTypeId = (String) param.get("content_type_id");
 
-            boolean empty = (sidoCode.isEmpty() && gugunCode.isEmpty() && contentTypeId.isEmpty());
-            if (!empty) {
-                sql.append("where sido_code = ? or gugun_code = ? or content_type_id = ? \n");
+            if (!sidoCode.isEmpty() && gugunCode.isEmpty() && contentTypeId.isEmpty()) {
+                sql.append("where sido_code = ? \n");
+            } else if (!sidoCode.isEmpty() && !gugunCode.isEmpty() && contentTypeId.isEmpty()) {
+                sql.append("where sido_code = ? and gugun_code = ? \n");
+            } else if (!sidoCode.isEmpty() && gugunCode.isEmpty() && !contentTypeId.isEmpty()) {
+                sql.append("where sido_code = ? and content_type_id = ? \n");
+            } else if (sidoCode.isEmpty() && gugunCode.isEmpty() && !contentTypeId.isEmpty()) {
+                sql.append("where content_type_id = ? \n");
+            } else if (!sidoCode.isEmpty() && !gugunCode.isEmpty() && !contentTypeId.isEmpty()) {
+                sql.append("where sido_code = ? and gugun_code = ? and content_type_id = ? \n");
             }
             sql.append("limit ?, ? \n");
             preparedStatement = connection.prepareStatement(sql.toString());
+            System.out.println(sql);
             int idx = 0;
-            if (!empty) {
+            if (!sidoCode.isEmpty() && gugunCode.isEmpty() && contentTypeId.isEmpty()) {
+                preparedStatement.setString(++idx, sidoCode);
+            } else if (!sidoCode.isEmpty() && !gugunCode.isEmpty() && contentTypeId.isEmpty()) {
+                preparedStatement.setString(++idx, sidoCode);
+                preparedStatement.setString(++idx, gugunCode);
+            } else if (!sidoCode.isEmpty() && gugunCode.isEmpty() && !contentTypeId.isEmpty()) {
+                preparedStatement.setString(++idx, sidoCode);
+                preparedStatement.setString(++idx, contentTypeId);
+            } else if (sidoCode.isEmpty() && gugunCode.isEmpty() && !contentTypeId.isEmpty()) {
+                preparedStatement.setString(++idx, contentTypeId);
+            } else if (!sidoCode.isEmpty() && !gugunCode.isEmpty() && !contentTypeId.isEmpty()) {
                 preparedStatement.setString(++idx, sidoCode);
                 preparedStatement.setString(++idx, gugunCode);
                 preparedStatement.setString(++idx, contentTypeId);
