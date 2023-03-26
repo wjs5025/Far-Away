@@ -28,15 +28,17 @@
                     </div>
                     <div class="form-group has-success">
                         <label class="form-label  d-flex mt-4" for="user_password">비밀번호</label>
-                        <input type="password" class="form-control is-valid" id="user_password" name="user_password">
+                        <input type="password" class="form-control" id="user_password" name="user_password"
+                               onfocusout="checkPassword()">
                         <div class="valid-feedback"></div>
                     </div>
 
                     <div class="form-group has-danger">
                         <label class="form-label  d-flex mt-4" for="user_password_check" name="user_password_check">비밀번호
                             재확인</label>
-                        <input type="password" class="form-control is-invalid" id="user_password_check">
-                        <div class="invalid-feedback  d-flex">비밀번호가 일치하지 않습니다</div>
+                        <input type="password" class="form-control" id="user_password_check"
+                               onfocusout="checkPassword()">
+                        <div class="d-flex" id="password-check-msg"></div>
                     </div>
                     <div class="form-group">
                         <label for="user_name" class="form-label  d-flex mt-4">이름</label>
@@ -47,7 +49,7 @@
                         <div class="col-5">
                             <label for="email_id" class="form-label  d-flex mt-4">이메일</label>
                             <input type="email" class="form-control" id="email_id" name="email_id"
-                                   aria-describedby="emailHelp" placeholder="이메일 아이디">
+                                   placeholder="이메일 아이디">
                         </div>
                         <div class="col-1 d-flex fs-3" style="align-items: flex-end;justify-content: center; ">@</div>
                         <div class="col-6">
@@ -78,11 +80,46 @@
 
 <%@ include file="../include/footer.jsp" %>
 <script>
+    // js에 요소 불러오기
+    let userPwInput = document.getElementById("user_password");
+    let userPwCheckInput = document.getElementById("user_password_check");
+    let pwCheckMsg = document.getElementById("password-check-msg");
     let submitBtn = document.getElementById("regist-submit-btn");
+
+    // 비밀번호 체크해서 스타일 적용하는 함수
+    const checkPassword = () => {
+        if (userPwInput.value == userPwCheckInput.value) {
+            userPwInput.setAttribute("class", "form-control is-valid")
+            userPwCheckInput.setAttribute("class", "form-control is-valid")
+            pwCheckMsg.innerText = "비밀번호가 일치합니다."
+            pwCheckMsg.style.cssText = "font-size: 0.9em; color: green";
+        } else {
+            userPwInput.setAttribute("class", "form-control is-invalid")
+            userPwCheckInput.setAttribute("class", "form-control is-invalid")
+            pwCheckMsg.innerText = "비밀번호가 일치하지 않습니다."
+            pwCheckMsg.style.cssText = "font-size: 0.9em; color: red";
+        }
+    }
+
+    // 가입하기 버튼 이벤트 추가
     submitBtn.addEventListener("click", () => {
-        let form = document.getElementById("regist-form");
-        form.setAttribute("action", "/user?action=regist");
-        form.submit();
+        if (!document.getElementById("user_name").value) {
+            alert("이름을 입력하세요.");
+            return;
+        } else if (!document.getElementById("user_password").value) {
+            alert("비밀번호를 입력하세요.");
+            return;
+        } else if (userPwInput.value != userPwCheckInput.value) {
+            alert("비밀번호를 확인하세요.");
+            return;
+        } else if (!document.getElementById("user_id").value) {
+            alert("아이디를 입력하세요.");
+            return;
+        } else {
+            let form = document.getElementById("regist-form");
+            form.setAttribute("action", "/user?action=regist");
+            form.submit();
+        }
     });
 </script>
 </body>

@@ -64,7 +64,7 @@
                     </div>
                     <div class="form-group has-success">
                         <label class="form-label  d-flex mt-4" for="user_password">비밀번호</label>
-                        <input type="password" class="form-control is-valid" id="user_password" name="user_password"
+                        <input type="password" class="form-control" id="user_password" name="user_password"
                                placeholder="회원정보를 변경하려면 비밀번호를 입력하세요.">
                         <div class="valid-feedback"></div>
                     </div>
