@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <%@ include file="/include/head.jsp" %>
+    <title>Far Away : 핫플레이스 추가하기</title>
 </head>
 <body>
 

@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <%@ include file="/include/import_styles.jsp" %>
+    <%@ include file="/include/head.jsp" %>
     <title>Far Away : 회원 정보 조회</title>
 </head>
 <body>

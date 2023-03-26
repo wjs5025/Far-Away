@@ -11,7 +11,6 @@
 
     <title>Far Away : ERROR</title>
 
-    <%@ include file="/include/import_styles.jsp" %>
 
 </head>
 

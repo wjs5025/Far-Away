@@ -3,8 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <%@ include file="/include/import_styles.jsp" %>
+    <%@ include file="/include/head.jsp" %>
     <title>Far Away : 비밀번호 찾기</title>
 </head>
 <body>

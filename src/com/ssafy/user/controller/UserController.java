@@ -144,7 +144,7 @@ public class UserController extends HttpServlet {
                     }
                 }
                 System.out.println("로그인 성공!");
-                forward(req, resp, "/");
+                redirect(req, resp, "/");
             }
         } catch (Exception e) {
             e.printStackTrace();

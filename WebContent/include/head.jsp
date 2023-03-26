@@ -1,3 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+<%-- import styles --%>
 <!-- Favicons -->
 <link href="../assets/img/favicon.png" rel="icon"/>
 <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon"/>
@@ -28,3 +36,13 @@
 
 <!-- Template Main CSS File -->
 <link href="../assets/css/style.css" rel="stylesheet"/>
+
+
+<%-- import scripts --%>
+
+<%-- APIs --%>
+<script src="/assets/js/api_config.js"></script>
+
+<!-- kakao map api -->
+<script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8510df0d52f1a6b3d7e4cefe66c42714"></script>

@@ -3,16 +3,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-
+    <%@ include file="/include/head.jsp" %>
     <title>Far Away : 당신에게 꼭 맞는 국내 여행지 추천</title>
-
-    <%@ include file="/include/import_styles.jsp" %>
-
-    <!-- api keys -->
-    <%@ include file="/include/import_apis.jsp" %>
-
 </head>
 
 <body>
