@@ -55,9 +55,10 @@ public class UserController extends HttpServlet {
                 redirect(req, resp, "/");
                 break;
             case "mv-find":
-                redirect(req, resp, "/regist.jsp");
+                redirect(req, resp, "/User/user_find.jsp");
                 break;
             case "find":
+                find(req,resp);
                 break;
             case "mv-info":
                 redirect(req, resp, "/User/user_info.jsp");
@@ -67,6 +68,8 @@ public class UserController extends HttpServlet {
         }
 
     }
+
+
 
     private void redirect(HttpServletRequest req, HttpServletResponse resp, String path) throws IOException {
         resp.sendRedirect(req.getContextPath() + path);
@@ -184,7 +187,7 @@ public class UserController extends HttpServlet {
         }
     }
 
-    private void delete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    private void delete(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         HttpSession session = req.getSession();
 
         try {
@@ -193,7 +196,32 @@ public class UserController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("msg", "회원 탈퇴에 실패했습니다.");
-            redirect(req, resp, "/error/error.jsp");
+            forward(req, resp, "/error/error.jsp");
+        }
+    }
+
+    private void find(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        UserDto userDto = new UserDto();
+
+        userDto.setUserId(req.getParameter("user_id"));
+        userDto.setUserName(req.getParameter("user_name"));
+        userDto.setEmailId(req.getParameter("email_id"));
+        userDto.setEmailDomain(req.getParameter("email_domain"));
+
+        try {
+            String user_password = userService.findUserPwd(userDto);
+            System.out.println(userDto);
+            System.out.println(user_password);
+            if (user_password == null){
+                throw new Exception();
+            }
+            req.setAttribute("user_id",userDto.getUserId());
+            req.setAttribute("user_password",user_password);
+            forward(req,resp,"/User/user_find_result.jsp");
+        } catch (Exception e) {
+            e.printStackTrace();
+            req.setAttribute("msg", "비밀번호 찾기 실패 : 입력하신 정보와 일치하는 회원이 없습니다.");
+            forward(req, resp, "/error/error.jsp");
         }
     }
 }

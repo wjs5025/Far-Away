@@ -47,7 +47,7 @@
                         </div>
                         <div class="row mb-4">
                             <div class="col text-center ">
-                                <a href="./user_find.jsp">비밀번호를 분실했나요?</a>
+                                <a href="${root}/user?action=mv-find">비밀번호를 분실했나요?</a>
                             </div>
 
                         </div>
