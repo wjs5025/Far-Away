@@ -3,7 +3,9 @@ package com.ssafy.attraction.info.controller;
 import com.ssafy.attraction.info.model.dto.AttractionInfoDto;
 import com.ssafy.attraction.info.model.service.AttractionInfoService;
 import com.ssafy.attraction.info.model.service.AttractionInfoServiceImpl;
+import com.ssafy.board.model.service.BoardService;
 import com.ssafy.user.model.dto.UserDto;
+import com.ssafy.util.PageNavigation;
 import com.ssafy.util.ParameterCheck;
 
 import javax.servlet.*;
@@ -20,6 +22,8 @@ public class AttractionInfoController extends HttpServlet {
     private String contentTypeId;
     private String sidoCode;
     private String gugunCode;
+    private String queryString;
+    private int pageNo;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -30,21 +34,15 @@ public class AttractionInfoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
+        pageNo = ParameterCheck.notNumberToOne(request.getParameter("page_no"));
         contentTypeId = ParameterCheck.nullToBlank(request.getParameter("content_type_id"));
         sidoCode = ParameterCheck.nullToBlank(request.getParameter("sido_code"));
         gugunCode = ParameterCheck.nullToBlank(request.getParameter("gugun_code"));
-        System.out.println(action);
-        System.out.println("======검색 키워드 확인======");
-        System.out.println(contentTypeId);
-        System.out.println(sidoCode);
-        System.out.println(gugunCode);
-        System.out.println("======확인 완료======");
+        queryString = "?page_no=" + pageNo + "&sido_code=" + sidoCode + "&gugun_code=" + gugunCode + "&content_type_id=" + contentTypeId;
         String path = "";
         switch (action) {
             case "list":
                 path = list(request, response);
-                System.out.println("관광지 정보 조회 경로");
-                System.out.println(path);
                 forward(request, response, path);
                 break;
             default:
@@ -74,19 +72,27 @@ public class AttractionInfoController extends HttpServlet {
         if (userDto != null) {
             try {
                 Map<String, String> map = new HashMap<>();
+                map.put("page_no", pageNo + "");
                 map.put("sido_code", sidoCode);
                 map.put("gugun_code", gugunCode);
                 map.put("content_type_id", contentTypeId);
+                System.out.println("=====list 메소드=====");
+                System.out.println("page_no: " + pageNo);
+                System.out.println("sido_code: " + sidoCode);
+                System.out.println("gugun_code: " + gugunCode);
+                System.out.println("content_type_id: " + contentTypeId);
 
                 List<AttractionInfoDto> attractionInfoList = attractionInfoService.getAttractionInfoList(map);
                 request.setAttribute("attractionInfoList", attractionInfoList);
+
+                PageNavigation pageNavigation = attractionInfoService.makePageNavigation(map);
+                request.setAttribute("page_navigation", pageNavigation);
 
             } catch (Exception e) {
                 e.printStackTrace();
                 request.setAttribute("msg", "관광지 정보 조회에 실패했습니다.");
             }
-            return "/Attraction/attraction_index.jsp?sido_code=" + sidoCode +
-                    "&gugun_code=" + gugunCode + "&content_type_id=" + contentTypeId;
+            return "/Attraction/attraction_index.jsp" + queryString;
         } else {
             return "/User/user_login.jsp";
         }
