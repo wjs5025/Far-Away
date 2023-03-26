@@ -203,7 +203,11 @@ public class BoardController extends HttpServlet {
         boardDto.setBoardId(boardId);
         boardDto.setUserId(userId);
         boardDto.setTitle(title);
-        boardDto.setContent(content);
+        if (boardDto.getCategory().equals("공지사항")) {
+            boardDto.setCategory("notice");
+        } else if (boardDto.getCategory().equals("공유게시판")) {
+            boardDto.setCategory("share");
+        }
         boardDto.setCategory(category);
 
         try {
