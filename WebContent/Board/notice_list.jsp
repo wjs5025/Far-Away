@@ -46,7 +46,7 @@
                                     <td class="col-1 fw-bold">${board.boardId}</td>
                                     <td class="text-start col-5 text-center">
                                         <a
-                                                href="#"
+                                                href="${root}/board?action=get&boardId=${board.boardId}"
                                                 class="article-title link-dark"
                                                 data-no="${board.boardId}"
                                                 style="text-decoration: none"

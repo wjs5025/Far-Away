@@ -29,8 +29,8 @@
                             <i class="bi bi-chevron-down"></i>
                         </a>
                         <ul>
-                            <li><a class="nav-link scrollto" href="${root}/Board/notice_list.jsp">공지사항</a></li>
-                            <li><a class="nav-link scrollto" href="${root}/Board/share_list.jsp">공유게시판</a></li>
+                            <li><a class="nav-link scrollto" href="${root}/board?action=get-list&category=notice&pageNo=1">공지사항</a></li>
+                            <li><a class="nav-link scrollto" href="${root}/board?action=get-list&category=share&pageNo=1">공유게시판</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
