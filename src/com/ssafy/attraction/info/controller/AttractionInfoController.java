@@ -30,14 +30,21 @@ public class AttractionInfoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        contentTypeId = ParameterCheck.nullToBlank(request.getParameter("content-type-id"));
-        sidoCode = ParameterCheck.nullToBlank(request.getParameter("sido-code"));
-        gugunCode = ParameterCheck.nullToBlank(request.getParameter("gugun-code"));
-
+        contentTypeId = ParameterCheck.nullToBlank(request.getParameter("content_type_id"));
+        sidoCode = ParameterCheck.nullToBlank(request.getParameter("sido_code"));
+        gugunCode = ParameterCheck.nullToBlank(request.getParameter("gugun_code"));
+        System.out.println(action);
+        System.out.println("======검색 키워드 확인======");
+        System.out.println(contentTypeId);
+        System.out.println(sidoCode);
+        System.out.println(gugunCode);
+        System.out.println("======확인 완료======");
         String path = "";
         switch (action) {
             case "list":
                 path = list(request, response);
+                System.out.println("관광지 정보 조회 경로");
+                System.out.println(path);
                 forward(request, response, path);
                 break;
             default:
@@ -67,20 +74,21 @@ public class AttractionInfoController extends HttpServlet {
         if (userDto != null) {
             try {
                 Map<String, String> map = new HashMap<>();
-                map.put("sido-code", sidoCode);
-                map.put("gugun-code", gugunCode);
-                map.put("content-type-id", contentTypeId);
+                map.put("sido_code", sidoCode);
+                map.put("gugun_code", gugunCode);
+                map.put("content_type_id", contentTypeId);
 
                 List<AttractionInfoDto> attractionInfoList = attractionInfoService.getAttractionInfoList(map);
                 request.setAttribute("attractionInfoList", attractionInfoList);
-                
-                return "/Attraction/attraction_index.jsp";
+
             } catch (Exception e) {
                 e.printStackTrace();
                 request.setAttribute("msg", "관광지 정보 조회에 실패했습니다.");
             }
+            return "/Attraction/attraction_index.jsp?sido_code=" + sidoCode +
+                    "&gugun_code=" + gugunCode + "&content_type_id=" + contentTypeId;
+        } else {
+            return "/User/user_login.jsp";
         }
-
-        return "/User/user_login.jsp";
     }
 }
