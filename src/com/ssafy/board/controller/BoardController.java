@@ -5,6 +5,7 @@ import com.ssafy.board.model.dto.BoardDto;
 import com.ssafy.board.model.service.BoardService;
 import com.ssafy.board.model.service.BoardServiceImpl;
 import com.ssafy.user.model.dto.UserDto;
+import com.ssafy.util.PageNavigation;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -58,7 +59,7 @@ public class BoardController extends HttpServlet {
                 getList(req, resp);
                 break;
             case "mv-modify":
-                mvModify(req,resp);
+                mvModify(req, resp);
                 break;
             case "modify":
                 modify(req, resp);
@@ -80,8 +81,13 @@ public class BoardController extends HttpServlet {
         try {
             BoardDto boardDto = boardService.getBoard(boardId);
 
-            if (boardDto == null){
+            if (boardDto == null) {
                 throw new Exception();
+            }
+            if (boardDto.getCategory().equals("notice")) {
+                boardDto.setCategory("공지사항");
+            } else if (boardDto.getCategory().equals("share")) {
+                boardDto.setCategory("공유게시판");
             }
             req.setAttribute("boardDto", boardDto);
             forward(req, resp, "/Board/board_modify.jsp");
@@ -118,13 +124,15 @@ public class BoardController extends HttpServlet {
         BoardDto boardDto = new BoardDto();
 
         boardDto.setUserId(userId);
-        boardDto.setTitle(title);
         boardDto.setContent(content);
         boardDto.setCategory(category);
 
         try {
-            boardService.addBoard(boardDto);
-            redirect(req, resp, "/board?action=get-list&category=" + category + "&pageNo=1");
+//            for (int i = 0; i < 50; i++) {
+//                boardDto.setTitle(title + ".." + i);
+//                boardService.addBoard(boardDto);
+//            }
+            redirect(req, resp, "/board?action=get-list&category=" + category + "&pageNo=1&key=&word=");
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("msg", "게시글 작성에 실패했습니다. 잠시 후 다시 시도하세요.");
@@ -137,10 +145,18 @@ public class BoardController extends HttpServlet {
         try {
             BoardDto boardDto = boardService.getBoard(boardId);
 
-            if (boardDto == null){
+            if (boardDto == null) {
                 throw new Exception();
             }
+            boardService.updateHit(boardId);
+            if (boardDto.getCategory().equals("notice")) {
+                boardDto.setCategory("공지사항");
+            } else if (boardDto.getCategory().equals("share")) {
+                boardDto.setCategory("공유게시판");
+            }
             req.setAttribute("boardDto", boardDto);
+            System.out.println(boardDto.getUserId());
+            System.out.println(req.getSession().getAttribute("user"));
             forward(req, resp, "/Board/board_detail.jsp");
         } catch (Exception e) {
             e.printStackTrace();
@@ -164,7 +180,11 @@ public class BoardController extends HttpServlet {
         try {
             List<BoardDto> boardList = boardService.getBoardList(map);
             req.setAttribute("list", boardList);
-            forward(req, resp, "/Board/" + category + "_list.jsp");
+
+            PageNavigation pageNavigation = boardService.makePageNavigation(map);
+            req.setAttribute("navigation", pageNavigation);
+
+            forward(req, resp, "/Board/" + category + "_list.jsp?pageNo=1&key=" + key + "&word=" + word);
         } catch (Exception e) {
             e.printStackTrace();
         }

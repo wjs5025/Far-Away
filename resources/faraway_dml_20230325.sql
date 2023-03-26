@@ -86,11 +86,11 @@ attraction_info schema
 | mlevel          | varchar(2)     | YES  |     | NULL    |       |
 +-----------------+----------------+------+-----+---------+-------+
 */
-select * from attraction_info limit 10;
+select * from attraction_info limit 10, 20;
 
 select * from sido;
 select * from gugun where sido_code = 1;
 
 select *
 from attraction_info
-where content_type_id = null or sido_code = null or gugun_code = null;
+where content_type_id = 12 or sido_code = 1 or gugun_code = 1;

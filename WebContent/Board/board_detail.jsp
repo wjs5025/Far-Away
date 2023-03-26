@@ -53,15 +53,16 @@
                                   readonly>${boardDto.content}</textarea>
                     </div>
 
-                    <div class="d-grid gap-2 mt-5 d-flex justify-content-between">
-                        <button class="btn btn-success btn-lg col-3">
-                            <a href="${root}/board?action=mv-modify&boardId=${boardDto.boardId}" class="text-white">게시글 수정하기</a>
-                        </button>
-                        <button id="board-delete-btn" class="btn btn-danger btn-lg  col-3">
-                            게시글 삭제하기
-                        </button>
-                    </div>
-
+                    <c:if test="${boardDto.userId eq user.userId}">
+                        <div class="d-grid gap-2 mt-5 d-flex justify-content-between">
+                            <button class="btn btn-success btn-lg col-3">
+                                <a href="${root}/board?action=mv-modify&boardId=${boardDto.boardId}" class="text-white">게시글 수정하기</a>
+                            </button>
+                            <button id="board-delete-btn" class="btn btn-danger btn-lg  col-3">
+                                게시글 삭제하기
+                            </button>
+                        </div>
+                    </c:if>
                 </form>
 
             </div>

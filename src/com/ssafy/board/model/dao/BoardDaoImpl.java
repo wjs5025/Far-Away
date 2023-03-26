@@ -107,25 +107,27 @@ public class BoardDaoImpl implements BoardDao {
                     .append("from board \n");
             String key = (String) param.get("key");
             String word = (String) param.get("word");
+            sql.append("where category = ? \n");
             if (!key.isEmpty() && !word.isEmpty()) {
                 if ("title".equals(key)) {
-                    sql.append("where title like concat('%', ?, '%') \n");
+                    sql.append("and title like concat('%', ?, '%') \n");
                 } else {
-                    sql.append("where ").append(key).append(" = ? \n");
+                    sql.append("and ").append(key).append(" = ? \n");
                 }
             }
-            sql.append("and category = ? \n");
+            System.out.println(sql);
             preparedStatement = connection.prepareStatement(sql.toString());
 
             int idx = 0;
+            preparedStatement.setString(++idx, (String) param.get("category"));
             if (!key.isEmpty() && !word.isEmpty()) {
                 preparedStatement.setString(++idx, word);
             }
-            preparedStatement.setString(++idx, (String) param.get("category"));
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 cnt = resultSet.getInt(1);
             }
+            System.out.println(cnt);
         } finally {
             dbUtil.close(connection, preparedStatement, resultSet);
         }

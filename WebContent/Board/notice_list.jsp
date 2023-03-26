@@ -62,7 +62,30 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="row">
+                        ${navigation.navigator}
+                    </div>
                 </div>
+                <form id="form-param" method="get" action="">
+                    <input type="hidden" id="p-action" name="action" value="">
+                    <input type="hidden" id="p-category" name="category" value="notice">
+                    <input type="hidden" id="p-pgno" name="pageNo" value="">
+                    <input type="hidden" id="p-key" name="key" value="">
+                    <input type="hidden" id="p-word" name="word" value="">
+                </form>
+                <script>
+                    let pages = document.querySelectorAll(".page-link");
+                    pages.forEach(function (page) {
+                        page.addEventListener("click", function () {
+                            console.log(this.parentNode.getAttribute("data-pg"));
+                            document.querySelector("#p-action").value = "get-list";
+                            document.querySelector("#p-pgno").value = this.parentNode.getAttribute("data-pg");
+                            document.querySelector("#p-key").value = "${param.key}";
+                            document.querySelector("#p-word").value = "${param.word}";
+                            document.querySelector("#form-param").submit();
+                        });
+                    });
+                </script>
             </div>
         </main>
     </div>

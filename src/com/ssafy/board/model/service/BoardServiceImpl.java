@@ -59,6 +59,7 @@ public class BoardServiceImpl implements BoardService {
 //			key = "user_id";
         param.put("key", key.isEmpty() ? "" : key);
         param.put("word", map.get("word").isEmpty() ? "" : map.get("word"));
+        param.put("category", map.get("category"));
         int totalCount = boardDao.getTotalBoardCount(param);
         pageNavigation.setTotalCount(totalCount);
         int totalPageCount = (totalCount - 1) / sizePerPage + 1;
