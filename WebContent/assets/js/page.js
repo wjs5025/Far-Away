@@ -20,9 +20,10 @@ const setSeason = () => {
 // window onload 시
 window.onload = () => {
   let pathname = location.pathname  ;
+  console.log(pathname);
 
   switch (pathname) {
-    case "/index.jsp" :
+    case "/" :
       setSeason();
       break;
     case "/Attraction/attraction_index.jsp":
