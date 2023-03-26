@@ -46,7 +46,7 @@
 <%@ include file="/include/footer.jsp" %>
 <script>
     document.getElementById("return-index-btn").addEventListener("click", function () {
-        location.href = "${root}/index.jsp";
+        location.href = "/";
     });
 </script>
 </body>

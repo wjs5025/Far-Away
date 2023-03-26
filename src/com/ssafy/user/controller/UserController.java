@@ -100,7 +100,7 @@ public class UserController extends HttpServlet {
         }
         catch (Exception e) {
             e.printStackTrace();
-            req.setAttribute("msg", "회원가입에 실패했습니다. : 이미 사용 중인 아이디입니다.");
+            req.setAttribute("msg", "회원가입에 실패했습니다. 이미 사용 중인 아이디입니다.");
             System.out.println(req.getAttribute("msg"));
             forward(req,resp,"/error/error.jsp");
         }
