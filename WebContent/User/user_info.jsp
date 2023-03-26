@@ -24,7 +24,6 @@
              style="height: 80vh">
             <h1 class="col-md-12 text-center section-header text-black">회원 정보 조회</h1>
             <div class="container col-4 ">
-
                     <div class="form-group">
                         <label for="user_id" class="form-label d-flex">아이디</label>
                         <input type="text" class="form-control" id="user_id" name="user_id" readonly

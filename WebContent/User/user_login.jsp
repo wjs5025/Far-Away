@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,17 +29,20 @@
                     </div>
 
                     <!-- 비밀번호 입력 -->
-                    <div class="form-outline mb-4">
+                    <div class="form-outline">
                         <label class="form-label d-flex" for="user_password">비밀번호</label>
                         <input type="password" id="user_password" name="user_password" class="form-control"/>
                     </div>
-
+                    <div class="form-outline m-3">
+                        <span class="text-danger">${msg}&nbsp;</span>
+                    </div>
                     <!-- 2 column grid layout for inline styling -->
                     <div class="row mb-4">
                         <div class="col d-flex justify-content-center">
                             <!-- Checkbox -->
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="save" id="save_id" name="save_id"/>
+                                <input class="form-check-input" type="checkbox" value="save" id="save_id"
+                                       name="save_id"/>
                                 <label class="form-check-label" for="save_id"> 로그인 정보 기억 </label>
                             </div>
                         </div>
@@ -46,6 +50,7 @@
                             <div class="col text-center ">
                                 <a href="./user_find.jsp">비밀번호를 분실했나요?</a>
                             </div>
+
                         </div>
                     </div>
                     <div class="row mb-4 justify-content-center">
