@@ -36,5 +36,7 @@ function displayMarker() {
 }
 
 function moveCenter(lat, lng) {
+  console.log(lat)
+  console.log(lng)
   map.setCenter(new kakao.maps.LatLng(lat, lng));
 }

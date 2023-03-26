@@ -1,10 +1,3 @@
-const parseXML = new DOMParser();
-
-// 현재 선택된 지역 코드 (default 광주(5));
-let selectedAreaCode = 0;
-let selectedSigunguCode = 0;
-let selectedTourType = 0;
-
 // getRegionData() : 지역 정보 불러오기 (fetch)
 const getRegionData = () => {
     const url = `/region`;
@@ -103,7 +96,7 @@ const makeTripList = (data) => {
         elementSum += "<tbody>";
         dataArr.forEach((el) => {
             elementSum += `
-        <tr  onclick="moveCenter(${el.mapy}, ${el.mapx});">
+        <tr>
           <td class="text-center"><img src="${
                 el.firstimage ? el.firstimage : defaultSrc
             }" width='100px'/></td>

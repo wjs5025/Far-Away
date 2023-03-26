@@ -67,7 +67,7 @@
                                 <c:if test="${not empty attractionInfoList}">
                                     <tbody>
                                     <c:forEach var="attractionInfo" items="${attractionInfoList}">
-                                        <tr class="text-center">
+                                        <tr class="text-center"  onclick="moveCenter('${attractionInfo.latitude}', '${attractionInfo.longitude}')">
                                             <c:if test="${empty attractionInfo.firstImage}">
                                                 <td><img src="${root}/assets/img/attraction/no-img.png" width="100px"/>
                                                 </td>
@@ -75,7 +75,9 @@
                                             <c:if test="${not empty attractionInfo.firstImage}">
                                                 <td><img src="${attractionInfo.firstImage}" width="100px"/></td>
                                             </c:if>
-                                            <td>${attractionInfo.title}</td>
+                                            <td>${attractionInfo.title}
+                                            <h1>${attractionInfo.latitude}</h1>
+                                            </td>
                                             <td>${attractionInfo.addr1}</td>
                                         </tr>
                                     </c:forEach>
