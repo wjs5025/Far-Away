@@ -203,16 +203,17 @@ public class BoardController extends HttpServlet {
         boardDto.setBoardId(boardId);
         boardDto.setUserId(userId);
         boardDto.setTitle(title);
-        if (boardDto.getCategory().equals("공지사항")) {
-            boardDto.setCategory("notice");
-        } else if (boardDto.getCategory().equals("공유게시판")) {
-            boardDto.setCategory("share");
+        if (category.equals("공지사항")) {
+            category = "notice";
+        } else if (category.equals("공유게시판")) {
+            category = "share";
         }
         boardDto.setCategory(category);
+        boardDto.setContent(content);
 
         try {
             boardService.modifyBoard(boardDto);
-            redirect(req, resp, "/board?action=get-list&category=" + category + "&pageNo=1");
+            redirect(req, resp, "/board?action=get-list&category=" + category + "&pageNo=1&key=&word=");
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("msg", "게시글 수정에 실패했습니다. 잠시 후 다시 시도하세요.");

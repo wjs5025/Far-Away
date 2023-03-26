@@ -24,6 +24,7 @@
                 <form class="col-10" id="write-form" method="POST">
                     <input type="hidden" class="form-control text-start" id="boardId" name="boardId" readonly
                            value="${boardDto.boardId}">
+                    <input type="hidden" class="form-control text-start" id="action" name="action" value="modify">
                     <div class="form-group col-12 d-flex">
                         <div class="col-4">
                             <label for="writer" class="form-label d-flex" style="font-size: 0.9em">카테고리</label>
@@ -79,7 +80,7 @@
             return;
         }else{
             let form = document.getElementById("write-form");
-            form.setAttribute("action", "/board?action=modify");
+            form.setAttribute("action", "${root}/board");
             form.submit();
         }
     });
