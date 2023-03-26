@@ -19,7 +19,6 @@ public class UserController extends HttpServlet {
 
     public void init() {
         userService = UserServiceImpl.getUserService();
-        System.out.println(userService);
     }
 
     @Override
@@ -83,7 +82,6 @@ public class UserController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("post로 받음");
         req.setCharacterEncoding("utf-8");
         doGet(req, resp);
     }
