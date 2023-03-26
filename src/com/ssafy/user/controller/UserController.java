@@ -10,6 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 @WebServlet("/user")
 public class UserController extends HttpServlet {
@@ -31,7 +33,6 @@ public class UserController extends HttpServlet {
                 break;
             case "regist":
                 regist(req, resp);
-                redirect(req, resp, "/User/user_login.jsp");
                 break;
             case "mv-login":
                 redirect(req, resp, "/User/user_login.jsp");
@@ -41,7 +42,7 @@ public class UserController extends HttpServlet {
                 break;
             case "logout":
                 logout(req, resp);
-                redirect(req, resp, "/index.jsp");
+                redirect(req, resp, "/");
                 break;
             case "mv-modify":
                 redirect(req, resp, "/User/user_modify.jsp");
@@ -51,7 +52,7 @@ public class UserController extends HttpServlet {
                 break;
             case "delete" :
                 delete(req,resp);
-                redirect(req,resp,"/index.jsp");
+                redirect(req,resp,"/");
                 break;
             case "mv-find":
                 redirect(req, resp, "/regist.jsp");
@@ -84,7 +85,7 @@ public class UserController extends HttpServlet {
         doGet(req, resp);
     }
 
-    private void regist(HttpServletRequest req, HttpServletResponse resp) {
+    private void regist(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         UserDto userDto = new UserDto();
         userDto.setUserId(req.getParameter("user_id"));
         userDto.setUserPwd(req.getParameter("user_password"));
@@ -92,11 +93,16 @@ public class UserController extends HttpServlet {
         userDto.setEmailId(req.getParameter("email_id"));
         userDto.setEmailDomain(req.getParameter("email_domain"));
 
-
         try {
-            System.out.println(userService.regist(userDto));
-        } catch (Exception e) {
+            if(userService.regist(userDto) == 1) {
+                redirect(req, resp, "/User/user_login.jsp");
+            }
+        }
+        catch (Exception e) {
             e.printStackTrace();
+            req.setAttribute("msg", "회원가입에 실패했습니다. : 이미 사용 중인 아이디입니다.");
+            System.out.println(req.getAttribute("msg"));
+            forward(req,resp,"/error/error.jsp");
         }
     }
 
@@ -109,7 +115,9 @@ public class UserController extends HttpServlet {
             userDto = userService.login(userId, userPassword);
             if (userDto == null) {
                 System.out.println("로그인 실패");
-                redirect(req, resp, "/User/user_login.jsp");
+                req.setAttribute("msg", "로그인에 실패했습니다. 아이디 또는 비밀번호를 확인해주세요.");
+                System.out.println(req.getAttribute("msg"));
+                forward(req, resp, "/User/user_login.jsp");
             } else {
                 // session 설정
                 HttpSession session = req.getSession();
@@ -136,7 +144,7 @@ public class UserController extends HttpServlet {
                     }
                 }
                 System.out.println("로그인 성공!");
-                redirect(req, resp, "/index.jsp");
+                forward(req, resp, "/");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -150,7 +158,7 @@ public class UserController extends HttpServlet {
         session.invalidate();
     }
 
-    private void modify(HttpServletRequest req, HttpServletResponse resp) {
+    private void modify(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
         String userPwd = ((UserDto) session.getAttribute("user")).getUserPwd();
 
@@ -167,7 +175,7 @@ public class UserController extends HttpServlet {
             try {
                 userService.modifyUser(modifiedUserDto);
                 session.setAttribute("user", modifiedUserDto);
-                redirect(req, resp, "/index.jsp");
+                redirect(req, resp, "/");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -177,11 +185,13 @@ public class UserController extends HttpServlet {
                 redirect(req, resp, "/User/user_modify.jsp");
             } catch (IOException e) {
                 e.printStackTrace();
+                req.setAttribute("msg", "회원 수정에 실패했습니다. 비밀번호를 확인해주세요.");
+                redirect(req,resp,"/error/error.jsp");
             }
         }
     }
 
-    private void delete(HttpServletRequest req, HttpServletResponse resp) {
+    private void delete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
 
         try {
@@ -189,6 +199,8 @@ public class UserController extends HttpServlet {
             session.removeAttribute("user");
         } catch (Exception e) {
             e.printStackTrace();
+            req.setAttribute("msg", "회원 탈퇴에 실패했습니다.");
+            redirect(req,resp,"/error/error.jsp");
         }
     }
 }
