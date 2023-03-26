@@ -1,3 +1,30 @@
+/*
+ * page.js
+ * - 페이지 별 수행해야 할 함수들 정의
+ *
+ */
+
+// window onload 시
+window.onload = () => {
+  let pathname = location.pathname  ;
+  console.log(pathname);
+
+  switch (pathname) {
+    case "/" :
+      setSeason();
+      break;
+    case "/Attraction/attraction_index.jsp":
+      getRegionData();
+      break;
+    case "/attraction" :
+      getRegionData();
+      break;
+    default:
+      break;
+  }
+};
+
+// setSeason : 메인 페이지 - 메인타이틀 수정
 const setSeason = () => {
   const mainTitle = document.getElementById("main-title");
 
@@ -17,19 +44,4 @@ const setSeason = () => {
   mainTitle.innerText = `이번 ${season}, 어디로 떠나실건가요?`;
 };
 
-// window onload 시
-window.onload = () => {
-  let pathname = location.pathname  ;
-  console.log(pathname);
 
-  switch (pathname) {
-    case "/" :
-      setSeason();
-      break;
-    case "/Attraction/attraction_index.jsp":
-      getRegionData();
-      break;
-    default:
-      break;
-  }
-};

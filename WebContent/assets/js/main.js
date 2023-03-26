@@ -1,3 +1,9 @@
+/*
+* main.js
+* - 부트스트랩 관련
+* - 건드릴 필요 없음.
+* */
+
 (function() {
   "use strict";
 
