@@ -90,4 +90,4 @@ select * from attraction_info limit 10;
 
 select *
 from attraction_info
-where content_type_id = null;
+where content_type_id = null or sido_code = null or gugun_code = null;
