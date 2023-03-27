@@ -18,10 +18,10 @@
                     <li><a class="nav-link scrollto active" href="/">INTRO</a>
                     </li>
                     <li><a class="nav-link scrollto"
-                           href="${root}/attraction?action=list&page_no=1&sido_code=&gugun_code=&content_type_id=">지역별 여행지</a></li>
-                    <li><a class="nav-link scrollto" href="${root}/Route/route_index.jsp">나의
+                           href="${root}/attraction?action=list&page-no=1&sido-code=&gugun-code=&content-type-id=">지역별 여행지</a></li>
+                    <li><a class="nav-link scrollto" href="${root}/route/route-index.jsp">나의
                         여행계획</a></li>
-                    <li><a class="nav-link scrollto" href="${root}/Attraction/hotplace_index.jsp">핫플 자랑하기</a>
+                    <li><a class="nav-link scrollto" href="${root}/attraction/hotplace-index.jsp">핫플 자랑하기</a>
                     </li>
                     <li class="dropdown">
                         <a href="#">

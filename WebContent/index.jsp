@@ -19,7 +19,7 @@
              data-aos="fade-in" data-aos-delay="200">
             <h1 id="main-title">메인 타이틀</h1>
             <h2>당신에게 꼭 맞는 여행지를 검색해보세요</h2>
-            <a href="${root}/attraction?action=list&page_no=1&sido_code=&gugun_code=&content_type_id=" class="btn-get-started scrollto">SEARCH
+            <a href="${root}/attraction?action=list&page-no=1&sido-code=&gugun-code=&content-type-id=" class="btn-get-started scrollto">SEARCH
                 !</a>
         </div>
     </section>

@@ -38,9 +38,9 @@ public class AttractionInfoDaoImpl implements AttractionInfoDao {
             sql = new StringBuilder();
             sql.append("select content_id, first_image,  title, addr1, latitude, longitude, content_type_id, zipcode, tel \n");
             sql.append("from attraction_info \n");
-            String sidoCode = (String) param.get("sido_code");
-            String gugunCode = (String) param.get("gugun_code");
-            String contentTypeId = (String) param.get("content_type_id");
+            String sidoCode = (String) param.get("sidoCode");
+            String gugunCode = (String) param.get("gugunCode");
+            String contentTypeId = (String) param.get("contentTypeId");
 
             if (!sidoCode.isEmpty() && gugunCode.isEmpty() && contentTypeId.isEmpty()) {
                 sql.append("where sido_code = ? \n");
@@ -73,7 +73,7 @@ public class AttractionInfoDaoImpl implements AttractionInfoDao {
                 preparedStatement.setString(++idx, contentTypeId);
             }
             preparedStatement.setInt(++idx, (Integer) param.get("start"));
-            preparedStatement.setInt(++idx, (Integer) param.get("list_size"));
+            preparedStatement.setInt(++idx, (Integer) param.get("listSize"));
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 AttractionInfoDto attractionInfoDto = new AttractionInfoDto();
@@ -102,9 +102,9 @@ public class AttractionInfoDaoImpl implements AttractionInfoDao {
             sql = new StringBuilder();
             sql.append("select count(content_id) \n");
             sql.append("from attraction_info \n");
-            String sidoCode = (String) param.get("sido_code");
-            String gugunCode = (String) param.get("gugun_code");
-            String contentTypeId = (String) param.get("content_type_id");
+            String sidoCode = (String) param.get("sidoCode");
+            String gugunCode = (String) param.get("gugunCode");
+            String contentTypeId = (String) param.get("contentTypeId");
 
             if (!sidoCode.isEmpty() && gugunCode.isEmpty() && contentTypeId.isEmpty()) {
                 sql.append("where sido_code = ? \n");

@@ -13,7 +13,7 @@ window.onload = () => {
     case "/" :
       setSeason();
       break;
-    case "/Attraction/attraction_index.jsp":
+    case "/attraction/attraction-index.jsp":
       getRegionData();
       break;
     case "/attraction" :

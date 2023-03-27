@@ -25,14 +25,14 @@ public class AttractionInfoServiceImpl implements AttractionInfoService {
     @Override
     public List<AttractionInfoDto> getAttractionInfoList(Map<String, String> map) throws Exception {
         Map<String, Object> param = new HashMap<>();
-        param.put("sido_code", map.get("sido_code"));
-        param.put("gugun_code", map.get("gugun_code"));
-        param.put("content_type_id", map.get("content_type_id"));
+        param.put("sidoCode", map.get("sidoCode"));
+        param.put("gugunCode", map.get("gugunCode"));
+        param.put("contentTypeId", map.get("contentTypeId"));
 
-        int pageNo = Integer.parseInt(map.get("page_no"));
+        int pageNo = Integer.parseInt(map.get("pageNo"));
         int start = pageNo * SizeConstant.LIST_SIZE - SizeConstant.LIST_SIZE;
         param.put("start", start);
-        param.put("list_size", SizeConstant.LIST_SIZE);
+        param.put("listSize", SizeConstant.LIST_SIZE);
         return attractionInfoDao.getAttractionInfoList(param);
     }
 
@@ -42,23 +42,20 @@ public class AttractionInfoServiceImpl implements AttractionInfoService {
 
         int navigationSize = SizeConstant.NAVIGATION_SIZE;
         int pageSize = SizeConstant.LIST_SIZE;
-        int currentPage = Integer.parseInt(map.get("page_no"));
+        int currentPage = Integer.parseInt(map.get("pageNo"));
 
         pageNavigation.setCurrentPage(currentPage);
         pageNavigation.setNaviSize(navigationSize);
         Map<String, Object> param = new HashMap<>();
-        param.put("sido_code", map.get("sido_code"));
-        param.put("gugun_code", map.get("gugun_code"));
-        param.put("content_type_id", map.get("content_type_id"));
+        param.put("sidoCode", map.get("sidoCode"));
+        param.put("gugunCode", map.get("gugunCode"));
+        param.put("contentTypeId", map.get("contentTypeId"));
 
         int totalCount = attractionInfoDao.getTotalAttractionInfoCount(param);
         pageNavigation.setTotalPageCount(totalCount);
 
-        System.out.println("========== 페이지네이션 확인 ===========");
-        System.out.println(totalCount);
         int totalPageCount = (totalCount - 1) / pageSize + 1;
         pageNavigation.setTotalPageCount(totalPageCount);
-        System.out.println(totalPageCount);
 
         boolean startRange = currentPage <= navigationSize;
         pageNavigation.setStartRange(startRange);
