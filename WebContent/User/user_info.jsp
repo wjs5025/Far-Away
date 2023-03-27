@@ -6,7 +6,7 @@
 <html>
 <head>
     <%@ include file="/include/head.jsp" %>
-    <title>Far Away : 회원 정보 조회</title>
+    <title>Far Away : 마이 페이지</title>
 </head>
 <body>
 <%@ include file="/include/nav.jsp" %>
@@ -20,7 +20,7 @@
     >
         <div class="card container align-items-center rounded-0 mt-5  justify-content-center overflow-y-scroll"
              style="height: 80vh">
-            <h1 class="col-md-12 text-center section-header text-black">회원 정보 조회</h1>
+            <h1 class="col-md-12 text-center section-header text-black">마이 페이지</h1>
             <div class="container col-4 ">
                     <div class="form-group">
                         <label for="user_id" class="form-label d-flex">아이디</label>
