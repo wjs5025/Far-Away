@@ -132,6 +132,8 @@ public class BoardController extends HttpServlet {
 //                boardDto.setTitle(title + ".." + i);
 //                boardService.addBoard(boardDto);
 //            }
+            boardDto.setTitle(title);
+            boardService.addBoard(boardDto);
             redirect(req, resp, "/board?action=get-list&category=" + category + "&pageNo=1&key=&word=");
         } catch (Exception e) {
             e.printStackTrace();
