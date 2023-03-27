@@ -1,3 +1,5 @@
+const positions = [];
+
 // getRegionData() : 지역 정보 불러오기 (fetch)
 const getRegionData = () => {
     const url = `/region`;
@@ -27,7 +29,7 @@ const getGunguData = () => {
 
     fetch(url)
         .then((res) => res.json())
-        .then((data) =>{
+        .then((data) => {
             console.log(data);
             makeGunguList(data);
         });
@@ -69,51 +71,4 @@ const Search = () => {
             console.log(data);
             makeTripList(data);
         });
-};
-
-let positions = [];
-/* makeTripList() : 여행정보 목록 보여주기*/
-const makeTripList = (data) => {
-    let table = document.getElementById("attraction_info_list");
-    let elementSum = "";
-    let dataArr = data.response.body.items.item;
-    let defaultSrc = "";
-
-    elementSum += `<thead>
-  <tr>
-    <th class="text-center">대표이미지</th>
-    <th class="text-center">관광지명</th>
-    <th class="text-center">주소</th>
-  </tr>
-</thead>`;
-    if (dataArr === undefined) {
-        elementSum += `
-        <tr>
-          <td>검색결과가 없습니다.</td>
-        </tr>
-    `;
-    } else {
-        elementSum += "<tbody>";
-        dataArr.forEach((el) => {
-            elementSum += `
-        <tr>
-          <td class="text-center"><img src="${
-                el.firstimage ? el.firstimage : defaultSrc
-            }" width='100px'/></td>
-          <td class="text-center">${el.title}</td>
-          <td class="text-center">${el.addr1}</td>
-        </tr>
-    `;
-            let markerInfo = {
-                title: el.title,
-                latlng: new kakao.maps.LatLng(el.mapy, el.mapx),
-                contenttypeid: el.contenttypeid,
-            };
-            positions.push(markerInfo);
-        });
-        elementSum += "</tbody>";
-    }
-
-    table.innerHTML = elementSum;
-    displayMarker();
 };
