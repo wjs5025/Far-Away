@@ -36,7 +36,7 @@ public class AttractionInfoDaoImpl implements AttractionInfoDao {
         try {
             connection = dbUtil.getConnection();
             sql = new StringBuilder();
-            sql.append("select content_id, first_image,  title, addr1, latitude, longitude \n");
+            sql.append("select content_id, first_image,  title, addr1, latitude, longitude, content_type_id \n");
             sql.append("from attraction_info \n");
             String sidoCode = (String) param.get("sido_code");
             String gugunCode = (String) param.get("gugun_code");
@@ -83,6 +83,7 @@ public class AttractionInfoDaoImpl implements AttractionInfoDao {
                 attractionInfoDto.setAddr1(resultSet.getString("addr1"));
                 attractionInfoDto.setLatitude(resultSet.getString("latitude"));
                 attractionInfoDto.setLongitude(resultSet.getString("longitude"));
+                attractionInfoDto.setContentTypeId(resultSet.getString("content_type_id"));
                 attractionInfoList.add(attractionInfoDto);
             }
         } finally {
