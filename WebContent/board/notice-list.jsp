@@ -46,7 +46,7 @@
                                     <td class="col-1 fw-bold">${board.boardId}</td>
                                     <td class="text-start col-5 text-center">
                                         <a
-                                                href="${root}/board?action=get&boardId=${board.boardId}"
+                                                href="${root}/board?action=get&board-id=${board.boardId}"
                                                 class="article-title link-dark"
                                                 data-no="${board.boardId}"
                                                 style="text-decoration: none"
@@ -69,7 +69,7 @@
                 <form id="form-param" method="get" action="">
                     <input type="hidden" id="p-action" name="action" value="">
                     <input type="hidden" id="p-category" name="category" value="notice">
-                    <input type="hidden" id="p-pgno" name="pageNo" value="">
+                    <input type="hidden" id="p-pgno" name="page-no" value="">
                     <input type="hidden" id="p-key" name="key" value="">
                     <input type="hidden" id="p-word" name="word" value="">
                 </form>

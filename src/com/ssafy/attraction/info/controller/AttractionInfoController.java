@@ -38,7 +38,7 @@ public class AttractionInfoController extends HttpServlet {
         contentTypeId = ParameterCheck.nullToBlank(request.getParameter("content_type_id"));
         sidoCode = ParameterCheck.nullToBlank(request.getParameter("sido_code"));
         gugunCode = ParameterCheck.nullToBlank(request.getParameter("gugun_code"));
-        queryString = "?page_no=" + pageNo + "&sido_code=" + sidoCode + "&gugun_code=" + gugunCode + "&content_type_id=" + contentTypeId;
+        queryString = "?page-no=" + pageNo + "&sido_code=" + sidoCode + "&gugun_code=" + gugunCode + "&content_type_id=" + contentTypeId;
         String path = "";
         switch (action) {
             case "list":

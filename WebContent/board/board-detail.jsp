@@ -30,8 +30,8 @@ pageEncoding="UTF-8" %>
               <input
                 type="hidden"
                 class="form-control text-start"
-                id="boardId"
-                name="boardId"
+                id="board-id"
+                name="board-id"
                 readonly
                 value="${boardDto.boardId}"
               />
@@ -104,7 +104,7 @@ ${boardDto.content}</textarea
                 <div class="d-grid gap-2 mt-5 d-flex justify-content-between">
                   <button class="btn btn-success btn-lg col-3">
                     <a
-                      href="${root}/board?action=mv-modify&boardId=${boardDto.boardId}"
+                      href="${root}/board?action=mv-modify&board-id=${boardDto.boardId}"
                       class="text-white"
                       >게시글 수정하기</a
                     >

@@ -22,7 +22,7 @@
                 <h1 class="col-md-12 text-center section-header">게시글 수정하기</h1>
                 <!-- 여기에 코드작성 -->
                 <form class="col-10" id="write-form" method="POST">
-                    <input type="hidden" class="form-control text-start" id="boardId" name="boardId" readonly
+                    <input type="hidden" class="form-control text-start" id="board-id" name="board-id" readonly
                            value="${boardDto.boardId}">
                     <input type="hidden" class="form-control text-start" id="action" name="action" value="modify">
                     <div class="form-group col-12 d-flex">

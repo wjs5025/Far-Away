@@ -44,7 +44,7 @@ public class BoardController extends HttpServlet {
         switch (action) {
             case "mv-add":
                 if (isLogined(req, resp)) {
-                    redirect(req, resp, "/Board/board_write.jsp");
+                    redirect(req, resp, "/board/board-write.jsp");
                 } else {
                     redirect(req, resp, "/user/user-login.jsp");
                 }
@@ -76,7 +76,7 @@ public class BoardController extends HttpServlet {
     }
 
     private void mvModify(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int boardId = Integer.parseInt(req.getParameter("boardId"));
+        int boardId = Integer.parseInt(req.getParameter("board-id"));
 
         try {
             BoardDto boardDto = boardService.getBoard(boardId);
@@ -90,7 +90,7 @@ public class BoardController extends HttpServlet {
                 boardDto.setCategory("공유게시판");
             }
             req.setAttribute("boardDto", boardDto);
-            forward(req, resp, "/Board/board_modify.jsp");
+            forward(req, resp, "/board/board-modify.jsp");
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("msg", "게시글 조회에 실패했습니다. 잘못된 게시글 번호입니다.");
@@ -134,7 +134,7 @@ public class BoardController extends HttpServlet {
 //            }
             boardDto.setTitle(title);
             boardService.addBoard(boardDto);
-            redirect(req, resp, "/board?action=get-list&category=" + category + "&pageNo=1&key=&word=");
+            redirect(req, resp, "/board?action=get-list&category=" + category + "&page-no=1&key=&word=");
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("msg", "게시글 작성에 실패했습니다. 잠시 후 다시 시도하세요.");
@@ -143,7 +143,7 @@ public class BoardController extends HttpServlet {
     }
 
     private void get(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int boardId = Integer.parseInt(req.getParameter("boardId"));
+        int boardId = Integer.parseInt(req.getParameter("board-id"));
         try {
             BoardDto boardDto = boardService.getBoard(boardId);
 
@@ -159,7 +159,7 @@ public class BoardController extends HttpServlet {
             req.setAttribute("boardDto", boardDto);
             System.out.println(boardDto.getUserId());
             System.out.println(req.getSession().getAttribute("user"));
-            forward(req, resp, "/Board/board_detail.jsp");
+            forward(req, resp, "/board/board-detail.jsp");
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("msg", "게시글 조회에 실패했습니다. 잘못된 게시글 번호입니다.");
@@ -170,7 +170,7 @@ public class BoardController extends HttpServlet {
     private void getList(HttpServletRequest req, HttpServletResponse resp) {
         Map<String, String> map = new HashMap<>();
         String category = req.getParameter("category");
-        String pageNo = req.getParameter("pageNo");
+        String pageNo = req.getParameter("page-no");
         String key = req.getParameter("key");
         String word = req.getParameter("word");
 
@@ -186,7 +186,7 @@ public class BoardController extends HttpServlet {
             PageNavigation pageNavigation = boardService.makePageNavigation(map);
             req.setAttribute("navigation", pageNavigation);
 
-            forward(req, resp, "/Board/" + category + "_list.jsp?pageNo=1&key=" + key + "&word=" + word);
+            forward(req, resp, "/board/" + category + "-list.jsp?page-no=1&key=" + key + "&word=" + word);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -194,7 +194,7 @@ public class BoardController extends HttpServlet {
 
     private void modify(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        int boardId = Integer.parseInt(req.getParameter("boardId"));
+        int boardId = Integer.parseInt(req.getParameter("board-id"));
         String userId = ((UserDto) session.getAttribute("user")).getUserId();
         String title = req.getParameter("title");
         String content = req.getParameter("content");
@@ -215,7 +215,7 @@ public class BoardController extends HttpServlet {
 
         try {
             boardService.modifyBoard(boardDto);
-            redirect(req, resp, "/board?action=get-list&category=" + category + "&pageNo=1&key=&word=");
+            redirect(req, resp, "/board?action=get-list&category=" + category + "&page-no=1&key=&word=");
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("msg", "게시글 수정에 실패했습니다. 잠시 후 다시 시도하세요.");
@@ -224,7 +224,7 @@ public class BoardController extends HttpServlet {
     }
 
     private void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int boardId = Integer.parseInt(req.getParameter("boardId"));
+        int boardId = Integer.parseInt(req.getParameter("board-id"));
         String category = req.getParameter("category");
         if (category.equals("공지사항")) {
             category = "notice";
@@ -233,7 +233,7 @@ public class BoardController extends HttpServlet {
         }
         try {
             boardService.deleteBoard(boardId);
-            redirect(req, resp, "/board?action=get-list&category=" + category + "&pageNo=1");
+            redirect(req, resp, "/board?action=get-list&category=" + category + "&page-no=1");
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("msg", "게시글 삭제에 실패했습니다.");

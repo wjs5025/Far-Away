@@ -13,6 +13,8 @@ import java.util.Map;
 public class BoardServiceImpl implements BoardService {
     private static BoardServiceImpl instance = new BoardServiceImpl();
     private BoardDao boardDao;
+
+    Map<String, Object> param;
     private BoardServiceImpl() {
         boardDao = BoardDaoImpl.getInstance();
     }
@@ -28,14 +30,14 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public List<BoardDto> getBoardList(Map<String, String> map) throws Exception {
-        Map<String, Object> param = new HashMap<String, Object>();
+        param = new HashMap<>();
         String key = map.get("key");
 //		if("userid".equals(key))
 //			key = "user-id";
         param.put("key", key.isEmpty() ? "" : key);
         param.put("word", map.get("word").isEmpty() ? "" : map.get("word"));
-        int pgno = Integer.parseInt(map.get("pageNo"));
-        int start = pgno * SizeConstant.LIST_SIZE - SizeConstant.LIST_SIZE;
+        int pageNo = Integer.parseInt(map.get("pageNo"));
+        int start = pageNo * SizeConstant.LIST_SIZE - SizeConstant.LIST_SIZE;
         param.put("start", start);
         param.put("listSize", SizeConstant.LIST_SIZE);
         param.put("category", map.get("category"));
@@ -53,10 +55,8 @@ public class BoardServiceImpl implements BoardService {
 
         pageNavigation.setCurrentPage(currentPage);
         pageNavigation.setNaviSize(naviSize);
-        Map<String, Object> param = new HashMap<String, Object>();
+        param = new HashMap<>();
         String key = map.get("key");
-//		if ("userid".equals(key))
-//			key = "user-id";
         param.put("key", key.isEmpty() ? "" : key);
         param.put("word", map.get("word").isEmpty() ? "" : map.get("word"));
         param.put("category", map.get("category"));
