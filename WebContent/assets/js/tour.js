@@ -13,7 +13,7 @@ const getRegionData = () => {
 
 // makeRegionList() : 가져온 지역 정보 dom에 뿌리기
 const makeRegionList = (regions) => {
-    const searchArea = document.getElementById("sido-code");
+    const searchArea = document.getElementById("sidoCode");
     let sidoSum = "<option value='' selected>시/도</option>";
     regions.forEach((el) => {
         sidoSum += `<option value=${el.sidoCode}>${el.sidoName}</option>`;
@@ -23,7 +23,7 @@ const makeRegionList = (regions) => {
 
 // getGunguData() : 시군구 정보 불러오기 (fetch)
 const getGunguData = () => {
-    let sidoCode = document.getElementById("sido-code").value;
+    let sidoCode = document.getElementById("sidoCode").value;
 
     const url = `/region?sidoCode=${sidoCode}`;
 
@@ -36,7 +36,7 @@ const getGunguData = () => {
 
 // makeSigunguList() : 가져온 지역 정보 dom에 뿌리기
 const makeGunguList = (gungu) => {
-    const searchArea = document.getElementById("gugun-code");
+    const searchArea = document.getElementById("gugunCode");
 
     let sigunguSum = "";
     gungu.forEach((el) => {

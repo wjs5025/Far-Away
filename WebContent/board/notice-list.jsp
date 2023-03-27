@@ -69,7 +69,7 @@
                 <form id="form-param" method="get" action="">
                     <input type="hidden" id="p-action" name="action" value="">
                     <input type="hidden" id="p-category" name="category" value="notice">
-                    <input type="hidden" id="p-pgno" name="page-no" value="">
+                    <input type="hidden" id="p-pgno" name="pageNo" value="">
                     <input type="hidden" id="p-key" name="key" value="">
                     <input type="hidden" id="p-word" name="word" value="">
                 </form>

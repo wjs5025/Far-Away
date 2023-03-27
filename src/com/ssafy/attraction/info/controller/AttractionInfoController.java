@@ -33,11 +33,11 @@ public class AttractionInfoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        pageNo = ParameterCheck.notNumberToOne(request.getParameter("page-no"));
-        contentTypeId = ParameterCheck.nullToBlank(request.getParameter("content-type-id"));
-        sidoCode = ParameterCheck.nullToBlank(request.getParameter("sido-code"));
-        gugunCode = ParameterCheck.nullToBlank(request.getParameter("gugun-code"));
-        queryString = "?page-no=" + pageNo + "&sido-code=" + sidoCode + "&gugun-code=" + gugunCode + "&content-type-id=" + contentTypeId;
+        pageNo = ParameterCheck.notNumberToOne(request.getParameter("pageNo"));
+        contentTypeId = ParameterCheck.nullToBlank(request.getParameter("contentTypeId"));
+        sidoCode = ParameterCheck.nullToBlank(request.getParameter("sidoCode"));
+        gugunCode = ParameterCheck.nullToBlank(request.getParameter("gugunCode"));
+        queryString = "?pageNo=" + pageNo + "&sidoCode=" + sidoCode + "&gugunCode=" + gugunCode + "&contentTypeId=" + contentTypeId;
         String path = "";
         switch (action) {
             case "list":

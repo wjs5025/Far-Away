@@ -134,7 +134,7 @@ public class BoardController extends HttpServlet {
 //            }
             boardDto.setTitle(title);
             boardService.addBoard(boardDto);
-            redirect(req, resp, "/board?action=get-list&category=" + category + "&page-no=1&key=&word=");
+            redirect(req, resp, "/board?action=get-list&category=" + category + "&pageNo=1&key=&word=");
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("msg", "게시글 작성에 실패했습니다. 잠시 후 다시 시도하세요.");
@@ -170,7 +170,7 @@ public class BoardController extends HttpServlet {
     private void getList(HttpServletRequest req, HttpServletResponse resp) {
         Map<String, String> map = new HashMap<>();
         String category = req.getParameter("category");
-        String pageNo = req.getParameter("page-no");
+        String pageNo = req.getParameter("pageNo");
         String key = req.getParameter("key");
         String word = req.getParameter("word");
 
@@ -186,7 +186,7 @@ public class BoardController extends HttpServlet {
             PageNavigation pageNavigation = boardService.makePageNavigation(map);
             req.setAttribute("navigation", pageNavigation);
 
-            forward(req, resp, "/board/" + category + "-list.jsp?page-no=1&key=" + key + "&word=" + word);
+            forward(req, resp, "/board/" + category + "-list.jsp?pageNo=1&key=" + key + "&word=" + word);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -215,7 +215,7 @@ public class BoardController extends HttpServlet {
 
         try {
             boardService.modifyBoard(boardDto);
-            redirect(req, resp, "/board?action=get-list&category=" + category + "&page-no=1&key=&word=");
+            redirect(req, resp, "/board?action=get-list&category=" + category + "&pageNo=1&key=&word=");
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("msg", "게시글 수정에 실패했습니다. 잠시 후 다시 시도하세요.");
@@ -233,7 +233,7 @@ public class BoardController extends HttpServlet {
         }
         try {
             boardService.deleteBoard(boardId);
-            redirect(req, resp, "/board?action=get-list&category=" + category + "&page-no=1");
+            redirect(req, resp, "/board?action=get-list&category=" + category + "&pageNo=1");
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("msg", "게시글 삭제에 실패했습니다.");

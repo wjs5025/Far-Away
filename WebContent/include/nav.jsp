@@ -18,7 +18,7 @@
                     <li><a class="nav-link scrollto active" href="/">INTRO</a>
                     </li>
                     <li><a class="nav-link scrollto"
-                           href="${root}/attraction?action=list&page-no=1&sido-code=&gugun-code=&content-type-id=">지역별 여행지</a></li>
+                           href="${root}/attraction?action=list&pageNo=1&sidoCode=&gugunCode=&contentTypeId=">지역별 여행지</a></li>
                     <li><a class="nav-link scrollto" href="${root}/route/route-index.jsp">나의
                         여행계획</a></li>
                     <li><a class="nav-link scrollto" href="${root}/attraction/hotplace-index.jsp">핫플 자랑하기</a>
@@ -29,8 +29,8 @@
                             <i class="bi bi-chevron-down"></i>
                         </a>
                         <ul>
-                            <li><a class="nav-link scrollto" href="${root}/board?action=get-list&category=notice&page-no=1&key=&word=">공지사항</a></li>
-                            <li><a class="nav-link scrollto" href="${root}/board?action=get-list&category=share&page-no=1&key=&word=">공유게시판</a></li>
+                            <li><a class="nav-link scrollto" href="${root}/board?action=get-list&category=notice&pageNo=1&key=&word=">공지사항</a></li>
+                            <li><a class="nav-link scrollto" href="${root}/board?action=get-list&category=share&pageNo=1&key=&word=">공유게시판</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

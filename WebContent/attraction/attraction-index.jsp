@@ -24,14 +24,14 @@
                         <!-- 관광지 검색 start -->
                         <form class="d-flex m-3" id="search-form" name="search-form" method="get" action="">
                             <input type="hidden" id="action" name="action" value="list">
-                            <input type="hidden" id="page-no" name="page-no" value="1">
-                            <select id="sido-code" name="sido-code" class="form-select mx-2"
+                            <input type="hidden" id="pageNo" name="pageNo" value="1">
+                            <select id="sidoCode" name="sidoCode" class="form-select mx-2"
                                     aria-label="Default select example" onchange="getGunguData()">
                                 <option value="" selected>시/도</option>
-                            </select> <select id="gugun-code" name="gugun-code" class="form-select mx-2"
+                            </select> <select id="gugunCode" name="gugunCode" class="form-select mx-2"
                                               aria-label="Default select example">
                             <option value="" selected>구/군</option>
-                        </select> <select id="content-type-id" name="content-type-id" class="form-select mx-2"
+                        </select> <select id="contentTypeId" name="contentTypeId" class="form-select mx-2"
                                           aria-label="Default select example">
                             <option value="" selected>관광지 유형</option>
                             <option value="12">관광지</option>
@@ -93,10 +93,10 @@
                 </div>
                 <form id="form-param" method="get" action="">
                     <input type="hidden" id="p-action" name="action" value="">
-                    <input type="hidden" id="p-page-no" name="page-no" value="">
-                    <input type="hidden" id="p-sido-code" name="sido-code" value="">
-                    <input type="hidden" id="p-gugun-code" name="gugun-code" value="">
-                    <input type="hidden" id="p-content-type-id" name="content-type-id" value="">
+                    <input type="hidden" id="p-page-no" name="pageNo" value="">
+                    <input type="hidden" id="p-sido-code" name="sidoCode" value="">
+                    <input type="hidden" id="p-gugun-code" name="gugunCode" value="">
+                    <input type="hidden" id="p-content-type-id" name="contentTypeId" value="">
                 </form>
                 <!-- 관광지 검색 end -->
             </div>
