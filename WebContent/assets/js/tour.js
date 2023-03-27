@@ -12,7 +12,7 @@ const getRegionData = () => {
 // makeRegionList() : 가져온 지역 정보 dom에 뿌리기
 const makeRegionList = (regions) => {
     const searchArea = document.getElementById("sido_code");
-    let sidoSum = "";
+    let sidoSum = "<option value='' selected>시/도</option>";
     regions.forEach((el) => {
         sidoSum += `<option value=${el.sidoCode}>${el.sidoName}</option>`;
     });
