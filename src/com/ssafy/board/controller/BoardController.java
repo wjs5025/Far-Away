@@ -226,7 +226,11 @@ public class BoardController extends HttpServlet {
     private void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int boardId = Integer.parseInt(req.getParameter("boardId"));
         String category = req.getParameter("category");
-
+        if (category.equals("공지사항")) {
+            category = "notice";
+        } else if (category.equals("공유게시판")) {
+            category = "share";
+        }
         try {
             boardService.deleteBoard(boardId);
             redirect(req, resp, "/board?action=get-list&category=" + category + "&pageNo=1");
