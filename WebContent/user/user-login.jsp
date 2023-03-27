@@ -23,14 +23,14 @@
                 <form method="POST" id="login-form">
                     <!-- 아이디 입력 -->
                     <div class="form-outline mb-4">
-                        <label class="form-label d-flex" for="user_id">아이디</label>
-                        <input type="email" id="user_id" name="user_id" class="form-control"/>
+                        <label class="form-label d-flex" for="user-id">아이디</label>
+                        <input type="email" id="user-id" name="user-id" class="form-control"/>
                     </div>
 
                     <!-- 비밀번호 입력 -->
                     <div class="form-outline">
-                        <label class="form-label d-flex" for="user_password">비밀번호</label>
-                        <input type="password" id="user_password" onkeyup="if(window.event.keyCode==13){submitBtn.click()}" name="user_password" class="form-control"/>
+                        <label class="form-label d-flex" for="user-password">비밀번호</label>
+                        <input type="password" id="user-password" onkeyup="if(window.event.keyCode==13){submitBtn.click()}" name="user-password" class="form-control"/>
                     </div>
                     <div class="form-outline m-3">
                         <span class="text-danger">${msg}&nbsp;</span>
@@ -61,7 +61,7 @@
                     <!-- Register buttons -->
                     <div class="text-center">
                         <div class="col">
-                            회원이 아니신가요? <br/><a href="./user_regist.jsp">회원가입</a>
+                            회원이 아니신가요? <br/><a href="${root}/user-regist.jsp">회원가입</a>
                         </div>
                     </div>
                 </form>
@@ -69,7 +69,7 @@
         </main>
     </div>
 </section>
-<%@ include file="../include/footer.jsp" %>
+<%@ include file="/include/footer.jsp" %>
 <script>
     let submitBtn = document.getElementById("login-submit-btn");
     submitBtn.addEventListener("click", () => {

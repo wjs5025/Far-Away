@@ -16,25 +16,26 @@ import java.sql.SQLIntegrityConstraintViolationException;
 @WebServlet("/user")
 public class UserController extends HttpServlet {
     private UserService userService;
-
+    private UserDto userDto;
     public void init() {
         userService = UserServiceImpl.getUserService();
+        userDto = null;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 넘겨받는 액션
         String action = req.getParameter("action");
-
+        System.out.println(action);
         switch (action) {
             case "mv-regist":
-                redirect(req, resp, "/User/user_regist.jsp");
+                redirect(req, resp, "/user/user-regist.jsp");
                 break;
             case "regist":
                 regist(req, resp);
                 break;
             case "mv-login":
-                redirect(req, resp, "/User/user_login.jsp");
+                redirect(req, resp, "/user/user-login.jsp");
                 break;
             case "login":
                 login(req, resp);
@@ -44,7 +45,7 @@ public class UserController extends HttpServlet {
                 redirect(req, resp, "/");
                 break;
             case "mv-modify":
-                redirect(req, resp, "/User/user_modify.jsp");
+                redirect(req, resp, "/user/user-modify.jsp");
                 break;
             case "modify":
                 modify(req, resp);
@@ -54,15 +55,16 @@ public class UserController extends HttpServlet {
                 redirect(req, resp, "/");
                 break;
             case "mv-find":
-                redirect(req, resp, "/User/user_find.jsp");
+                redirect(req, resp, "/user/user-find.jsp");
                 break;
             case "find":
                 find(req,resp);
                 break;
             case "mv-info":
-                redirect(req, resp, "/User/user_info.jsp");
+                redirect(req, resp, "/user/user-info.jsp");
                 break;
             default:
+                redirect(req, resp, "");
                 break;
         }
 
@@ -71,6 +73,7 @@ public class UserController extends HttpServlet {
 
 
     private void redirect(HttpServletRequest req, HttpServletResponse resp, String path) throws IOException {
+        System.out.println(req.getContextPath() + path);
         resp.sendRedirect(req.getContextPath() + path);
     }
 
@@ -87,16 +90,16 @@ public class UserController extends HttpServlet {
     }
 
     private void regist(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        UserDto userDto = new UserDto();
-        userDto.setUserId(req.getParameter("user_id"));
-        userDto.setUserPwd(req.getParameter("user_password"));
-        userDto.setUserName(req.getParameter("user_name"));
-        userDto.setEmailId(req.getParameter("email_id"));
-        userDto.setEmailDomain(req.getParameter("email_domain"));
+        userDto = new UserDto();
+        userDto.setUserId(req.getParameter("user-id"));
+        userDto.setUserPwd(req.getParameter("user-password"));
+        userDto.setUserName(req.getParameter("user-name"));
+        userDto.setEmailId(req.getParameter("email-id"));
+        userDto.setEmailDomain(req.getParameter("email-domain"));
 
         try {
             if (userService.regist(userDto) == 1) {
-                redirect(req, resp, "/User/user_login.jsp");
+                redirect(req, resp, "/user/user-login.jsp");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -107,17 +110,17 @@ public class UserController extends HttpServlet {
     }
 
     private void login(HttpServletRequest req, HttpServletResponse resp) {
-        String userId = req.getParameter("user_id");
-        String userPassword = req.getParameter("user_password");
+        String userId = req.getParameter("user-id");
+        String userPassword = req.getParameter("user-password");
 
-        UserDto userDto = null;
+        userDto = null;
         try {
             userDto = userService.login(userId, userPassword);
             if (userDto == null) {
                 System.out.println("로그인 실패");
                 req.setAttribute("msg", "로그인에 실패했습니다. 아이디 또는 비밀번호를 확인해주세요.");
                 System.out.println(req.getAttribute("msg"));
-                forward(req, resp, "/User/user_login.jsp");
+                forward(req, resp, "/user/user-login.jsp");
             } else {
                 // session 설정
                 HttpSession session = req.getSession();
@@ -127,7 +130,7 @@ public class UserController extends HttpServlet {
                 String idSave = req.getParameter("save_id");
 
                 if (idSave != null) {
-                    Cookie cookie = new Cookie("user_id", userId);
+                    Cookie cookie = new Cookie("user-id", userId);
                     cookie.setPath(req.getContextPath());
                     cookie.setMaxAge(60 * 60 * 24 * 7);
                     resp.addCookie(cookie);
@@ -135,7 +138,7 @@ public class UserController extends HttpServlet {
                     Cookie[] cookies = req.getCookies();
                     if (cookies != null) {
                         for (Cookie cookie : cookies) {
-                            if (cookie.getName().equals("user_id")) {
+                            if (cookie.getName().equals("user-id")) {
                                 cookie.setMaxAge(0);
                                 resp.addCookie(cookie);
                                 break;
@@ -163,18 +166,18 @@ public class UserController extends HttpServlet {
         String userPwd = ((UserDto) session.getAttribute("user")).getUserPwd();
 
         // 비밀번호가 일치하면 변경 가능.
-        if (req.getParameter("user_password").equals(userPwd)) {
-            UserDto modifiedUserDto = new UserDto();
+        if (req.getParameter("user-password").equals(userPwd)) {
+            userDto = new UserDto();
 
-            modifiedUserDto.setUserId(req.getParameter("user_id"));
-            modifiedUserDto.setUserPwd(req.getParameter("user_password"));
-            modifiedUserDto.setUserName(req.getParameter("user_name"));
-            modifiedUserDto.setEmailId(req.getParameter("email_id"));
-            modifiedUserDto.setEmailDomain(req.getParameter("email_domain"));
+            userDto.setUserId(req.getParameter("user-id"));
+            userDto.setUserPwd(req.getParameter("user-password"));
+            userDto.setUserName(req.getParameter("user-name"));
+            userDto.setEmailId(req.getParameter("email-id"));
+            userDto.setEmailDomain(req.getParameter("email-domain"));
 
             try {
-                userService.modifyUser(modifiedUserDto);
-                session.setAttribute("user", modifiedUserDto);
+                userService.modifyUser(userDto);
+                session.setAttribute("user", userDto);
                 redirect(req, resp, "/");
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -199,23 +202,22 @@ public class UserController extends HttpServlet {
     }
 
     private void find(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        UserDto userDto = new UserDto();
-
-        userDto.setUserId(req.getParameter("user_id"));
-        userDto.setUserName(req.getParameter("user_name"));
-        userDto.setEmailId(req.getParameter("email_id"));
-        userDto.setEmailDomain(req.getParameter("email_domain"));
+        userDto = new UserDto();
+        userDto.setUserId(req.getParameter("user-id"));
+        userDto.setUserName(req.getParameter("user-name"));
+        userDto.setEmailId(req.getParameter("email-id"));
+        userDto.setEmailDomain(req.getParameter("email-domain"));
 
         try {
-            String user_password = userService.findUserPwd(userDto);
+            String userPwd = userService.findUserPwd(userDto);
             System.out.println(userDto);
-            System.out.println(user_password);
-            if (user_password == null){
+            System.out.println(userPwd);
+            if (userPwd == null){
                 throw new Exception();
             }
-            req.setAttribute("user_id",userDto.getUserId());
-            req.setAttribute("user_password",user_password);
-            forward(req,resp,"/User/user_find_result.jsp");
+            req.setAttribute("user-id",userDto.getUserId());
+            req.setAttribute("user-password", userPwd);
+            forward(req,resp,"/user/user-find-result.jsp.jsp");
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("msg", "비밀번호 찾기 실패 : 입력하신 정보와 일치하는 회원이 없습니다.");

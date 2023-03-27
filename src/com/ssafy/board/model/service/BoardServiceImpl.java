@@ -31,7 +31,7 @@ public class BoardServiceImpl implements BoardService {
         Map<String, Object> param = new HashMap<String, Object>();
         String key = map.get("key");
 //		if("userid".equals(key))
-//			key = "user_id";
+//			key = "user-id";
         param.put("key", key.isEmpty() ? "" : key);
         param.put("word", map.get("word").isEmpty() ? "" : map.get("word"));
         int pgno = Integer.parseInt(map.get("pageNo"));
@@ -56,7 +56,7 @@ public class BoardServiceImpl implements BoardService {
         Map<String, Object> param = new HashMap<String, Object>();
         String key = map.get("key");
 //		if ("userid".equals(key))
-//			key = "user_id";
+//			key = "user-id";
         param.put("key", key.isEmpty() ? "" : key);
         param.put("word", map.get("word").isEmpty() ? "" : map.get("word"));
         param.put("category", map.get("category"));

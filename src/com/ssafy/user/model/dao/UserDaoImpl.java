@@ -93,8 +93,8 @@ public class UserDaoImpl implements UserDao {
                 userDto.setUserId(resultSet.getString("user_id"));
                 userDto.setUserName(resultSet.getString("user_name"));
                 userDto.setUserPwd(resultSet.getString("user_password"));
-                userDto.setEmailId(resultSet.getString("email_id"));
-                userDto.setEmailDomain(resultSet.getString("email_domain"));
+                userDto.setEmailId(resultSet.getString("email-id"));
+                userDto.setEmailDomain(resultSet.getString("email-domain"));
                 userDto.setJoinDate(resultSet.getString("join_date"));
             }
         } finally {

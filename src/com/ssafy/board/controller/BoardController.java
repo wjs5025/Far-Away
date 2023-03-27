@@ -46,7 +46,7 @@ public class BoardController extends HttpServlet {
                 if (isLogined(req, resp)) {
                     redirect(req, resp, "/Board/board_write.jsp");
                 } else {
-                    redirect(req, resp, "/User/user_login.jsp");
+                    redirect(req, resp, "/user/user-login.jsp");
                 }
                 break;
             case "add":
