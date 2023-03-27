@@ -94,7 +94,7 @@ public class AttractionInfoController extends HttpServlet {
             }
             return "/Attraction/attraction_index.jsp" + queryString;
         } else {
-            return "/User/user_login.jsp";
+            return "/user/user-login.jsp";
         }
     }
 }

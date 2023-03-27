@@ -22,42 +22,42 @@
             <div class="container col-4 ">
                 <form method="POST" id="regist-form">
                     <div class="form-group">
-                        <label for="user_id" class="form-label d-flex">아이디</label>
-                        <input type="text" class="form-control" id="user_id" name="user_id"
+                        <label for="user-id" class="form-label d-flex">아이디</label>
+                        <input type="text" class="form-control" id="user-id" name="user-id"
                                aria-describedby="emailHelp">
                     </div>
                     <div class="form-group has-success">
-                        <label class="form-label  d-flex mt-4" for="user_password">비밀번호</label>
-                        <input type="password" class="form-control" id="user_password" name="user_password"
+                        <label class="form-label  d-flex mt-4" for="user-password">비밀번호</label>
+                        <input type="password" class="form-control" id="user-password" name="user-password"
                                onfocusout="checkPassword()">
                         <div class="valid-feedback"></div>
                     </div>
 
                     <div class="form-group has-danger">
-                        <label class="form-label  d-flex mt-4" for="user_password_check" name="user_password_check">비밀번호
+                        <label class="form-label  d-flex mt-4" for="user-password_check" name="user-password_check">비밀번호
                             재확인</label>
-                        <input type="password" class="form-control" id="user_password_check"
+                        <input type="password" class="form-control" id="user-password_check"
                                onfocusout="checkPassword()">
                         <div class="d-flex" id="password-check-msg"></div>
                     </div>
                     <div class="form-group">
-                        <label for="user_name" class="form-label  d-flex mt-4">이름</label>
-                        <input type="text" class="form-control" id="user_name" name="user_name"
+                        <label for="user-name" class="form-label  d-flex mt-4">이름</label>
+                        <input type="text" class="form-control" id="user-name" name="user-name"
                                aria-describedby="emailHelp">
                     </div>
                     <div class="form-group d-flex">
                         <div class="col-5">
-                            <label for="email_id" class="form-label  d-flex mt-4">이메일</label>
-                            <input type="email" class="form-control" id="email_id" name="email_id"
+                            <label for="email-id" class="form-label  d-flex mt-4">이메일</label>
+                            <input type="email" class="form-control" id="email-id" name="email-id"
                                    placeholder="이메일 아이디">
                         </div>
                         <div class="col-1 d-flex fs-3" style="align-items: flex-end;justify-content: center; ">@</div>
                         <div class="col-6">
-                            <label for="email_domain" class="form-label  d-flex mt-4">&nbsp;</label>
+                            <label for="email-domain" class="form-label  d-flex mt-4">&nbsp;</label>
                             <select
                                     class="form-select"
-                                    id="email_domain"
-                                    name="email_domain"
+                                    id="email-domain"
+                                    name="email-domain"
                                     aria-label="이메일 도메인 선택"
                             >
                                 <option selected>선택</option>
@@ -81,8 +81,8 @@
 <%@ include file="../include/footer.jsp" %>
 <script>
     // js에 요소 불러오기
-    let userPwInput = document.getElementById("user_password");
-    let userPwCheckInput = document.getElementById("user_password_check");
+    let userPwInput = document.getElementById("user-password");
+    let userPwCheckInput = document.getElementById("user-password_check");
     let pwCheckMsg = document.getElementById("password-check-msg");
     let submitBtn = document.getElementById("regist-submit-btn");
 
@@ -103,16 +103,16 @@
 
     // 가입하기 버튼 이벤트 추가
     submitBtn.addEventListener("click", () => {
-        if (!document.getElementById("user_name").value) {
+        if (!document.getElementById("user-name").value) {
             alert("이름을 입력하세요.");
             return;
-        } else if (!document.getElementById("user_password").value) {
+        } else if (!document.getElementById("user-password").value) {
             alert("비밀번호를 입력하세요.");
             return;
         } else if (userPwInput.value != userPwCheckInput.value) {
             alert("비밀번호를 확인하세요.");
             return;
-        } else if (!document.getElementById("user_id").value) {
+        } else if (!document.getElementById("user-id").value) {
             alert("아이디를 입력하세요.");
             return;
         } else {

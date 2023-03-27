@@ -46,7 +46,7 @@ public class BoardController extends HttpServlet {
                 if (isLogined(req, resp)) {
                     redirect(req, resp, "/Board/board_write.jsp");
                 } else {
-                    redirect(req, resp, "/User/user_login.jsp");
+                    redirect(req, resp, "/user/user-login.jsp");
                 }
                 break;
             case "add":
@@ -128,10 +128,12 @@ public class BoardController extends HttpServlet {
         boardDto.setCategory(category);
 
         try {
-//            for (int i = 0; i < 50; i++) {
+//            for (int i = 0; i < 20; i++) {
 //                boardDto.setTitle(title + ".." + i);
 //                boardService.addBoard(boardDto);
 //            }
+            boardDto.setTitle(title);
+            boardService.addBoard(boardDto);
             redirect(req, resp, "/board?action=get-list&category=" + category + "&pageNo=1&key=&word=");
         } catch (Exception e) {
             e.printStackTrace();
@@ -224,7 +226,11 @@ public class BoardController extends HttpServlet {
     private void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int boardId = Integer.parseInt(req.getParameter("boardId"));
         String category = req.getParameter("category");
-
+        if (category.equals("공지사항")) {
+            category = "notice";
+        } else if (category.equals("공유게시판")) {
+            category = "share";
+        }
         try {
             boardService.deleteBoard(boardId);
             redirect(req, resp, "/board?action=get-list&category=" + category + "&pageNo=1");

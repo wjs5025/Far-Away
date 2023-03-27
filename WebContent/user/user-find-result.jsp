@@ -22,7 +22,7 @@
 
                     <!-- 아이디 입력 -->
                     <div class="form-outline mb-4 d-flex" style="height: 30vh; align-items: center">
-                        <h3 class="text-success"> [ ${user_id} ] 님의 비밀번호는 <br/><br/>[ ${user_password} ] 입니다.</h3>
+                        <h3 class="text-success"> [ ${user-id} ] 님의 비밀번호는 <br/><br/>[ ${user-password} ] 입니다.</h3>
                     </div>
             </div>
         </main>

@@ -50,8 +50,7 @@
                             </c:if>
                             <c:if test="${not empty user}">
                                 <li><a class="nav-link scrollto" href="${root}/user?action=logout"> 로그아웃 </a></li>
-                                <li><a class="nav-link scrollto" href="${root}/user?action=mv-info"> 회원정보조회 </a></li>
-                                <li><a class="nav-link scrollto" href="${root}/User/user_modify.jsp"> 회원정보변경 </a></li>
+                                <li><a class="nav-link scrollto" href="${root}/user?action=mv-info"> 마이페이지 </a></li>
                             </c:if>
                         </ul>
                     </li>

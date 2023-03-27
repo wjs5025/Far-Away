@@ -54,14 +54,18 @@ public class AttractionInfoServiceImpl implements AttractionInfoService {
         int totalCount = attractionInfoDao.getTotalAttractionInfoCount(param);
         pageNavigation.setTotalPageCount(totalCount);
 
+        System.out.println("========== 페이지네이션 확인 ===========");
+        System.out.println(totalCount);
         int totalPageCount = (totalCount - 1) / pageSize + 1;
         pageNavigation.setTotalPageCount(totalPageCount);
+        System.out.println(totalPageCount);
 
         boolean startRange = currentPage <= navigationSize;
         pageNavigation.setStartRange(startRange);
 
         boolean endRange = (totalPageCount - 1) / navigationSize * navigationSize < currentPage;
         pageNavigation.setEndRange(endRange);
+
         pageNavigation.makeNavigator();
         return pageNavigation;
     }

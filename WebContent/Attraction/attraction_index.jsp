@@ -66,8 +66,10 @@
                                 </c:if>
                                 <c:if test="${not empty attractionInfoList}">
                                     <tbody>
+
                                     <c:forEach var="attractionInfo" items="${attractionInfoList}">
-                                        <tr class="text-center"  onclick="moveCenter(${attractionInfo.latitude}, ${attractionInfo.longitude})">
+                                        <tr class="text-center"
+                                            onclick="moveCenter(${attractionInfo.latitude}, ${attractionInfo.longitude})">
                                             <c:if test="${empty attractionInfo.firstImage}">
                                                 <td><img src="${root}/assets/img/attraction/no-img.png" width="100px"/>
                                                 </td>
@@ -132,7 +134,21 @@
 
     window.onload = () => {
         getRegionData();
+        displayMarker();
     }
+    let markerInfo;
+
+    <c:forEach items="${attractionInfoList}" var="attractionInfo" >
+    console.log('${attractionInfo}');
+    markerInfo = {
+        title: '${attractionInfo.title}',
+        latlng: new kakao.maps.LatLng('${attractionInfo.latitude}', '${attractionInfo.longitude}'),
+        contenttypeid: '${attractionInfo.contentTypeId}'
+    };
+    positions.push(markerInfo)
+    </c:forEach>
+
+
 </script>
 
 </body>

@@ -36,7 +36,7 @@ public class AttractionInfoDaoImpl implements AttractionInfoDao {
         try {
             connection = dbUtil.getConnection();
             sql = new StringBuilder();
-            sql.append("select content_id, first_image,  title, addr1, latitude, longitude \n");
+            sql.append("select content_id, first_image,  title, addr1, latitude, longitude, content_type_id \n");
             sql.append("from attraction_info \n");
             String sidoCode = (String) param.get("sido_code");
             String gugunCode = (String) param.get("gugun_code");
@@ -83,6 +83,7 @@ public class AttractionInfoDaoImpl implements AttractionInfoDao {
                 attractionInfoDto.setAddr1(resultSet.getString("addr1"));
                 attractionInfoDto.setLatitude(resultSet.getString("latitude"));
                 attractionInfoDto.setLongitude(resultSet.getString("longitude"));
+                attractionInfoDto.setContentTypeId(resultSet.getString("content_type_id"));
                 attractionInfoList.add(attractionInfoDto);
             }
         } finally {
@@ -103,13 +104,30 @@ public class AttractionInfoDaoImpl implements AttractionInfoDao {
             String gugunCode = (String) param.get("gugun_code");
             String contentTypeId = (String) param.get("content_type_id");
 
-            boolean empty = (sidoCode.isEmpty() && gugunCode.isEmpty() && contentTypeId.isEmpty());
-            if (!empty) {
-                sql.append("where sido_code = ? or gugun_code = ? or content_type_id = ? \n");
+            if (!sidoCode.isEmpty() && gugunCode.isEmpty() && contentTypeId.isEmpty()) {
+                sql.append("where sido_code = ? \n");
+            } else if (!sidoCode.isEmpty() && !gugunCode.isEmpty() && contentTypeId.isEmpty()) {
+                sql.append("where sido_code = ? and gugun_code = ? \n");
+            } else if (!sidoCode.isEmpty() && gugunCode.isEmpty() && !contentTypeId.isEmpty()) {
+                sql.append("where sido_code = ? and content_type_id = ? \n");
+            } else if (sidoCode.isEmpty() && gugunCode.isEmpty() && !contentTypeId.isEmpty()) {
+                sql.append("where content_type_id = ? \n");
+            } else if (!sidoCode.isEmpty() && !gugunCode.isEmpty() && !contentTypeId.isEmpty()) {
+                sql.append("where sido_code = ? and gugun_code = ? and content_type_id = ? \n");
             }
             preparedStatement = connection.prepareStatement(sql.toString());
             int idx = 0;
-            if (!empty) {
+            if (!sidoCode.isEmpty() && gugunCode.isEmpty() && contentTypeId.isEmpty()) {
+                preparedStatement.setString(++idx, sidoCode);
+            } else if (!sidoCode.isEmpty() && !gugunCode.isEmpty() && contentTypeId.isEmpty()) {
+                preparedStatement.setString(++idx, sidoCode);
+                preparedStatement.setString(++idx, gugunCode);
+            } else if (!sidoCode.isEmpty() && gugunCode.isEmpty() && !contentTypeId.isEmpty()) {
+                preparedStatement.setString(++idx, sidoCode);
+                preparedStatement.setString(++idx, contentTypeId);
+            } else if (sidoCode.isEmpty() && gugunCode.isEmpty() && !contentTypeId.isEmpty()) {
+                preparedStatement.setString(++idx, contentTypeId);
+            } else if (!sidoCode.isEmpty() && !gugunCode.isEmpty() && !contentTypeId.isEmpty()) {
                 preparedStatement.setString(++idx, sidoCode);
                 preparedStatement.setString(++idx, gugunCode);
                 preparedStatement.setString(++idx, contentTypeId);

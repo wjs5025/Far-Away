@@ -131,7 +131,7 @@ ${boardDto.content}</textarea
         console.log("이게 왜안돼");
         if (window.confirm("게시글을 정말 삭제하시겠습니까?")) {
           let form = document.getElementById("detail-form");
-          form.setAttribute("action", "/board?action=delete");
+          form.setAttribute("action", "${root}/board?action=delete");
           form.submit();
         }
       });
