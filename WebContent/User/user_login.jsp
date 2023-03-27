@@ -30,7 +30,7 @@
                     <!-- 비밀번호 입력 -->
                     <div class="form-outline">
                         <label class="form-label d-flex" for="user_password">비밀번호</label>
-                        <input type="password" id="user_password" name="user_password" class="form-control"/>
+                        <input type="password" id="user_password" onkeyup="if(window.event.keyCode==13){submitBtn.click()}" name="user_password" class="form-control"/>
                     </div>
                     <div class="form-outline m-3">
                         <span class="text-danger">${msg}&nbsp;</span>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="row mb-4">
                             <div class="col text-center ">
-                                <a href="${root}/user?action=mv-find">비밀번호를 분실했나요?</a>
+                                <a  href="${root}/user?action=mv-find">비밀번호를 분실했나요?</a>
                             </div>
 
                         </div>
