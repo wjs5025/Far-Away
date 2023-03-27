@@ -139,11 +139,15 @@
     let markerInfo;
 
     <c:forEach items="${attractionInfoList}" var="attractionInfo" >
-    console.log('${attractionInfo}');
     markerInfo = {
+        contentId : '${attractionInfo.contentId}',
+        addr1 : '${attractionInfo.addr1}',
         title: '${attractionInfo.title}',
         latlng: new kakao.maps.LatLng('${attractionInfo.latitude}', '${attractionInfo.longitude}'),
-        contenttypeid: '${attractionInfo.contentTypeId}'
+        contentTypeId: '${attractionInfo.contentTypeId}',
+        firstImage : '${attractionInfo.firstImage}',
+        zipCode : '${attractionInfo.zipCode}',
+        tel : '${attractionInfo.tel}'
     };
     positions.push(markerInfo)
     </c:forEach>

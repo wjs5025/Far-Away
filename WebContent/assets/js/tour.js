@@ -30,7 +30,6 @@ const getGunguData = () => {
     fetch(url)
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
             makeGunguList(data);
         });
 };
