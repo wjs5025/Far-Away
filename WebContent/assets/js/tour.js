@@ -45,30 +45,3 @@ const makeGunguList = (gungu) => {
     });
     searchArea.innerHTML = sigunguSum;
 };
-
-// Search() :  검색하기
-const Search = () => {
-    apiName = "searchKeyword1";
-
-    // dom values
-    const areaCode = document.getElementById("sido_code").value;
-    const sigunguCode = document.getElementById("gugun_code").value;
-    const contentTypeId = document.getElementById("content_type_id").value;
-
-    // contentTypeId에 따라 다른 api호출
-    // 12 관광지  14 문화시설  15 축제공연행사  25 여행코스   28 레포츠   32숙박  38쇼핑  39 음식점
-    apiName = "areaBasedList1";
-    const url = `${baseURL}${apiName}?serviceKey=${serviceKey}&MobileOS=ETC&MobileApp=AppTest&${
-        areaCode == 0 ? "" : "areaCode=" + areaCode
-    }&_type=json&numOfRows=10&${
-        contentTypeId == 0 ? "" : "contentTypeId=" + contentTypeId
-    }&arrange=O&sigunguCode=${sigunguCode}`;
-    console.log(url);
-
-    fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-            makeTripList(data);
-        });
-};

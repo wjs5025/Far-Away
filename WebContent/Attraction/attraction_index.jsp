@@ -134,6 +134,7 @@
 
     window.onload = () => {
         getRegionData();
+        displayMarker();
     }
     let markerInfo;
 
@@ -145,10 +146,8 @@
         contenttypeid: '${attractionInfo.contentTypeId}'
     };
     positions.push(markerInfo)
-    console.log(markerInfo);
-    console.log(positions);
     </c:forEach>
-    displayMarker();
+
 
 </script>
 
