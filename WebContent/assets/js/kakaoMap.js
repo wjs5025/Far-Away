@@ -62,8 +62,9 @@ const displayMarker = () => {
     }
 
 
-    // 첫번째 검색 정보를 이용하여 지도 중심을 이동 시킵니다
-    map.setCenter(positions[0].latlng);
+    if (positions.length != 0){
+        map.setCenter(positions[0].latlng);
+    }
 }
 
 function moveCenter(lat, lng) {
