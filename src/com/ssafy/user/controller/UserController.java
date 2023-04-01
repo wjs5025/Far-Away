@@ -42,7 +42,6 @@ public class UserController extends HttpServlet {
                 break;
             case "logout":
                 logout(req, resp);
-                redirect(req, resp, "/");
                 break;
             case "mv-modify":
                 redirect(req, resp, "/user/user-modify.jsp");

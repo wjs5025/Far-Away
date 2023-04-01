@@ -4,18 +4,31 @@
 <html lang="en">
 <head>
     <%@ include file="/include/head.jsp" %>
-    <title>Far Away : 핫플자랑하기</title>
+    <title> Far Away : 핫플자랑하기</title>
+
 </head>
 <body>
 <%@ include file="/include/nav.jsp" %>
-<section id="hero" class="background d-flex align-items-center">
-    <div
-            class="container text-center position-relative"
-            data-aos="fade-in"
-            data-aos-delay="100"
-    >
-        <main class="main" id="board">
-            <div class="card container align-items-center rounded-0 mt-5">
+
+<!-- 본문 -->
+<main id="main">
+
+    <section id="intro" class="background d-flex align-items-center mb-5">
+        <div class="container text-center position-relative"
+             data-aos="fade-in" data-aos-delay="200">
+            <h1 id="main-title">우리동네 핫플레이스를 소개합니다.</h1>
+            <h2>지금 대한민국에서 가장 핫한 관광지는 어디일까요?</h2>
+            <a href="#route" class="btn-get-started scrollto">GO !</a>
+        </div>
+    </section>
+    <section id="hotplace" class="d-flex align-items-center p-0">
+        <div
+                class="w-100 text-center position-relative"
+                data-aos="fade-in"
+                data-aos-delay="100"
+        >
+
+            <div class="card align-items-center rounded-0 mt-5">
                 <div class="section-title" data-aos="fade-left">
                     <h2 class="col-md-12 text-center section-header">핫플 자랑하기</h2>
                     <p>우리 동네 🔥핫🔥 플레이스를 소개합니다 !</p>
@@ -78,9 +91,17 @@
                     </div>
                 </div>
             </div>
-        </main>
-    </div>
-</section>
+
+
+        </div>
+    </section>
+</main>
+
+
+<%-- Footer --%>
 <%@ include file="../include/footer.jsp" %>
+
+<%-- 카카오맵 API --%>
+<script src="../assets/js/route_kakaomap.js"></script>
 </body>
 </html>

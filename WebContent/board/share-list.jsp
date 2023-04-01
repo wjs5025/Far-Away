@@ -10,14 +10,14 @@
 <body>
 <%@ include file="/include/nav.jsp" %>
 
-<section id="hero" class="background d-flex align-items-center">
+<section id="board" class="background d-flex align-items-center">
     <div
             class="container text-center position-relative"
             data-aos="fade-in"
             data-aos-delay="100"
     >
 
-        <main class="main" id="board">
+        <main class="main">
             <div class="card container align-items-center rounded-0 mt-5 " style="height: 80vh;" >
                 <h1 class="col-md-12 text-center section-header">공유게시판</h1>
                 <div class="col-md-12 card rounded-0">

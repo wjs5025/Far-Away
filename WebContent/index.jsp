@@ -13,7 +13,6 @@
 
 <!-- 본문 -->
 <main id="main">
-
     <section id="intro" class="background d-flex align-items-center">
         <div class="container text-center position-relative"
              data-aos="fade-in" data-aos-delay="200">

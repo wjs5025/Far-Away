@@ -49,7 +49,7 @@
 
                     <div class="d-grid gap-2 mt-5">
                         <button class="btn btn-success btn-lg">
-                            <a href="/User/user-modify.jsp" class="text-white">회원 정보 수정하기</a>
+                            <a href="/user/user-modify.jsp" class="text-white">회원 정보 수정하기</a>
                         </button>
                         <button id="user-delete-btn" class="btn btn-danger btn-lg">
                             탈퇴하기

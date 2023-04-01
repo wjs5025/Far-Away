@@ -15,13 +15,13 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto active" href="/">INTRO</a>
+                    <li><a class="nav-link scrollto" href="/">INTRO</a>
                     </li>
                     <li><a class="nav-link scrollto"
                            href="${root}/attraction?action=list&pageNo=1&sidoCode=&gugunCode=&contentTypeId=">지역별 여행지</a></li>
-                    <li><a class="nav-link scrollto" href="${root}/route/route-index.jsp">나의
+                    <li><a class="scrollto" href="${root}/route/route-index.jsp#route">나의
                         여행계획</a></li>
-                    <li><a class="nav-link scrollto" href="${root}/attraction/hotplace-index.jsp">핫플 자랑하기</a>
+                    <li><a class="nav-link scrollto" href="${root}/attraction/hotplace-index.jsp#hotplace">핫플 자랑하기</a>
                     </li>
                     <li class="dropdown">
                         <a href="#">

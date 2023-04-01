@@ -8,7 +8,7 @@
 </head>
 <body>
 <%@ include file="/include/nav.jsp" %>
-<section id="hero" class="background d-flex align-items-center">
+<section id="attraction" class="background d-flex align-items-center">
     <div
             class="container text-center position-relative"
             data-aos="fade-in"
