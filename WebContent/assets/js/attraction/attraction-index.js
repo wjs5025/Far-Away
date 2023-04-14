@@ -1,32 +1,76 @@
-document.getElementById("btn-search").addEventListener("click", function () {
+window.onload = () => {
+    document.getElementById("btn-search").addEventListener("click", () => getAttractionData(1));
+    getRegionData();
+    getAttractionData(1);
+}
+
+// getAttractionData() : 서버로부터 현재 조건에 맞는 관광지 정보 불러오기
+const getAttractionData = (pageNo) => {
     let sidoCode = document.getElementById("sidoCode").value;
     let gugunCode = document.getElementById("gugunCode").value;
     let contentTypeId = document.getElementById("contentTypeId").value;
 
-    const url = `/attraction?action=list&sidoCode=${sidoCode}&gugunCode=${gugunCode}&contentTypeId=${contentTypeId}`;
-    // const url = `/region?sidoCode=${sidoCode}`;
-    fetch(url)
+    // 관광지 데이터 받아오기
+    const dataUrl = `/attraction?action=list&pageNo=${pageNo}&sidoCode=${sidoCode}&gugunCode=${gugunCode}&contentTypeId=${contentTypeId}`;
+    console.log("dataURL" + dataUrl);
+
+    fetch(dataUrl)
         .then((res) => res.json())
-        .then((data) => {
-            console.log(data);
-            // makeRegionList(data);
-        });
-});
+        .then((data) => makeAttractionList(data));
 
-let pages = document.querySelectorAll(".page-link");
-pages.forEach(function (page) {
-    page.addEventListener("click", function () {
-        console.log(this.parentNode.getAttribute("data-pg"));
-        document.querySelector("#p-action").value = "list";
-        document.querySelector("#p-page-no").value = this.parentNode.getAttribute("data-pg");
-        document.querySelector("#p-sido-code").value = "${param.sidoCode}";
-        document.querySelector("#p-gugun-code").value = "${param.gugunCode}";
-        document.querySelector("#p-content-type-id").value = "${param.contentTypeId}";
-        document.querySelector("#form-param").submit();
-    });
-});
+    // 페이지 정보 불러오기
+    const pageUrl = `/attraction?action=pageNavigation&pageNo=${pageNo}&sidoCode=${sidoCode}&gugunCode=${gugunCode}&contentTypeId=${contentTypeId}`;
+    console.log("pageUrl" + pageUrl);
+    fetch(pageUrl)
+        .then((res) => res.json())
+        .then((data) => makeNavigation(data));
+}
 
-window.onload = () => {
-    getRegionData();
-    // displayMarker();
+
+// document에 받아온 정보 뿌리기
+const makeAttractionList = (data) => {
+    const attractionList = document.getElementById("attraction-list");
+    positions.length = 0;
+
+    let str = "";
+
+    if (data.length === 0){
+        str += ` <tr>
+                    <td>검색 결과가 없습니다.</td>
+                </tr>`
+    } else {
+        data.forEach(el => {
+            saveMarkerInfo(el);
+            const imgSrc = el.firstImage ? el.firstImage : "/assets/img/attraction/no-img.png";
+            str += `<tr class="text-center" onclick="moveCenter(${el.latitude}, ${el.longitude})">
+                        <td><img src="${imgSrc}" width="100px"/></td>
+                        <td>${el.title}</td>
+                        <td>${el.addr1}</td>
+                    </tr>`
+        })
+    }
+    attractionList.innerHTML = str;
+    displayMarker();
+}
+
+// 네비게이션 만들기
+const makeNavigation = (data) => {
+    const navigator = document.getElementById("navigator");
+    navigator.innerHTML = data.navigator;
+}
+
+
+const saveMarkerInfo = (el) => {
+    const markerInfo = {
+        contentId: el.contentId,
+        addr1: el.addr1,
+        title: el.title,
+        latlng: new kakao.maps.LatLng(el.latitude, el.longitude),
+        contentTypeId: el.contentTypeId,
+        firstImage: el.firstImage,
+        zipCode: el.zipCode,
+        tel: el.tel
+    };
+
+    positions.push(markerInfo)
 }
