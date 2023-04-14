@@ -18,7 +18,7 @@ public class UserController extends HttpServlet {
     private UserService userService;
     private UserDto userDto;
     public void init() {
-        userService = UserServiceImpl.getUserService();
+        userService = UserServiceImpl.getInstance();
         userDto = null;
     }
 

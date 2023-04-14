@@ -13,7 +13,7 @@ public class UserServiceImpl implements UserService {
         userDao = UserDaoImpl.getInstance();
     }
 
-    public static UserServiceImpl getUserService(){
+    public static UserServiceImpl getInstance(){
         return instance;
     }
 

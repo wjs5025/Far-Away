@@ -71,6 +71,7 @@ public class UserDto {
                 "userId='" + userId + '\'' +
                 ", userName='" + userName + '\'' +
                 ", userPwd='" + userPwd + '\'' +
+                ", salt='" + salt + '\'' +
                 ", emailId='" + emailId + '\'' +
                 ", emailDomain='" + emailDomain + '\'' +
                 ", joinDate='" + joinDate + '\'' +
