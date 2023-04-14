@@ -3,10 +3,12 @@ package com.ssafy.user.model.service;
 import com.ssafy.user.model.dao.UserDao;
 import com.ssafy.user.model.dao.UserDaoImpl;
 import com.ssafy.user.model.dto.UserDto;
+import com.ssafy.util.Encrypt;
 
 public class UserServiceImpl implements UserService {
     private static UserServiceImpl instance = new UserServiceImpl();
     private UserDao userDao;
+    private Encrypt encrypt = new Encrypt();
     private UserServiceImpl() {
         userDao = UserDaoImpl.getInstance();
     }
@@ -17,11 +19,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int regist(UserDto userDto) throws Exception {
+        String userPwd = userDto.getUserPwd();
+        String salt = encrypt.getSalt();
+        userDto.setSalt(salt);
+        userDto.setUserPwd(encrypt.getEncrypt(userPwd, salt));
         return userDao.regist(userDto);
     }
 
     @Override
     public UserDto login(String userId, String userPwd) throws Exception {
+        String salt = userDao.getUserSalt(userId);
+        userPwd = encrypt.getEncrypt(userPwd, salt);
         return userDao.login(userId, userPwd);
     }
 

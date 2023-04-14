@@ -2,8 +2,8 @@ package com.ssafy.hotplace.model.dto;
 
 import java.util.Date;
 
-public class HotplaceDto {
-    private int hotplaceId;
+public class HotPlaceDto {
+    private int hotPlaceId;
     private String userId;
     private String title;
     private Date visitedDate;
@@ -13,12 +13,12 @@ public class HotplaceDto {
     private double longitude;
     private String image;
 
-    public int getHotplaceId() {
-        return hotplaceId;
+    public int getHotPlaceId() {
+        return hotPlaceId;
     }
 
-    public void setHotplaceId(int hotplaceId) {
-        this.hotplaceId = hotplaceId;
+    public void setHotPlaceId(int hotPlaceId) {
+        this.hotPlaceId = hotPlaceId;
     }
 
     public String getUserId() {

@@ -4,6 +4,7 @@ public class UserDto {
     private String userId;
     private String userName;
     private String userPwd;
+    private String salt;
     private String emailId;
     private String emailDomain;
     private String joinDate;
@@ -30,6 +31,14 @@ public class UserDto {
 
     public void setUserPwd(String userPwd) {
         this.userPwd = userPwd;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public String getEmailId() {
