@@ -1,5 +1,6 @@
 package com.ssafy.plan.model.dto;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class PlanDto {
@@ -12,6 +13,7 @@ public class PlanDto {
     private String arrivalTime;
     private String registerTime;
     private String tripCourse;
+    private String planCourse;
 
     public int getPlanId() {
         return planId;
@@ -83,5 +85,13 @@ public class PlanDto {
 
     public void setTripCourse(String tripCourse) {
         this.tripCourse = tripCourse;
+    }
+
+    public String getPlanCourse() {
+        return planCourse;
+    }
+
+    public void setPlanCourse(int[] planCourse) {
+        this.planCourse = Arrays.toString(planCourse);
     }
 }
