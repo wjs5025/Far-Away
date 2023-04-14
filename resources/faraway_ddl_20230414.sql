@@ -130,3 +130,17 @@ CREATE TABLE `gugun` (
   KEY `gugun_to_sido_sido_code_fk_idx` (`sido_code`),
   CONSTRAINT `gugun_to_sido_sido_code_fk` FOREIGN KEY (`sido_code`) REFERENCES `sido` (`sido_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+
+
+-- -----------------------------------------------------
+-- Table `faraway`.`sido`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `sido`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sido` (
+  `sido_code` int NOT NULL,
+  `sido_name` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`sido_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
