@@ -40,10 +40,13 @@ public class AttractionInfoController extends HttpServlet {
         gugunCode = ParameterCheck.nullToBlank(request.getParameter("gugunCode"));
         queryString = "?pageNo=" + pageNo + "&sidoCode=" + sidoCode + "&gugunCode=" + gugunCode + "&contentTypeId=" + contentTypeId;
         String path = "";
+
         switch (action) {
+            case "mv-list":
+                redirect(request, response, "/attraction/attraction-index.jsp");
+                break;
             case "list":
-                path = list(request, response);
-//                forward(request, response, path);
+                list(request, response);
                 break;
             default:
                 break;
@@ -78,10 +81,8 @@ public class AttractionInfoController extends HttpServlet {
                 map.put("contentTypeId", contentTypeId);
 
                 List<AttractionInfoDto> attractionInfoList = attractionInfoService.getAttractionInfoList(map);
-//                request.setAttribute("attractionInfoList", attractionInfoList);
 
                 PageNavigation pageNavigation = attractionInfoService.makePageNavigation(map);
-//                request.setAttribute("navigation", pageNavigation);
 
                 // JSON test
                 StringBuilder resultJson = new StringBuilder();

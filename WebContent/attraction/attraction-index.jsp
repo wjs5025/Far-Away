@@ -109,50 +109,26 @@
 <%-- Footer --%>
 <%@ include file="../include/footer.jsp" %>
 
-<%-- 카카오맵 API --%>
+<%-- 카카오맵 API import--%>
 <script src="../assets/js/kakaoMap.js"></script>
+
+<script src="../assets/js/attraction/attraction-index.js"></script>
 <script>
-    document.getElementById("btn-search").addEventListener("click", function () {
-        let form = document.getElementById("search-form");
-        form.setAttribute("action", "${root}/attraction");
-        console.log("${root}/attraction");
-        form.submit();
-    });
-
-    let pages = document.querySelectorAll(".page-link");
-    pages.forEach(function (page) {
-        page.addEventListener("click", function () {
-            console.log(this.parentNode.getAttribute("data-pg"));
-            document.querySelector("#p-action").value = "list";
-            document.querySelector("#p-page-no").value = this.parentNode.getAttribute("data-pg");
-            document.querySelector("#p-sido-code").value = "${param.sidoCode}";
-            document.querySelector("#p-gugun-code").value = "${param.gugunCode}";
-            document.querySelector("#p-content-type-id").value = "${param.contentTypeId}";
-            document.querySelector("#form-param").submit();
-        });
-    });
-
-    window.onload = () => {
-        getRegionData();
-        displayMarker();
-    }
     let markerInfo;
 
     <c:forEach items="${attractionInfoList}" var="attractionInfo" >
     markerInfo = {
-        contentId : '${attractionInfo.contentId}',
-        addr1 : '${attractionInfo.addr1}',
+        contentId: '${attractionInfo.contentId}',
+        addr1: '${attractionInfo.addr1}',
         title: '${attractionInfo.title}',
         latlng: new kakao.maps.LatLng('${attractionInfo.latitude}', '${attractionInfo.longitude}'),
         contentTypeId: '${attractionInfo.contentTypeId}',
-        firstImage : '${attractionInfo.firstImage}',
-        zipCode : '${attractionInfo.zipCode}',
-        tel : '${attractionInfo.tel}'
+        firstImage: '${attractionInfo.firstImage}',
+        zipCode: '${attractionInfo.zipCode}',
+        tel: '${attractionInfo.tel}'
     };
     positions.push(markerInfo)
     </c:forEach>
-
-
 </script>
 
 </body>
