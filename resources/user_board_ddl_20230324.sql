@@ -3,11 +3,6 @@
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
--- -----------------------------------------------------
--- Schema faraway
--- -----------------------------------------------------
-
 -- -----------------------------------------------------
 -- Schema faraway
 -- -----------------------------------------------------
@@ -17,12 +12,13 @@ USE `faraway` ;
 -- -----------------------------------------------------
 -- Table `faraway`.`members`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `faraway`.`members` ;
+DROP TABLE IF EXISTS `faraway`.`users` ;
 
 CREATE TABLE IF NOT EXISTS `faraway`.`users` (
   `user_id` VARCHAR(16) NOT NULL,
   `user_name` VARCHAR(20) NOT NULL,
   `user_password` VARCHAR(16) NOT NULL,
+  `salt` VARCHAR(45) NOT NULL,
   `email_id` VARCHAR(20) NULL DEFAULT NULL,
   `email_domain` VARCHAR(45) NULL DEFAULT NULL,
   `join_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -30,10 +26,6 @@ CREATE TABLE IF NOT EXISTS `faraway`.`users` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
-
-insert into `faraway`.`users` (user_id, user_name, user_password, email_id, email_domain, join_date)
-values 	('ssafy', '김싸피', '1234', 'ssafy', 'ssafy.com', now()), 
-		('admin', '관리자', '1234', 'admin', 'google.com', now());
 	
 commit;
 
@@ -52,8 +44,8 @@ CREATE TABLE IF NOT EXISTS `faraway`.`board` (
   `hit` INT NULL DEFAULT 0,
   `register_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`board_id`),
-  INDEX `board_to_members_user_id_fk` (`user_id` ASC) VISIBLE,
-  CONSTRAINT `board_to_members_user_id_fk`
+  INDEX `board_to_users_user_id_fk` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `board_to_users_user_id_fk`
     FOREIGN KEY (`user_id`)
     REFERENCES `faraway`.`users` (`user_id`))
 ENGINE = InnoDB
