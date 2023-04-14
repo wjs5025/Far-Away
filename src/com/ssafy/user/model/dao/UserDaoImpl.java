@@ -79,7 +79,7 @@ public class UserDaoImpl implements UserDao {
         try {
             connection = dbUtil.getConnection();
             sql = new StringBuilder();
-            sql.append("select user_id, user_name, user_password, email_id, email_domain, join_date \n");
+            sql.append("select user_id, user_name, user_password, salt, email_id, email_domain, join_date \n");
             sql.append("from users \n");
             sql.append("where user_id = ? \n");
             preparedStatement = connection.prepareStatement(sql.toString());
@@ -90,6 +90,7 @@ public class UserDaoImpl implements UserDao {
                 userDto.setUserId(resultSet.getString("user_id"));
                 userDto.setUserName(resultSet.getString("user_name"));
                 userDto.setUserPwd(resultSet.getString("user_password"));
+                userDto.setSalt(resultSet.getString("salt"));
                 userDto.setEmailId(resultSet.getString("email_id"));
                 userDto.setEmailDomain(resultSet.getString("email_domain"));
                 userDto.setJoinDate(resultSet.getString("join_date"));
