@@ -24,6 +24,10 @@ public class PlanDaoImpl implements PlanDao {
     private ResultSet resultSet = null;
     private StringBuilder sql = null;
 
+    public static PlanDaoImpl getInstance() {
+        return instance;
+    }
+
     @Override
     public void addPlan(PlanDto planDto) throws SQLException {
         try {
