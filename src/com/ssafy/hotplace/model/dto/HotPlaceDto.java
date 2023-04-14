@@ -1,12 +1,10 @@
 package com.ssafy.hotplace.model.dto;
 
-import java.util.Date;
-
 public class HotPlaceDto {
     private int hotPlaceId;
     private String userId;
     private String title;
-    private Date visitedDate;
+    private String visitedDate;
     private int type;
     private String content;
     private double latitude;
@@ -37,11 +35,11 @@ public class HotPlaceDto {
         this.title = title;
     }
 
-    public Date getVisitedDate() {
+    public String getVisitedDate() {
         return visitedDate;
     }
 
-    public void setVisitedDate(Date visitedDate) {
+    public void setVisitedDate(String visitedDate) {
         this.visitedDate = visitedDate;
     }
 
