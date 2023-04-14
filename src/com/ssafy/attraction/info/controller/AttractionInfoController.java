@@ -1,5 +1,6 @@
 package com.ssafy.attraction.info.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.attraction.info.model.dto.AttractionInfoDto;
 import com.ssafy.attraction.info.model.service.AttractionInfoService;
 import com.ssafy.attraction.info.model.service.AttractionInfoServiceImpl;
@@ -42,7 +43,7 @@ public class AttractionInfoController extends HttpServlet {
         switch (action) {
             case "list":
                 path = list(request, response);
-                forward(request, response, path);
+//                forward(request, response, path);
                 break;
             default:
                 break;
@@ -77,10 +78,22 @@ public class AttractionInfoController extends HttpServlet {
                 map.put("contentTypeId", contentTypeId);
 
                 List<AttractionInfoDto> attractionInfoList = attractionInfoService.getAttractionInfoList(map);
-                request.setAttribute("attractionInfoList", attractionInfoList);
+//                request.setAttribute("attractionInfoList", attractionInfoList);
 
                 PageNavigation pageNavigation = attractionInfoService.makePageNavigation(map);
-                request.setAttribute("navigation", pageNavigation);
+//                request.setAttribute("navigation", pageNavigation);
+
+                // JSON test
+                StringBuilder resultJson = new StringBuilder();
+                try {
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    resultJson.append(objectMapper.writeValueAsString(attractionInfoList));
+                    resultJson.append(objectMapper.writeValueAsString(pageNavigation));
+                    response.setContentType("application/x-json; charset=utf-8");
+                    response.getWriter().println(resultJson);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();

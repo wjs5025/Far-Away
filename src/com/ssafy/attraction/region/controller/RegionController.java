@@ -52,7 +52,6 @@ public class RegionController extends HttpServlet {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            
         }
     }
 }
