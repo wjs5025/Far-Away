@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS `faraway`.`users` ;
 CREATE TABLE IF NOT EXISTS `faraway`.`users` (
   `user_id` VARCHAR(16) NOT NULL,
   `user_name` VARCHAR(20) NOT NULL,
-  `user_password` VARCHAR(16) NOT NULL,
+  `user_password` TEXT NOT NULL,
   `salt` VARCHAR(45) NOT NULL,
   `email_id` VARCHAR(20) NULL DEFAULT NULL,
   `email_domain` VARCHAR(45) NULL DEFAULT NULL,
