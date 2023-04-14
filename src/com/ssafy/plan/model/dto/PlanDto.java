@@ -94,4 +94,20 @@ public class PlanDto {
     public void setPlanCourse(int[] planCourse) {
         this.planCourse = Arrays.toString(planCourse);
     }
+
+    @Override
+    public String toString() {
+        return "PlanDto{" +
+                "planId=" + planId +
+                ", userId='" + userId + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", hit=" + hit +
+                ", departureTime='" + departureTime + '\'' +
+                ", arrivalTime='" + arrivalTime + '\'' +
+                ", registerTime='" + registerTime + '\'' +
+                ", tripCourse='" + tripCourse + '\'' +
+                ", planCourse='" + planCourse + '\'' +
+                '}';
+    }
 }

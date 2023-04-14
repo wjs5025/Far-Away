@@ -134,7 +134,7 @@ public class PlanDaoImpl implements PlanDao {
             sql = new StringBuilder();
             sql.append("select plan_id, user_id, title, content, hit, departure_time, arrival_time, register_time, trip_course \n");
             sql.append("from plans \n");
-            sql.append("where article_no = ?");
+            sql.append("where plan_id = ?");
             preparedStatement = connection.prepareStatement(sql.toString());
             preparedStatement.setInt(1, planId);
             resultSet = preparedStatement.executeQuery();
@@ -177,14 +177,14 @@ public class PlanDaoImpl implements PlanDao {
         try {
             connection = dbUtil.getConnection();
             sql = new StringBuilder();
-            sql.append("update plan \n");
-            sql.append("set title = ?, content = ?, departure_time = ?, register_time = ?, trip_course = ? \n");
+            sql.append("update plans \n");
+            sql.append("set title = ?, content = ?, departure_time = ?, arrival_time = ?, trip_course = ? \n");
             sql.append("where plan_id = ? \n");
             preparedStatement = connection.prepareStatement(sql.toString());
             preparedStatement.setString(1, planDto.getTitle());
             preparedStatement.setString(2, planDto.getContent());
             preparedStatement.setString(3, planDto.getDepartureTime());
-            preparedStatement.setString(4, planDto.getRegisterTime());
+            preparedStatement.setString(4, planDto.getArrivalTime());
             preparedStatement.setString(5, planDto.getTripCourse());
             preparedStatement.setInt(6, planDto.getPlanId());
             preparedStatement.executeUpdate();
