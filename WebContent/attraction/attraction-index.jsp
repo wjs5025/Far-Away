@@ -66,9 +66,7 @@
                         </div>
                         <%--네비게이션 영역--%>
                         <div class="row" id="navigator">
-                            <div class="spinner-border text-success" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
+
                         </div>
                     </div>
                 </div>

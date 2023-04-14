@@ -5,23 +5,21 @@ window.onload = () => {
 }
 
 // getAttractionData() : 서버로부터 현재 조건에 맞는 관광지 정보 불러오기
-const getAttractionData = (pageNo) => {
+const getAttractionData = async (pageNo) => {
     let sidoCode = document.getElementById("sidoCode").value;
     let gugunCode = document.getElementById("gugunCode").value;
     let contentTypeId = document.getElementById("contentTypeId").value;
 
     // 관광지 데이터 받아오기
     const dataUrl = `/attraction?action=list&pageNo=${pageNo}&sidoCode=${sidoCode}&gugunCode=${gugunCode}&contentTypeId=${contentTypeId}`;
-    console.log("dataURL" + dataUrl);
 
-    fetch(dataUrl)
+    await fetch(dataUrl)
         .then((res) => res.json())
         .then((data) => makeAttractionList(data));
 
     // 페이지 정보 불러오기
     const pageUrl = `/attraction?action=pageNavigation&pageNo=${pageNo}&sidoCode=${sidoCode}&gugunCode=${gugunCode}&contentTypeId=${contentTypeId}`;
-    console.log("pageUrl" + pageUrl);
-    fetch(pageUrl)
+    await fetch(pageUrl)
         .then((res) => res.json())
         .then((data) => makeNavigation(data));
 }
@@ -29,6 +27,7 @@ const getAttractionData = (pageNo) => {
 
 // document에 받아온 정보 뿌리기
 const makeAttractionList = (data) => {
+    console.log(data)
     const attractionList = document.getElementById("attraction-list");
     positions.length = 0;
 
