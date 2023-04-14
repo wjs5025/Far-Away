@@ -59,45 +59,19 @@
                                     <th>주소</th>
                                 </tr>
                                 </thead>
-                                <c:if test="${empty attractionInfoList}">
-                                    <tr>
-                                        <td>검색 결과가 없습니다.</td>
-                                    </tr>
-                                </c:if>
-                                <c:if test="${not empty attractionInfoList}">
-                                    <tbody>
+                                <tbody id="attraction-list">
 
-                                    <c:forEach var="attractionInfo" items="${attractionInfoList}">
-                                        <tr class="text-center"
-                                            onclick="moveCenter(${attractionInfo.latitude}, ${attractionInfo.longitude})">
-                                            <c:if test="${empty attractionInfo.firstImage}">
-                                                <td><img src="${root}/assets/img/attraction/no-img.png" width="100px"/>
-                                                </td>
-                                            </c:if>
-                                            <c:if test="${not empty attractionInfo.firstImage}">
-                                                <td><img src="${attractionInfo.firstImage}" width="100px"/></td>
-                                            </c:if>
-                                            <td>${attractionInfo.title}
-                                            </td>
-                                            <td>${attractionInfo.addr1}</td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </c:if>
+                                </tbody>
                             </table>
                         </div>
-                        <div class="row">
-                            ${navigation.navigator}
+                        <%--네비게이션 영역--%>
+                        <div class="row" id="navigator">
+                            <div class="spinner-border text-success" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <form id="form-param" method="get" action="">
-                    <input type="hidden" id="p-action" name="action" value="">
-                    <input type="hidden" id="p-page-no" name="pageNo" value="">
-                    <input type="hidden" id="p-sido-code" name="sidoCode" value="">
-                    <input type="hidden" id="p-gugun-code" name="gugunCode" value="">
-                    <input type="hidden" id="p-content-type-id" name="contentTypeId" value="">
-                </form>
                 <!-- 관광지 검색 end -->
             </div>
         </main>
@@ -113,23 +87,6 @@
 <script src="../assets/js/kakaoMap.js"></script>
 
 <script src="../assets/js/attraction/attraction-index.js"></script>
-<script>
-    let markerInfo;
-
-    <c:forEach items="${attractionInfoList}" var="attractionInfo" >
-    markerInfo = {
-        contentId: '${attractionInfo.contentId}',
-        addr1: '${attractionInfo.addr1}',
-        title: '${attractionInfo.title}',
-        latlng: new kakao.maps.LatLng('${attractionInfo.latitude}', '${attractionInfo.longitude}'),
-        contentTypeId: '${attractionInfo.contentTypeId}',
-        firstImage: '${attractionInfo.firstImage}',
-        zipCode: '${attractionInfo.zipCode}',
-        tel: '${attractionInfo.tel}'
-    };
-    positions.push(markerInfo)
-    </c:forEach>
-</script>
 
 </body>
 </html>
