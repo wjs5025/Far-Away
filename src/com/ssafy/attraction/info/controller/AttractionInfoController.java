@@ -83,13 +83,15 @@ public class AttractionInfoController extends HttpServlet {
                 List<AttractionInfoDto> attractionInfoList = attractionInfoService.getAttractionInfoList(map);
 
                 PageNavigation pageNavigation = attractionInfoService.makePageNavigation(map);
-
+                request.setAttribute("navigation",pageNavigation);
                 // JSON test
                 StringBuilder resultJson = new StringBuilder();
                 try {
                     ObjectMapper objectMapper = new ObjectMapper();
                     resultJson.append(objectMapper.writeValueAsString(attractionInfoList));
-                    resultJson.append(objectMapper.writeValueAsString(pageNavigation));
+//                    resultJson.append(",");
+//                    resultJson.append(objectMapper.writeValueAsString(pageNavigation));
+//                    System.out.println(resultJson);
                     response.setContentType("application/x-json; charset=utf-8");
                     response.getWriter().println(resultJson);
                 } catch (Exception e) {
