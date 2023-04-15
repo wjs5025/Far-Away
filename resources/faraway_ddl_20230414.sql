@@ -89,7 +89,7 @@ CREATE TABLE `hotplaces` (
   `user_id` varchar(16) DEFAULT NULL,
   `title` varchar(100) DEFAULT NULL,
   `visited_date` date NOT NULL,
-  `type` int DEFAULT NULL,
+  `type` varchar(20) DEFAULT NULL,
   `content` TEXT DEFAULT NULL,
   `latitude` double(30,10) DEFAULT '37.5006130000',
   `longitude` double(30,10) DEFAULT '127.0364310000',
