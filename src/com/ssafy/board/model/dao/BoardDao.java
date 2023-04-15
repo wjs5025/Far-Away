@@ -12,7 +12,6 @@ public interface BoardDao {
     int getTotalBoardCount(Map<String, Object> param) throws SQLException;
     BoardDto getBoard(int boardId) throws SQLException;
     void updateHit(int boardId) throws SQLException;
-
     void modifyBoard(BoardDto boardDto) throws SQLException;
     void deleteBoard(int boardId) throws SQLException;
 }

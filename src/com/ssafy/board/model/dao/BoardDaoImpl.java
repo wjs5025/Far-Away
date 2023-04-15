@@ -52,8 +52,8 @@ public class BoardDaoImpl implements BoardDao {
         try {
             connection = dbUtil.getConnection();
             StringBuilder sql = new StringBuilder();
-            sql.append("select board_id, user_id, title, content, category, hit, register_time \n")
-                    .append("from board \n");
+            sql.append("select board_id, user_id, title, content, category, hit, register_time \n");
+            sql.append("from board \n");
             String key = (String) param.get("key");
             String word = (String) param.get("word");
             if (!key.isEmpty() && !word.isEmpty()) {

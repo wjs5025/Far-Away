@@ -5,7 +5,7 @@ public class HotPlaceDto {
     private String userId;
     private String title;
     private String visitedDate;
-    private int type;
+    private String type;
     private String content;
     private double latitude;
     private double longitude;
@@ -43,11 +43,11 @@ public class HotPlaceDto {
         this.visitedDate = visitedDate;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -81,5 +81,20 @@ public class HotPlaceDto {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "HotPlaceDto{" +
+                "hotPlaceId=" + hotPlaceId +
+                ", userId='" + userId + '\'' +
+                ", title='" + title + '\'' +
+                ", visitedDate='" + visitedDate + '\'' +
+                ", type='" + type + '\'' +
+                ", content='" + content + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", image='" + image + '\'' +
+                '}';
     }
 }
