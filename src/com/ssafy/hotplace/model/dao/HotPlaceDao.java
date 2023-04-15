@@ -11,7 +11,7 @@ public interface HotPlaceDao {
     List<HotPlaceDto> getHotPlaceList(Map<String, Object> param) throws SQLException;
     int getTotalHotPlaceCount(Map<String, Object> param) throws SQLException;
     HotPlaceDto getHotPlace(int hotPlaceId) throws SQLException;
-    void updateHotPlace(int hotPlaceId) throws SQLException;
+    void updateHit(int hotPlaceId) throws SQLException;
     void modifyHotPlace(HotPlaceDto hotPlaceDto) throws SQLException;
     void deleteHotPlace(int hotPlaceId) throws SQLException;
 }

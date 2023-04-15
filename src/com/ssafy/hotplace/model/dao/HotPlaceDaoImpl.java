@@ -47,7 +47,7 @@ public class HotPlaceDaoImpl implements HotPlaceDao {
     }
 
     @Override
-    public void updateHotPlace(int hotPlaceId) throws SQLException {
+    public void updateHit(int hotPlaceId) throws SQLException {
 
     }
 
