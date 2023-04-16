@@ -15,22 +15,20 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto" href="/">INTRO</a>
-                    </li>
+                    <li><a class="nav-link scrollto" href="${root}/board?action=get-list&category=notice&pageNo=1&key=&word=">공지사항</a></li>
                     <li><a class="nav-link scrollto"
                            href="${root}/attraction?action=mv-list">지역별 여행지</a></li>
-                    <li><a class="scrollto" href="${root}/plan?action=planlist&pageNo=1&key=&word=">나의
-                        여행계획</a></li>
-                    <li><a class="nav-link scrollto" href="${root}/attraction/hotplace-index.jsp#hotplace">핫플 자랑하기</a>
-                    </li>
                     <li class="dropdown">
                         <a href="#">
                             <span>여행정보 공유</span>
                             <i class="bi bi-chevron-down"></i>
                         </a>
                         <ul>
-                            <li><a class="nav-link scrollto" href="${root}/board?action=get-list&category=notice&pageNo=1&key=&word=">공지사항</a></li>
                             <li><a class="nav-link scrollto" href="${root}/board?action=get-list&category=share&pageNo=1&key=&word=">공유게시판</a></li>
+                            <li><a class="scrollto" href="${root}/plan?action=planlist&pageNo=1&key=&word=">나의
+                                여행계획</a></li>
+                            <li><a class="nav-link scrollto" href="${root}/attraction/hotplace-index.jsp#hotplace">핫플 자랑하기</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="dropdown">
