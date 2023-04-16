@@ -21,7 +21,7 @@
             <a href="#route" class="btn-get-started scrollto">GO !</a>
         </div>
     </section>
-    <section id="route" class="d-flex align-items-center p-0">
+    <section id="route" class="align-items-center p-0" style="height: 100vh">
         <div
                 class="w-100 text-center position-relative"
                 data-aos="fade-in"
@@ -29,18 +29,109 @@
         >
 
             <div class="card w-100 align-items-center rounded-0">
-                <!-- 중앙 center content end -->
-                <h2 class="col-md-12 text-center section-header">나의 여행계획</h2>
-                <em>최적의 경로로, 최고의 여행을 만들어보세요 !</em>
-                <p class="" data-bs-toggle="tooltip" data-bs-html="true"
-                   title="1. 최초 좌클릭하여 선그리기를 시작하세요.<br/>2. 추가적인 좌클릭으로 경유지를 추가하세요 !<br/>3. 모든 경로가 추가되었다면, 우클릭으로 선그리기를 종료하세요.">
-                    <u>사용방법❓</u>
-                </p>
-                <div class="col-md-12 d-flex flex-row justify-content-center">
-                    <div id="route_map" class="col-md-10" style="height: 70vh"></div>
+                <div class="col-md-12 row justify-content-center">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <h2 class="my-3 py-3 shadow-sm bg-light text-center">
+                            <mark class="sky">여행 계획</mark>
+                        </h2>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="row align-self-center mb-2">
+                            <div class="col-md-2 text-start">
+                                <button type="button" id="btn-planwrite"
+                                        class="btn btn-outline-primary btn-sm">여행계획만들기</button>
+                            </div>
+                            <div class="col-md-7 offset-3">
+                                <form class="d-flex" id="form-search" action="">
+                                    <input type="hidden" name="action" value="list" /> <input
+                                        type="hidden" name="pgno" value="1" /> <select name="key"
+                                                                                       id="key" class="form-select form-select-sm ms-5 me-1 w-50"
+                                                                                       aria-label="검색조건">
+                                    <option selected>검색조건</option>
+                                    <option value="article_no">글번호</option>
+                                    <option value="subject">제목</option>
+                                    <option value="user_id">작성자</option>
+                                </select>
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" name="word" id="word" class="form-control"
+                                               placeholder="검색어..." />
+                                        <button id="btn-search" class="btn btn-dark" type="button">검색</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr class="text-center">
+                                <th scope="col">글번호</th>
+                                <th scope="col">제목</th>
+                                <th scope="col">작성자</th>
+                                <th scope="col">조회수</th>
+                                <th scope="col">출발일</th>
+                                <th scope="col">도착일</th>
+                                <th scope="col">작성일</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="article" items="${articles}">
+                                <tr class="text-center">
+                                    <th scope="row">${article.articleNo}</th>
+                                    <td class="text-start"><a href="#"
+                                                              class="article-title link-dark" data-no="${article.articleNo}"
+                                                              style="text-decoration: none"> ${article.subject} </a></td>
+                                    <td>${article.userId}</td>
+                                    <td>${article.hit}</td>
+                                    <td>${article.departureTime}</td>
+                                    <td>${article.arrivalTime}</td>
+                                    <td>${article.registerTime}</td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">${navigation.navigator}</div>
                 </div>
-            </div>
+                <form id="form-param" method="get" action="">
+                    <input type="hidden" id="p-action" name="action" value=""> <input
+                        type="hidden" id="p-pgno" name="pgno" value=""> <input
+                        type="hidden" id="p-key" name="key" value=""> <input
+                        type="hidden" id="p-word" name="word" value="">
+                </form>
+                <script>
+                    let titles = document.querySelectorAll(".article-title");
+                    titles.forEach(function(title) {
+                        title.addEventListener("click", function() {
+                            console.log(this.getAttribute("data-no"));
+                            location.href = "${root}/plan?action=planview&articleno="
+                                + this.getAttribute("data-no");
+                        });
+                    });
 
+                    document.querySelector("#btn-planwrite").addEventListener("click",
+                        function() {
+                            location.href = "${root}/plan?action=mvplanwrite";
+                        });
+
+                    document.querySelector("#btn-search").addEventListener("click", function() {
+                        let form = document.querySelector("#form-search");
+                        form.setAttribute("action", "${root}/plan");
+                        form.submit();
+                    });
+
+                    let pages = document.querySelectorAll(".page-link");
+                    pages.forEach(function(page) {
+                        page.addEventListener("click", function() {
+                            console.log(this.parentNode.getAttribute("data-pg"));
+                            document.querySelector("#p-action").value = "list";
+                            document.querySelector("#p-pgno").value = this.parentNode
+                                .getAttribute("data-pg");
+                            document.querySelector("#p-key").value = "${param.key}";
+                            document.querySelector("#p-word").value = "${param.word}";
+                            document.querySelector("#form-param").submit();
+                        });
+                    });
+                </script>
+            </div>
         </div>
     </section>
 </main>

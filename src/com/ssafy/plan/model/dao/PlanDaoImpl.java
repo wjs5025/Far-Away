@@ -113,13 +113,23 @@ public class PlanDaoImpl implements PlanDao {
             sql.append("order by plan_id desc \n");
             sql.append("limit ?, ?");
             preparedStatement = connection.prepareStatement(sql.toString());
+
             int idx = 0;
-            if (!key.isEmpty() && !word.isEmpty())
+            if (!key.isEmpty() && !word.isEmpty()){
                 preparedStatement.setString(++idx, word);
-            preparedStatement.setInt(++idx, (Integer) param.get("start"));
-            preparedStatement.setInt(++idx, (Integer) param.get("listSize"));
+            }
+            //(Integer) param.get("start")
+            preparedStatement.setInt(++idx, 1);
+            //(Integer) param.get("listSize")
+            preparedStatement.setInt(++idx, 10);
+
             resultSet = preparedStatement.executeQuery();
-            cnt = resultSet.getInt(1);
+            System.out.println(resultSet);
+//            if(resultSet.next()){
+//                cnt = resultSet.getInt(1);
+//            } else{
+//                cnt = 0;
+//            }
         } finally {
             dbUtil.close(resultSet, preparedStatement, connection);
         }
