@@ -154,10 +154,11 @@ public class UserController extends HttpServlet {
 
     }
 
-    private void logout(HttpServletRequest req, HttpServletResponse resp) {
+    private void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
         session.removeAttribute("user");
         session.invalidate();
+        redirect(req, resp, "/");
     }
 
     private void modify(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

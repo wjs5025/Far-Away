@@ -43,7 +43,7 @@ public class AttractionInfoController extends HttpServlet {
 
         switch (action) {
             case "mv-list":
-                redirect(request, response, "/attraction/attraction-index.jsp");
+                mvList(request,response);
                 break;
             case "list":
                 list(request, response);
@@ -69,6 +69,17 @@ public class AttractionInfoController extends HttpServlet {
 
     private void redirect(HttpServletRequest request, HttpServletResponse response, String path) throws IOException {
         response.sendRedirect(request.getContextPath() + path);
+    }
+
+    private void mvList(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        Object userDto = (UserDto) session.getAttribute("user");
+
+        if (userDto == null){
+            redirect(request, response, "/user/user-login.jsp");
+            return;
+        }
+        redirect(request, response, "/attraction/attraction-index.jsp");
     }
 
     private String list(HttpServletRequest request, HttpServletResponse response) {
