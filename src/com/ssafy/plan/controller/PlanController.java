@@ -57,7 +57,7 @@ public class PlanController extends HttpServlet {
             path = planView(request, response);
             forward(request, response, path);
         } else if ("mvplanwrite".equals(action)) {
-            path = "/plan/planwrite.jsp";
+            path = mvPlanWrite(request, response);
             forward(request, response, path);
         } else if ("planregist".equals(action)) {
             path = planRegist(request, response);
@@ -82,6 +82,7 @@ public class PlanController extends HttpServlet {
     private void redirect(HttpServletRequest request, HttpServletResponse response, String path) throws IOException {
         response.sendRedirect(request.getContextPath() + path);
     }
+
 
     private String planlist(HttpServletRequest request, HttpServletResponse response) {
         try {
@@ -112,8 +113,8 @@ public class PlanController extends HttpServlet {
             planService.updateHit(articleNo);
             PlanDto planDto = planService.getPlan(articleNo);
             System.out.println(planDto.getPlanCourse());
-            request.setAttribute("article", planDto);
-            return "/plan/plan-index.jsp";
+            request.setAttribute("plan", planDto);
+            return "/plan/plan-detail.jsp";
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("msg", "글내용 출력 중 문제 발생!!!");
@@ -121,9 +122,20 @@ public class PlanController extends HttpServlet {
         }
     }
 
+    private String mvPlanWrite(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        UserDto userDto = (UserDto) session.getAttribute("user");
+
+        if (userDto == null) {
+            return "/user/user-login.jsp";
+        } else {
+            return "/plan/plan-write.jsp";
+        }
+    }
+
     private String planRegist(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        UserDto userDto = (UserDto) session.getAttribute("userinfo");
+        UserDto userDto = (UserDto) session.getAttribute("user");
         if (userDto != null) {
             PlanDto planDto = new PlanDto();
             planDto.setTitle(request.getParameter("subject"));
@@ -142,7 +154,7 @@ public class PlanController extends HttpServlet {
                 return "/error/error.jsp";
             }
         } else {
-            return "/user/login.jsp";
+            return "/user/user-login.jsp";
         }
     }
 }

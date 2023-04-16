@@ -1,68 +1,38 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <%@ include file="/include/head.jsp" %>
-    <title>Far Away : 지역별 여행지</title>
-
+    <title>Far Away : 여행 계획</title>
 </head>
+
 <body>
 <%@ include file="/include/nav.jsp" %>
 
-<!-- 본문 -->
-<main id="main">
+<section id="board" class="background d-flex align-items-center">
+    <div
+            class="container text-center position-relative"
+            data-aos="fade-in"
+            data-aos-delay="100"
+    >
 
-    <section id="intro" class="background d-flex align-items-center mb-5">
-        <div class="container text-center position-relative"
-             data-aos="fade-in" data-aos-delay="200">
-            <h1 id="main-title">나만의 여행 경로를 계획하세요.</h1>
-            <h2>가장 효율적인 동선을 알아볼까요?</h2>
-            <a href="#route" class="btn-get-started scrollto">GO !</a>
-        </div>
-    </section>
-    <section id="route" class="align-items-center p-0" style="height: 100vh">
-        <div
-                class="w-100 text-center position-relative"
-                data-aos="fade-in"
-                data-aos-delay="100"
-        >
-
-            <div class="card w-100 align-items-center rounded-0">
-                <div class="col-md-12 row justify-content-center">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <h2 class="my-3 py-3 shadow-sm bg-light text-center">
-                            <mark class="sky">여행 계획</mark>
-                        </h2>
+        <main class="main" id="board">
+            <div class="card container align-items-center rounded-0 mt-5 " style="height: 80vh;">
+                <h1 class="col-md-12 text-center section-header">여행 계획</h1>
+                <div class="col-md-12 card rounded-0">
+                    <div class="card-header">
+                        <a class="btn float-end text-white rounded-5"
+                           style="background-color: #009970"
+                           href="${root}/plan?action=mvplanwrite">
+                            <i class="fas fa-edit"></i>
+                            WRITE
+                        </a>
                     </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <div class="row align-self-center mb-2">
-                            <div class="col-md-2 text-start">
-                                <button type="button" id="btn-planwrite"
-                                        class="btn btn-outline-primary btn-sm">여행계획만들기</button>
-                            </div>
-                            <div class="col-md-7 offset-3">
-                                <form class="d-flex" id="form-search" action="">
-                                    <input type="hidden" name="action" value="list" /> <input
-                                        type="hidden" name="pgno" value="1" /> <select name="key"
-                                                                                       id="key" class="form-select form-select-sm ms-5 me-1 w-50"
-                                                                                       aria-label="검색조건">
-                                    <option selected>검색조건</option>
-                                    <option value="article_no">글번호</option>
-                                    <option value="subject">제목</option>
-                                    <option value="user_id">작성자</option>
-                                </select>
-                                    <div class="input-group input-group-sm">
-                                        <input type="text" name="word" id="word" class="form-control"
-                                               placeholder="검색어..." />
-                                        <button id="btn-search" class="btn btn-dark" type="button">검색</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <table class="table table-hover">
+                    <div class="card-body">
+                        <table class="table table-hover table-striped " style="border: 1px solid green;">
                             <thead>
-                            <tr class="text-center">
+                            <tr style="background-color: #009970; color: white">
                                 <th scope="col">글번호</th>
                                 <th scope="col">제목</th>
                                 <th scope="col">작성자</th>
@@ -72,24 +42,26 @@
                                 <th scope="col">작성일</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <c:forEach var="article" items="${articles}">
+                            <tbody id="posts">
+                            <c:forEach var="plan" items="${articles}">
                                 <tr class="text-center">
-                                    <th scope="row">${article.articleNo}</th>
-                                    <td class="text-start"><a href="#"
-                                                              class="article-title link-dark" data-no="${article.articleNo}"
-                                                              style="text-decoration: none"> ${article.subject} </a></td>
-                                    <td>${article.userId}</td>
-                                    <td>${article.hit}</td>
-                                    <td>${article.departureTime}</td>
-                                    <td>${article.arrivalTime}</td>
-                                    <td>${article.registerTime}</td>
+                                    <th scope="row">${plan.planId}</th>
+                                    <td class="text-start">
+                                        <a href="#" class="article-title link-dark" data-no="${plan.planId}"
+                                           style="text-decoration: none"> ${plan.title} </a></td>
+                                    <td>${plan.userId}</td>
+                                    <td>${plan.hit}</td>
+                                    <td>${plan.departureTime}</td>
+                                    <td>${plan.arrivalTime}</td>
+                                    <td>${plan.registerTime}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
                         </table>
                     </div>
-                    <div class="row">${navigation.navigator}</div>
+                    <div class="row">
+                        ${navigation.navigator}
+                    </div>
                 </div>
                 <form id="form-param" method="get" action="">
                     <input type="hidden" id="p-action" name="action" value=""> <input
@@ -132,15 +104,11 @@
                     });
                 </script>
             </div>
-        </div>
-    </section>
-</main>
+        </main>
+    </div>
+</section>
 
-
-<%-- Footer --%>
 <%@ include file="../include/footer.jsp" %>
 
-<%-- 카카오맵 API --%>
-<script src="../assets/js/route_kakaomap.js"></script>
 </body>
 </html>
